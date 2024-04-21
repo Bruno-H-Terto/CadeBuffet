@@ -1,0 +1,10 @@
+<%= form_with model: @buffet do |form| %>
+  <div>
+  <%= form.label :brand_name %>
+  <%= form.text_field :brand_name %>
+  </div>
+
+  <div>
+  <%= form.submit 'Gravar' %>
+  </div>
+  <% end %>
