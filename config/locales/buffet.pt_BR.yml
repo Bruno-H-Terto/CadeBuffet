@@ -1,0 +1,20 @@
+pt-BR:
+  activerecord:
+    models:
+      buffet: 'Buffet'
+    attributes:
+      buffet:
+        brand_name: 'Nome Fantasia'
+        corporate_name: 'Razão Social'
+        register_number: 'CNPJ'
+        phone_number: 'Telefone'
+        address: 'Endereço'
+        state: 'Estado'
+        owner_id: 'Proprietário'
+        owner: 'Proprietário'
+        district: 'Bairro'
+        city: 'Cidade'
+        zip_code: 'CEP'
+        description: 'Descrição'
+        payment_methods: 'Formas de Pagamento'
+

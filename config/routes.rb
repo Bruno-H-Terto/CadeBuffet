@@ -16,9 +16,7 @@ Rails.application.routes.draw do
       registrations: 'buffets/owners/registrations',
       unlocks: 'buffets/owners/unlocks'
     }
-    resources :buffet, only: [:show, :new, :create]
-
-    root to: 'owner#index'
+    resources :buffet, only: [:index, :show, :new, :create]
   end
 
 end
