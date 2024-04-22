@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 module Buffets
   class Owners::SessionsController < Devise::SessionsController
+    before_action :redirect_owner, except: [:destroy]
   # before_action :configure_sign_in_params, only: [:create]
 
     def after_sign_in_path_for(resource)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_21_014742) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_004746) do
   create_table "buffets", force: :cascade do |t|
     t.integer "owner_id", null: false
     t.string "brand_name"
@@ -27,6 +27,26 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_21_014742) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["owner_id"], name: "index_buffets_on_owner_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "min_quantity_people"
+    t.integer "max_quantity_people"
+    t.integer "duration_in_minutes"
+    t.text "menu"
+    t.boolean "alcoholic_drink"
+    t.boolean "self_decoration"
+    t.boolean "parking"
+    t.boolean "valet"
+    t.boolean "fixed_location"
+    t.integer "owner_id", null: false
+    t.integer "buffet_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buffet_id"], name: "index_events_on_buffet_id"
+    t.index ["owner_id"], name: "index_events_on_owner_id"
   end
 
   create_table "owners", force: :cascade do |t|
@@ -54,4 +74,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_21_014742) do
   end
 
   add_foreign_key "buffets", "owners"
+  add_foreign_key "events", "buffets"
+  add_foreign_key "events", "owners"
 end

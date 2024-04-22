@@ -1,30 +1,27 @@
-<% if @buffet.errors.any? %>
-  <p>Reveja os campos abaixo: </p>
-  <% @buffet.errors.full_messages.each do |msg| %>
-    <div><%= msg %></div>
-  <% end %>
-<% end %>
+<%= @buffet.full_register %>
+<%= @buffet.full_address %>
+<%= @buffet.full_contact %>
 
-
-<%= form_with model: @buffet, url: buffets_buffet_index_path, method: :post do |form| %>
+<h2>Cadastrar novo evento</h2>
+<%= form_with model: @event, url: buffets_buffet_events_path, method: :post do |form| %>
   <div>
-    <%= form.label :brand_name %>
-    <%= form.text_field :brand_name %>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.label :corporate_name %>
-    <%= form.text_field :corporate_name %>
+    <%= form.label :min_quantity_people %>
+    <%= form.number_field :min_quantity_people %>
   </div>
 
   <div>
-    <%= form.label :register_number %>
-    <%= form.text_field :register_number %>
+    <%= form.label :max_quantity_people %>
+    <%= form.text_field :max_quantity_people %>
   </div>
 
   <div>
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
+    <%= form.label :duration_in_minutes %>
+    <%= form.text_field :duration_in_minutes %>
   </div>
 
   <div>
@@ -58,8 +55,8 @@
   </div>
 
   <div>
-    <%= form.label :payment_methods %>
-    <%= form.text_field :payment_methods %>
+    <%= form.label :menu %>
+    <%= form.text_area :menu %>
   </div>
 
   <div>

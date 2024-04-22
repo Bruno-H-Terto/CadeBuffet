@@ -10,7 +10,11 @@
   </head>
 
   <body>
-
+    <% if buffets_owner_signed_in? %>
+      <div>
+        <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
+      </div>
+    <% end %>
     <%= notice %>
     <%= alert %>
     <%= yield %>

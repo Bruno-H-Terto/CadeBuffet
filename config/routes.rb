@@ -1,10 +1,9 @@
 Rails.application.routes.draw do
 
-  get '/', to: 'home#dashboard', as: 'dashboard'
+  root to: 'home#index'
 
-  namespace :users do
+  namespace :casual_users do
     devise_for :users
-    root to: 'user#index'
   end
 
   namespace :buffets do
@@ -16,7 +15,9 @@ Rails.application.routes.draw do
       registrations: 'buffets/owners/registrations',
       unlocks: 'buffets/owners/unlocks'
     }
-    resources :buffet, only: [:index, :show, :new, :create]
+    resources :buffet, only: %i[show new create] do
+      resource :events, only: %i[create]
+    end
   end
 
 end
