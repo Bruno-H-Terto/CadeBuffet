@@ -1,0 +1,14 @@
+<%= link_to 'Voltar', buffets_buffet_path(@event.buffet) %> 
+<%= link_to "Valores para #{@event.name}", new_buffets_price_event_path(@event.id) %>
+<%= link_to 'Editar', edit_buffets_buffet_events_path(@event) %>
+<%= @event.name %>
+<%= @event.min_quantity_people %>
+<%= @event.max_quantity_people %>
+<%= @event.duration_in_minutes %>
+<%= @event.menu %>    
+<%= @event.alcoholic_drink %>      
+<%= @event.self_decoration %>
+<%= @event.parking %>
+<%= @event.valet %>
+<%= @event.fixed_location %>
+<%= @event.description %>

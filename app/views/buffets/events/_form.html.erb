@@ -1,0 +1,62 @@
+<section>
+  <%= form_with model: @event, url:buffets_buffet_events_path  do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name %>
+    </div>
+  
+    <div>
+      <%= form.label :min_quantity_people %>
+      <%= form.number_field :min_quantity_people%>
+    </div>
+  
+    <div>
+      <%= form.label :max_quantity_people %>
+      <%= form.number_field :max_quantity_people %>
+    </div>
+  
+    <div>
+      <%= form.label :duration_in_minutes %>
+      <%= form.text_field :duration_in_minutes %>
+    </div>
+  
+    <div>
+      <%= form.label :alcoholic_drink %>
+      <%= form.check_box :alcoholic_drink %>
+    </div>
+  
+    <div>
+      <%= form.label :self_decoration %>
+      <%= form.check_box :self_decoration %>
+    </div>
+  
+    <div>
+      <%= form.label :parking %>
+      <%= form.check_box :parking%>
+    </div>
+  
+    <div>
+      <%= form.label :valet %>
+      <%= form.check_box :valet %>
+    </div>
+  
+    <div>
+      <%= form.label :fixed_location %>
+      <%= form.check_box :fixed_location %>
+    </div>
+  
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
+  
+    <div>
+      <%= form.label :menu %>
+      <%= form.text_area :menu, value: @event[:menu] %>
+    </div>
+  
+    <div>
+      <%= form.submit 'Registrar' %>
+    </div>
+  <% end %>
+</section>

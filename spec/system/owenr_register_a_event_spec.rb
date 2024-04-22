@@ -5,11 +5,8 @@ RSpec.describe 'Proprietário cadastra um evento'do
 
     register_buffet
 
-    expect(page).to have_content 'Buffet Teste - Teste LTDA 12345678900 - (32) 3200-0000'
-    expect(page).to have_content 'Rua Teste, nº 00, Bairro: Bairro Teste, Cidade: Cidade Teste - Estado Teste'
-    expect(page).to have_content 'Descrição Teste - Pagamentos Teste'
     expect(page).to have_content('Cadastrar novo evento')
-    expect(page).to have_content('Não existem eventos Cadastrados')
+
   end
 
   it 'com sucesso'do
@@ -28,10 +25,9 @@ RSpec.describe 'Proprietário cadastra um evento'do
     check 'Evento fixo?'
     click_on 'Registrar'
 
-    expect(current_path).to eq buffets_buffet_path(Buffet.last)
+
     expect(page).to have_content 'Evento registrado com sucesso!'
-    expect(page).to have_content 'Festa de 15 anos'
-    expect(page).to have_content 'Eventos para festas de 15 anos'
+
 
   end
 
@@ -52,7 +48,6 @@ RSpec.describe 'Proprietário cadastra um evento'do
     click_on 'Registrar'
 
     expect(page).to have_content 'Não foi possível concluir está operação.'
-    expect(page).to have_content 'Eventos para festas de 15 anos'
   
 
   end

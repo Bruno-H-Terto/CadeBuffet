@@ -1,4 +1,4 @@
-<%= @event.name %>
+<h2>Cadastre o valor do evento <%= @event.name %></h2>
 
 <%= form_with model: @price_event, url: buffets_price_event_index_path(@event), method: :post do |form| %>
   <div>

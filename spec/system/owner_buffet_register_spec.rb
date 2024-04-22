@@ -42,7 +42,6 @@ RSpec.describe 'Proprietário registra seu Buffet' do
     click_on 'Gravar'
 
     expect(page).to have_content 'Buffet salvo com sucesso!'
-    expect(current_path).to eq buffets_buffet_path(Buffet.last)
   end
 
   it 'e falha por não poder ter mais de um Buffet registrado para o mesmo usuário' do

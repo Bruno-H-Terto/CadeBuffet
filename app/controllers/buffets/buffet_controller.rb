@@ -29,7 +29,7 @@ module Buffets
       
       if @buffet.save
         flash.notice = "Buffet salvo com sucesso!"
-        redirect_to buffets_buffet_path(@buffet)
+        redirect_to new_buffets_buffet_events_path(@buffet)
       else
         flash.alert = 'Não foi possível concluir está operação.'
         render 'new'
