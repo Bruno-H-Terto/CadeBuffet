@@ -16,8 +16,9 @@ Rails.application.routes.draw do
       unlocks: 'buffets/owners/unlocks'
     }
     resources :buffet, only: %i[show new create] do
-      resource :events, only: %i[create]
+      resource :events, only: %i[create edit]
     end
+    resources :price_event, only: %i[new create]
   end
 
 end

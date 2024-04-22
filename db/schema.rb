@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_22_004746) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_22_084928) do
   create_table "buffets", force: :cascade do |t|
     t.integer "owner_id", null: false
     t.string "brand_name"
@@ -61,6 +61,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_004746) do
     t.index ["reset_password_token"], name: "index_owners_on_reset_password_token", unique: true
   end
 
+  create_table "price_events", force: :cascade do |t|
+    t.integer "min_price_working_day"
+    t.integer "additional_price_for_person_working_day"
+    t.integer "extra_hour_working_day"
+    t.integer "min_price_weekend"
+    t.integer "additional_price_for_person_weekend"
+    t.integer "extra_hour_weekend"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "event_id", null: false
+    t.index ["event_id"], name: "index_price_events_on_event_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -76,4 +89,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_22_004746) do
   add_foreign_key "buffets", "owners"
   add_foreign_key "events", "buffets"
   add_foreign_key "events", "owners"
+  add_foreign_key "price_events", "events"
 end

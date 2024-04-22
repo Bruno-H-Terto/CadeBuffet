@@ -1,0 +1,21 @@
+pt-BR:
+  activerecord:
+    models:
+      event: 'Evento'
+    attributes:
+      event:
+        name: 'Nome'
+        min_quantity_people: 'Quantidade mínima de pessoas'
+        max_quantity_people: 'Quantidade máxima de pessoas'
+        duration_in_minutes: 'Duração em minutos'
+        menu: 'Cardápio'
+        alcoholic_drink: 'Bebidas alcoólicas?'
+        owner_id: 'Proprietário'
+        owner: 'Proprietário'
+        self_decoration: 'Decoração?'
+        parking: 'Estacionamento?'
+        valet: 'Valet?'
+        description: 'Descrição'
+        fixed_location: 'Evento fixo?'
+        buffet_id: 'Buffet'
+        buffet: 'Buffet'

@@ -1,10 +1,12 @@
 module Buffets
  class BuffetController < ApplicationController
+  
     before_action :authenticate_buffets_owner!
     before_action :redirect_owner, except: [:create]
 
     def show
       @buffet = Buffet.find(params[:id])
+      @events = Event.where(buffet: @buffet)
     end
 
     def new

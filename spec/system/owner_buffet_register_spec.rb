@@ -2,27 +2,14 @@ require 'rails_helper'
 
 RSpec.describe 'Proprietário registra seu Buffet' do
   it 'a partir da página inicial' do
-    owner = Owner.create!(email: 'owner@test.com', password: '123456')
-
-    visit root_path
-    click_on 'Sou Proprietário'
-    fill_in 'Email', with: 'owner@test.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
+    login()
 
     expect(current_path).to eq new_buffets_buffet_path
 
   end
 
   it 'e é obrigado a concluir o cadastro' do
-    owner = Owner.create!(email: 'owner@test.com', password: '123456')
-
-    visit root_path
-    click_on 'Sou Proprietário'
-    fill_in 'Email', with: 'owner@test.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
-    visit root_path
+    login()
 
     expect(page).to have_content 'Registre o Buffet para prosseguir!'
     expect(current_path).to eq new_buffets_buffet_path
@@ -30,27 +17,15 @@ RSpec.describe 'Proprietário registra seu Buffet' do
   end
 
   it 'e desloga sem registrar um Buffet' do
-    owner = Owner.create!(email: 'owner@test.com', password: '123456')
-
-    visit root_path
-    click_on 'Sou Proprietário'
-    fill_in 'Email', with: 'owner@test.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
+    login()
     click_on 'Sair'
-
+    
     expect(page).to have_content 'Logout efetuado com sucesso.'
     expect(current_path).to eq root_path
 
   end
   it 'e cadastra com sucesso' do
-    owner = Owner.create!(email: 'owner@test.com', password: '123456')
-    
-    visit root_path
-    click_on 'Sou Proprietário'
-    fill_in 'Email', with: 'owner@test.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
+    login()
   
     fill_in 'Nome Fantasia', with: 'Teste'
     fill_in 'Razão Social', with: 'Teste LTDA'
@@ -71,13 +46,7 @@ RSpec.describe 'Proprietário registra seu Buffet' do
   end
 
   it 'e falha por não poder ter mais de um Buffet registrado para o mesmo usuário' do
-    owner = Owner.create!(email: 'owner@test.com', password: '123456')
-
-    visit root_path
-    click_on 'Sou Proprietário'
-    fill_in 'Email', with: 'owner@test.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
+    login()
 
     fill_in 'Nome Fantasia', with: 'Teste'
     fill_in 'Razão Social', with: 'Teste LTDA'
@@ -99,13 +68,7 @@ RSpec.describe 'Proprietário registra seu Buffet' do
   end
   
   it 'e falha por deixar campos vazios' do
-    owner = Owner.create!(email: 'owner@test.com', password: '123456')
-
-    visit root_path
-    click_on 'Sou Proprietário'
-    fill_in 'Email', with: 'owner@test.com'
-    fill_in 'Password', with: '123456'
-    click_on 'Log in'
+    login()
 
     fill_in 'Nome Fantasia', with: ''
     fill_in 'Razão Social', with: ''

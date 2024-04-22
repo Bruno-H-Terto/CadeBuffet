@@ -2,64 +2,91 @@
 <%= @buffet.full_address %>
 <%= @buffet.full_contact %>
 
-<h2>Cadastrar novo evento</h2>
-<%= form_with model: @event, url: buffets_buffet_events_path, method: :post do |form| %>
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
+<section>
+  <% if @events.any? %>
+    <% @events.each do |ev| %>
+      <div>
+        <%= link_to "Valores para #{ev.name}", new_buffets_price_event_path(ev) %>
+        <%= ev.name %>
+        <%= ev.min_quantity_people %>
+        <%= ev.max_quantity_people %>
+        <%= ev.duration_in_minutes %>
+        <%= ev.menu %>    
+        <%= ev.alcoholic_drink %>      
+        <%= ev.self_decoration %>
+        <%= ev.parking %>
+        <%= ev.valet %>
+        <%= ev.fixed_location %>
+        <%= ev.description %>
+      </div>
 
-  <div>
-    <%= form.label :min_quantity_people %>
-    <%= form.number_field :min_quantity_people %>
-  </div>
+    <% end %>
+  <% else %>
+    <p>Não existem eventos Cadastrados</p>
+  <% end %>
+</section>
 
-  <div>
-    <%= form.label :max_quantity_people %>
-    <%= form.text_field :max_quantity_people %>
-  </div>
 
-  <div>
-    <%= form.label :duration_in_minutes %>
-    <%= form.text_field :duration_in_minutes %>
-  </div>
+<section>
+  <h2>Cadastrar novo evento</h2>
+  <%= form_with model: [@buffet, @buffet.event.build], url:buffets_buffet_events_path(@buffet)  do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name, value: params[:name] %>
+    </div>
 
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
+    <div>
+      <%= form.label :min_quantity_people %>
+      <%= form.number_field :min_quantity_people, value: params[:min_quantity_people] %>
+    </div>
 
-  <div>
-    <%= form.label :district %>
-    <%= form.text_field :district %>
-  </div>
+    <div>
+      <%= form.label :max_quantity_people %>
+      <%= form.number_field :max_quantity_people, value: params[:max_quantity_people,] %>
+    </div>
 
-  <div>
-    <%= form.label :state %>
-    <%= form.text_field :state %>
-  </div>
+    <div>
+      <%= form.label :duration_in_minutes %>
+      <%= form.text_field :duration_in_minutes, value: params[:duration_in_minutes] %>
+    </div>
 
-  <div>
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
+    <div>
+      <%= form.label :alcoholic_drink %>
+      <%= form.check_box :alcoholic_drink, {checked: params[:alcoholic_drink] == '1'} %>
+    </div>
 
-  <div>
-    <%= form.label :zip_code %>
-    <%= form.text_field :zip_code %>
-  </div>
+    <div>
+      <%= form.label :self_decoration %>
+      <%= form.check_box :self_decoration, {checked: params[:self_decoration] == '1'} %>
+    </div>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+    <div>
+      <%= form.label :parking %>
+      <%= form.check_box :parking, {checked: params[:parking] == '1'} %>
+    </div>
 
-  <div>
-    <%= form.label :menu %>
-    <%= form.text_area :menu %>
-  </div>
+    <div>
+      <%= form.label :valet %>
+      <%= form.check_box :valet, {checked: params[:valet] == '1'} %>
+    </div>
 
-  <div>
-    <%= form.submit 'Gravar' %>
-  </div>
-<% end %>
+    <div>
+      <%= form.label :fixed_location %>
+      <%= form.check_box :fixed_location, {checked: params[:fixed_location] == '1'} %>
+    </div>
+
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description, value: params[:description] %>
+    </div>
+
+    <div>
+      <%= form.label :menu %>
+      <%= form.text_area :menu, value: params[:menu] %>
+    </div>
+
+    <div>
+      <%= form.submit 'Registrar' %>
+    </div>
+  <% end %>
+</section>
