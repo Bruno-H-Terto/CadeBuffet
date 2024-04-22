@@ -9,7 +9,7 @@
         
         <%= link_to "#{ev.name}", buffets_buffet_events_path(ev) %> 
         <%= ev.description %>
-        
+        <%= PriceEvent.find_by(event: ev).min_price_weekend %>
 
       </div>
 

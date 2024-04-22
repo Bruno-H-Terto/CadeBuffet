@@ -9,8 +9,9 @@ class Buffets::PriceEventController < ApplicationController
     @event = Event.find(params[:format])
     @buffet = Buffet.find(@event.buffet_id)
     @price_event = PriceEvent.new(price_event_params)
+    @price_event.event_id = @event.id
     if @price_event.save
-      redirect_to redirect_to buffets_buffet_path(@buffet)
+      redirect_to buffets_buffet_path(@buffet)
       return flash.notice = 'Valores salvos com sucesso!'
     end
   end
