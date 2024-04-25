@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Proprietário cadastra um evento'do
-  it 'logo após concluir o cadastro de seu Buffet' do
+  it 'localiza o link logo após concluir o cadastro de seu Buffet' do
 
     register_buffet
 
@@ -12,6 +12,8 @@ RSpec.describe 'Proprietário cadastra um evento'do
   it 'com sucesso'do
 
     register_buffet
+    click_on 'Cadastrar novo evento'
+
     fill_in 'Nome', with: 'Festa de 15 anos'
     fill_in 'Quantidade mínima de pessoas', with: '10'
     fill_in 'Quantidade máxima de pessoas', with: '50'
@@ -34,6 +36,8 @@ RSpec.describe 'Proprietário cadastra um evento'do
   it 'e falha por deixar campos vazios'do
 
     register_buffet
+    click_on 'Cadastrar novo evento'
+
     fill_in 'Nome', with: 'Evento de formatura'
     fill_in 'Quantidade mínima de pessoas', with: ''
     fill_in 'Quantidade máxima de pessoas', with: ''
@@ -51,4 +55,6 @@ RSpec.describe 'Proprietário cadastra um evento'do
   
 
   end
+
+
 end

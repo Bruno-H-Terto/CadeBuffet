@@ -1,12 +1,14 @@
 <% if @buffet.errors.any? %>
   <p>Reveja os campos abaixo: </p>
+  <ul>
   <% @buffet.errors.full_messages.each do |msg| %>
-    <div><%= msg %></div>
+    <li><%= msg %></li>
   <% end %>
+  </ul>
 <% end %>
 
 <h2>Cadastre seu Buffet</h2>
-<%= form_with model: @buffet, url: buffets_buffet_index_path, method: :post do |form| %>
+<%= form_with model: @buffet, url: buffet_index_path, method: :post do |form| %>
   <div>
     <%= form.label :brand_name %>
     <%= form.text_field :brand_name %>

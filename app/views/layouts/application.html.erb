@@ -16,9 +16,17 @@
       <div>
         <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
       </div>
+    <% else %>
+      <div>
+        <%= link_to 'Sou Proprietário', new_buffets_owner_session_path %>
+      </div>
     <% end %>
-    <%= notice %>
-    <%= alert %>
+    <div>
+      <%= notice %>
+    </div>
+    <div>
+      <%= alert %>
+    </div>
     <%= yield %>
   </body>
 </html>

@@ -1,4 +1,5 @@
 <%= link_to 'Voltar', buffets_buffet_path(@event.buffet) %> 
+
 <%= link_to "Valores para #{@event.name}", new_buffets_price_event_path(@event.id) %>
 <%= link_to 'Editar', edit_buffets_buffet_events_path(@event) %>
 <%= @event.name %>

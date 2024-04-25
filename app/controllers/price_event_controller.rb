@@ -1,4 +1,5 @@
-class Buffets::PriceEventController < ApplicationController
+class PriceEventController < ApplicationController
+  before_action :authenticate_buffets_owner!
   def new
     @price_event = PriceEvent.new
     @event = Event.find(params[:format])

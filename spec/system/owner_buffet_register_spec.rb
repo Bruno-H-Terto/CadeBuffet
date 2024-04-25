@@ -4,19 +4,20 @@ RSpec.describe 'Proprietário registra seu Buffet' do
   it 'a partir da página inicial' do
     login()
 
-    expect(current_path).to eq new_buffets_buffet_path
+    expect(current_path).to eq new_buffet_path
 
   end
 
   it 'e é obrigado a concluir o cadastro' do
     login()
-
+    visit root_path
+    
     expect(page).to have_content 'Registre o Buffet para prosseguir!'
-    expect(current_path).to eq new_buffets_buffet_path
+    expect(current_path).to eq new_buffet_path
 
   end
 
-  it 'e desloga sem registrar um Buffet' do
+  it 'e desloga sem registrar em seguida' do
     login()
     click_on 'Sair'
     
@@ -60,7 +61,7 @@ RSpec.describe 'Proprietário registra seu Buffet' do
     fill_in 'Formas de Pagamento', with: 'Pagamentos Teste'
 
     click_on 'Gravar'
-    visit new_buffets_buffet_path 
+    visit new_buffet_path 
 
     expect(page).to have_content 'Propietário já está em uso!'
 
