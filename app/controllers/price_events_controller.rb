@@ -1,4 +1,4 @@
-class PriceEventController < ApplicationController
+class PriceEventsController < ApplicationController
   before_action :authenticate_buffets_owner!
   def new
     @price_event = PriceEvent.new

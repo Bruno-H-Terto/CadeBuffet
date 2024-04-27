@@ -12,7 +12,7 @@ class BuffetController < ApplicationController
     if Buffet.find_by(owner: current_buffets_owner).nil?
       @buffet = Buffet.new 
     else
-      flash.alert = 'Propietário já está em uso!'
+      flash.alert = 'Propietário já está em uso!' if request.path == new_buffet_path
       redirect_to buffet_path(Buffet.find_by(owner: current_buffets_owner))
     end
   end
@@ -30,7 +30,7 @@ class BuffetController < ApplicationController
       flash.notice = "Buffet salvo com sucesso!"
       redirect_to buffet_path(@buffet)
     else
-      flash.alert = 'Não foi possível concluir está operação.'
+      flash.alert = 'Não foi possível salvar seu Buffet.'
       render 'new'
     end
   end

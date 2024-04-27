@@ -1,3 +1,4 @@
+<p>Meu Buffet</p>
 <ul>
   <li><%= @buffet.full_register %></li>
   <li><%= @buffet.full_address %></li>
@@ -16,7 +17,7 @@
     <tbody>
       <% @events.each do |ev| %>
         <tr>
-          <td><%= link_to "#{ev.name}", events_path(ev) %></td>
+          <td><%= link_to "#{ev.name}", event_path(ev) %></td>
           <td><%= ev.description %></td>
         </tr>
       <% end %>
@@ -27,4 +28,4 @@
   <% end %>
 </section>
 
-<%= link_to 'Cadastrar novo evento', new_events_path %>
+<%= link_to 'Cadastrar novo evento', new_event_path %>

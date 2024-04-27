@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root to: 'home#index'
-
+  get 'list', to: 'home#list', as: 'listing'
 
   namespace :buffets do
     devise_for :owners, controllers: {
@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
   end
   resources :buffet, only: %i[show new create]
-  resource :events, only: %i[new create] do
-    resources :price_events, only: %i[new create]
+ 
+
+  resources :events, only: %i[new create] do
+    resource :price_events, only: %i[new create]
   end
+  resources :events, only: %i[show edit update]
+  
 end

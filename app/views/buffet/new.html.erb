@@ -1,3 +1,5 @@
+
+
 <% if @buffet.errors.any? %>
   <p>Reveja os campos abaixo: </p>
   <ul>
@@ -7,64 +9,66 @@
   </ul>
 <% end %>
 
-<h2>Cadastre seu Buffet</h2>
-<%= form_with model: @buffet, url: buffet_index_path, method: :post do |form| %>
-  <div>
-    <%= form.label :brand_name %>
-    <%= form.text_field :brand_name %>
-  </div>
+<main>
+  <h2>Cadastre seu Buffet</h2>
+  <%= form_with model: @buffet, url: buffet_index_path, method: :post do |form| %>
+    <div>
+      <%= form.label :brand_name %>
+      <%= form.text_field :brand_name %>
+    </div>
 
-  <div>
-    <%= form.label :corporate_name %>
-    <%= form.text_field :corporate_name %>
-  </div>
+    <div>
+      <%= form.label :corporate_name %>
+      <%= form.text_field :corporate_name %>
+    </div>
 
-  <div>
-    <%= form.label :register_number %>
-    <%= form.text_field :register_number %>
-  </div>
+    <div>
+      <%= form.label :register_number %>
+      <%= form.text_field :register_number %>
+    </div>
 
-  <div>
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number %>
-  </div>
+    <div>
+      <%= form.label :phone_number %>
+      <%= form.text_field :phone_number %>
+    </div>
 
-  <div>
-    <%= form.label :address %>
-    <%= form.text_field :address %>
-  </div>
+    <div>
+      <%= form.label :address %>
+      <%= form.text_field :address %>
+    </div>
 
-  <div>
-    <%= form.label :district %>
-    <%= form.text_field :district %>
-  </div>
+    <div>
+      <%= form.label :district %>
+      <%= form.text_field :district %>
+    </div>
 
-  <div>
-    <%= form.label :state %>
-    <%= form.text_field :state %>
-  </div>
+    <div>
+      <%= form.label :state %>
+      <%= form.text_field :state %>
+    </div>
 
-  <div>
-    <%= form.label :city %>
-    <%= form.text_field :city %>
-  </div>
+    <div>
+      <%= form.label :city %>
+      <%= form.text_field :city %>
+    </div>
 
-  <div>
-    <%= form.label :zip_code %>
-    <%= form.text_field :zip_code %>
-  </div>
+    <div>
+      <%= form.label :zip_code %>
+      <%= form.text_field :zip_code %>
+    </div>
 
-  <div>
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
+    <div>
+      <%= form.label :description %>
+      <%= form.text_area :description %>
+    </div>
 
-  <div>
-    <%= form.label :payment_methods %>
-    <%= form.text_field :payment_methods %>
-  </div>
+    <div>
+      <%= form.label :payment_methods %>
+      <%= form.text_field :payment_methods %>
+    </div>
 
-  <div>
-    <%= form.submit 'Gravar' %>
-  </div>
-<% end %>
+    <div>
+      <%= form.submit 'Gravar' %>
+    </div>
+  <% end %>
+</main>

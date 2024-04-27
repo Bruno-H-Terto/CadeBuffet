@@ -1,13 +1,13 @@
-
 class EventsController < ApplicationController
   before_action :authenticate_buffets_owner!
   def show
-    @event = Event.find(params[:buffet_id])
-
+    @event = Event.find(params[:id])
+    @price = PriceEvent.find(@event.price_events)
   end
 
   def new
     @event = Event.new
+    @price = PriceEvent.new
   end
 
 
@@ -17,35 +17,39 @@ class EventsController < ApplicationController
     @event = Event.new(event_params)
     @event.owner = @buffet.owner
     @event.buffet = @buffet
+    
+    @price = PriceEvent.new(price_event_params)  # Uso correto do método
+    @price.event = @event  # Associa ao evento
 
-    if @event.save
-      @event.price_events.create(price_event_params.values)
+    if @event.valid? && @price.valid?
+      @event.save!
+      @price.save!  # Salva o PriceEvent associado ao evento
       flash.notice = 'Evento registrado com sucesso!'
-
       redirect_to buffet_path(@buffet)
     else
-      flash.notice = 'Não foi possível concluir está operação.'
+      flash.notice = 'Não foi possível cadastrar seu Evento.'
       render 'new'
     end
-    
   end
 
+
   def edit
-    @event = Event.find(params[:buffet_id])
+    @event = Event.find(params[:id])
+    @price = PriceEvent.find_by(event: @event)
     @buffet = Buffet.find(@event.buffet_id)
   end
   
   def update
-    @event = Event.find(params[:buffet_id])
-    @buffet = Buffet.find(@event.buffet_id)
-    
-    if @event.update(event_params)
-      redirect_to buffets_buffet_path(@buffet)
-      return flash.notice = 'Evento registrado com sucesso!'
+    @event = Event.find(params[:id])
+    @price = PriceEvent.find_by(event: @event)
+
+    if @event.update(event_params) && @price.update(price_event_params)
+      flash.notice = 'Evento atualizado com sucesso!'
+      redirect_to buffet_path(@buffet)
+    else
+      flash.notice = 'Não foi possível atualizar seu Evento.'
+      render 'edit'
     end
-    
-    flash.notice = 'Não foi possível concluir está operação.'
-    render 'edit'
 
   end
 
@@ -69,14 +73,15 @@ class EventsController < ApplicationController
     params.require(:event).permit(
       price_event: [
         :id,
-        :min_price_working_day, :min_price_weekend,
+        :min_price_working_day,
+        :min_price_weekend,
         :additional_price_for_person_working_day,
         :additional_price_for_person_weekend,
         :extra_hour_working_day,
         :extra_hour_weekend,
         :_destroy
       ]
-    )
+    )[:price_event] 
   end
 
 end

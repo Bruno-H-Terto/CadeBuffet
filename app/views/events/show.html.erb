@@ -1,15 +1,36 @@
-<%= link_to 'Voltar', buffets_buffet_path(@event.buffet) %> 
+<p><%= link_to 'Meu Buffet', buffet_path(@event.buffet)%> > <%= @event.name %></p>
 
-<%= link_to "Valores para #{@event.name}", new_buffets_price_event_path(@event.id) %>
-<%= link_to 'Editar', edit_buffets_buffet_events_path(@event) %>
-<%= @event.name %>
-<%= @event.min_quantity_people %>
-<%= @event.max_quantity_people %>
-<%= @event.duration_in_minutes %>
-<%= @event.menu %>    
-<%= @event.alcoholic_drink %>      
-<%= @event.self_decoration %>
-<%= @event.parking %>
-<%= @event.valet %>
-<%= @event.fixed_location %>
-<%= @event.description %>
+<div>
+  <%= link_to 'Editar informações', edit_event_path(@event)%>
+</div>
+
+<main>
+  <h2><%= @event.name %></h2>
+  <div><p><%= @event.full_description %></p></div>
+
+  <div><p><%= @event.capacity %></p></div>
+
+  <div><p><%= @event.duration %></p></div>
+
+  <div><p><%= @event.menu_description %></p></div>
+
+  <div><p><%= @event.alcoholic? %></p></div>
+
+  <div><p><%= @event.decoration? %></p></div>
+
+  <div><p><%= @event.parking_space? %></p></div>
+
+  <div><p><%= @event.valet_service? %></p></div>
+
+  <div><p><%= @event.location? %></p></div>
+
+  <div><p><%= @price.price_working_days(number_to_currency(@price.min_price_working_day), 
+              number_to_currency(@price.additional_price_for_person_working_day),
+              number_to_currency(@price.extra_hour_working_day)) %></p></div>
+
+  <div><p><%= @price.price_weekend(number_to_currency(@price.min_price_weekend), 
+              number_to_currency(@price.additional_price_for_person_weekend),
+              number_to_currency(@price.extra_hour_weekend)) %></p></div>
+</main>
+
+

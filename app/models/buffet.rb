@@ -1,6 +1,6 @@
 class Buffet < ApplicationRecord
   belongs_to :owner
-  has_many :event
+  has_many :events
 
 
   validates :owner_id, uniqueness: true

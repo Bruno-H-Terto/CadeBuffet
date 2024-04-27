@@ -5,7 +5,7 @@ RSpec.describe Event, type: :model do
     it 'Todos os campos validos' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -22,7 +22,7 @@ RSpec.describe Event, type: :model do
     it 'Nome é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -39,7 +39,7 @@ RSpec.describe Event, type: :model do
     it 'Quantidade mínima de pessoas é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -56,7 +56,7 @@ RSpec.describe Event, type: :model do
     it 'Quantidade máxima de pessoas é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -73,7 +73,7 @@ RSpec.describe Event, type: :model do
     it 'Duração é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -90,7 +90,7 @@ RSpec.describe Event, type: :model do
     it 'Menu é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -107,7 +107,7 @@ RSpec.describe Event, type: :model do
     it 'Descrição é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -124,7 +124,7 @@ RSpec.describe Event, type: :model do
     it 'Proprietário é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -141,7 +141,7 @@ RSpec.describe Event, type: :model do
     it 'Buffet é obrigatório' do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
-                          state:'MG', address: 'Rua Principal, 42', register_number: '123456789123456', 
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
                           phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
@@ -155,5 +155,21 @@ RSpec.describe Event, type: :model do
       expect(result).to eq false
     end
 
+    it 'Número máximo de pessoas deve ser maior ou igual ao mínimo' do
+      owner = Owner.create!(email: 'owner@test.com', password: '123456')
+      buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
+                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
+
+      event = Event.new(name: 'Festa de formatura', min_quantity_people: '20', max_quantity_people: '10', duration_in_minutes: '60',
+                        menu: 'A definir', alcoholic_drink: false, self_decoration: true, parking: true, valet: false, fixed_location: true,
+                        description: 'Especialidade em formaturas', owner: owner, buffet: buffet)
+  
+  
+      result = event.valid?
+
+      expect(result).to eq false
+    end
   end
 end

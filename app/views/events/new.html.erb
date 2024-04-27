@@ -1,3 +1,5 @@
+<p><%= link_to 'Meu Buffet', buffet_path(Buffet.find_by(owner: current_buffets_owner))%> > Cadastrar novo evento</p>
+
 <% if @event.errors.any? %>
   <p>Reveja os campos abaixo: </p>
   <ul>
@@ -6,8 +8,17 @@
   <% end %>
   </ul>
 <% end %>
+<% if @price.errors.any? %>
+  <p>Reveja os campos abaixo: </p>
+  <ul>
+  <% @price.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
 
-<section>
+
+<main>
   <h2>Cadastrar novo evento</h2>
   <%= render 'form' %>
-</section>
+</main>

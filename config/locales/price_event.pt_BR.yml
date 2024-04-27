@@ -4,11 +4,11 @@ pt-BR:
       price_event: 'Valor do Evento'
     attributes:
       price_event:
-        min_price_weekend: 'Valor mínimo do evento (finais de semana)'
-        additional_price_for_person_weekend: 'Valor adicional por pessoa (finais de semana)'
+        min_price_weekend: 'Valor base do evento (finais de semana)'
+        additional_price_for_person_weekend: 'Adicional por pessoa (finais de semana)'
         extra_hour_weekend: 'Hora extra (finais de semana)'
-        min_price_working_day: 'Valor mínimo do evento (dias úteis)'
-        additional_price_for_person_working_day: 'Valor adicional por pessoa (dias úteis)'
+        min_price_working_day: 'Valor base do evento (dias úteis)'
+        additional_price_for_person_working_day: 'Adicional por pessoa (dias úteis)'
         extra_hour_working_day: 'Hora extra (dias úteis)'
         event_id: 'Evento'
         event: 'Evento'

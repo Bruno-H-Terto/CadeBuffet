@@ -1,7 +1,7 @@
 
 
 <section>
-  <%= form_with model: @event, url:events_path  do |form| %>
+  <%= form_with model: @event do |form| %>
     <div>
       <%= form.label :name %>
       <%= form.text_field :name %>
@@ -58,37 +58,42 @@
     </div>
 
     <h3>Valores</h3>
-      <%= form.fields_for :price_event do |price| %>
+      <%= form.fields_for @price do |price| %>
         <div>
-          <%= price.label :min_price_working_day %>
-          <%= price.number_field :min_price_working_day %>
+        <h4>Dias úteis</h4>
+          <div>
+            <%= price.label :min_price_working_day %>
+            <%= price.number_field :min_price_working_day %>
+          </div>
+        
+          <div>
+            <%= price.label :additional_price_for_person_working_day %>
+            <%= price.number_field :additional_price_for_person_working_day %>
+          </div>
+        
+          <div>
+            <%= price.label :extra_hour_working_day %>
+            <%= price.number_field :extra_hour_working_day %>
+          </div>
         </div>
-      
+
         <div>
-          <%= price.label :additional_price_for_person_working_day %>
-          <%= price.number_field :additional_price_for_person_working_day %>
+          <h4>Fins de semana</h4>
+          <div>
+            <%= price.label :min_price_weekend %>
+            <%= price.number_field :min_price_weekend %>
+          </div>
+        
+          <div>
+            <%= price.label :additional_price_for_person_weekend %>
+            <%= price.number_field :additional_price_for_person_weekend %>
+          </div>
+        
+          <div>
+            <%= price.label :extra_hour_weekend %>
+            <%= price.number_field :extra_hour_weekend %>
+          </div>
         </div>
-      
-        <div>
-          <%= price.label :extra_hour_working_day %>
-          <%= price.number_field :extra_hour_working_day %>
-        </div>
-      
-        <div>
-          <%= price.label :min_price_weekend %>
-          <%= price.number_field :min_price_weekend %>
-        </div>
-      
-        <div>
-          <%= price.label :additional_price_for_person_weekend %>
-          <%= price.number_field :additional_price_for_person_weekend %>
-        </div>
-      
-        <div>
-          <%= price.label :extra_hour_weekend %>
-          <%= price.number_field :extra_hour_weekend %>
-        </div>
-    
       <% end %>
       
     <div>

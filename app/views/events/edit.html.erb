@@ -1,3 +1,5 @@
-<section>
+<p>Meu Buffet > <%=link_to "#{@event.name}", event_path(@event)%> > Editar informações </p>
+<main>
   <h2>Editar evento <%= @event.name%></h2>
   <%= render 'form' %>
+</main>

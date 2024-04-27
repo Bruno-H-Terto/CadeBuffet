@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Proprietário registra seu Buffet' do
+describe 'Proprietário registra seu Buffet' do
   it 'a partir da página inicial' do
     login()
 
@@ -30,7 +30,7 @@ RSpec.describe 'Proprietário registra seu Buffet' do
   
     fill_in 'Nome Fantasia', with: 'Teste'
     fill_in 'Razão Social', with: 'Teste LTDA'
-    fill_in 'CNPJ', with: '12345678900'
+    fill_in 'CNPJ', with: '75889767000112'
     fill_in 'Telefone', with: '(32) 3200-0000'
     fill_in 'Endereço', with: 'Rua Teste, nº 00'
     fill_in 'Bairro', with: 'Bairro Teste'
@@ -50,7 +50,7 @@ RSpec.describe 'Proprietário registra seu Buffet' do
 
     fill_in 'Nome Fantasia', with: 'Teste'
     fill_in 'Razão Social', with: 'Teste LTDA'
-    fill_in 'CNPJ', with: '12345678900'
+    fill_in 'CNPJ', with: '75889767000112'
     fill_in 'Telefone', with: '(32) 3200-0000'
     fill_in 'Endereço', with: 'Rua Teste, nº 00'
     fill_in 'Bairro', with: 'Bairro Teste'
@@ -84,7 +84,7 @@ RSpec.describe 'Proprietário registra seu Buffet' do
 
     click_on 'Gravar'
 
-    expect(page).to have_content 'Não foi possível concluir está operação.'
+    expect(page).to have_content 'Não foi possível salvar seu Buffet.'
     expect(page).to have_content 'Nome Fantasia não pode ficar em branco'
     expect(page).to have_content 'Razão Social não pode ficar em branco'
     expect(page).to have_content 'CNPJ não pode ficar em branco'

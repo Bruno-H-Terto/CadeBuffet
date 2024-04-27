@@ -1,37 +1,39 @@
 <h2>Cadastre o valor do evento <%= @event.name %></h2>
 
-<%= form_with model: @price_event, url: buffets_price_event_index_path(@event), method: :post do |form| %>
-  <div>
-    <%= form.label :min_price_working_day %>
-    <%= form.number_field :min_price_working_day %>
-  </div>
+<main>
+  <%= form_with model: @price_event, url: buffets_price_event_index_path(@event), method: :post do |form| %>
+    <div>
+      <%= form.label :min_price_working_day %>
+      <%= form.number_field :min_price_working_day %>
+    </div>
 
-  <div>
-    <%= form.label :additional_price_for_person_working_day %>
-    <%= form.number_field :additional_price_for_person_working_day %>
-  </div>
+    <div>
+      <%= form.label :additional_price_for_person_working_day %>
+      <%= form.number_field :additional_price_for_person_working_day %>
+    </div>
 
-  <div>
-    <%= form.label :extra_hour_working_day %>
-    <%= form.number_field :extra_hour_working_day %>
-  </div>
+    <div>
+      <%= form.label :extra_hour_working_day %>
+      <%= form.number_field :extra_hour_working_day %>
+    </div>
 
-  <div>
-    <%= form.label :min_price_weekend %>
-    <%= form.number_field :min_price_weekend %>
-  </div>
+    <div>
+      <%= form.label :min_price_weekend %>
+      <%= form.number_field :min_price_weekend %>
+    </div>
 
-  <div>
-    <%= form.label :additional_price_for_person_weekend %>
-    <%= form.number_field :additional_price_for_person_weekend %>
-  </div>
+    <div>
+      <%= form.label :additional_price_for_person_weekend %>
+      <%= form.number_field :additional_price_for_person_weekend %>
+    </div>
 
-  <div>
-    <%= form.label :extra_hour_weekend %>
-    <%= form.number_field :extra_hour_weekend %>
-  </div>
+    <div>
+      <%= form.label :extra_hour_weekend %>
+      <%= form.number_field :extra_hour_weekend %>
+    </div>
 
-  <div>
-    <%= form.submit 'Gravar' %>
-  </div>
-<% end %>
+    <div>
+      <%= form.submit 'Gravar' %>
+    </div>
+  <% end %>
+</main>

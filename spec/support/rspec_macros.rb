@@ -15,7 +15,7 @@ def register_buffet
 
   fill_in 'Nome Fantasia', with: 'Teste'
   fill_in 'Razão Social', with: 'Teste LTDA'
-  fill_in 'CNPJ', with: '12345678900'
+  fill_in 'CNPJ', with: '75889767000112'
   fill_in 'Telefone', with: '(32) 3200-0000'
   fill_in 'Endereço', with: 'Rua Teste, nº 00'
   fill_in 'Bairro', with: 'Bairro Teste'
@@ -30,6 +30,7 @@ end
 
 def register_event
   register_buffet
+  click_on 'Cadastrar novo evento'
 
   fill_in 'Nome', with: 'Festa de 15 anos'
   fill_in 'Quantidade mínima de pessoas', with: '10'
@@ -42,5 +43,12 @@ def register_event
   check 'Valet?'
   fill_in 'Descrição', with: 'Eventos para festas de 15 anos'
   check 'Evento fixo?'
+  fill_in 'Valor base do evento (finais de semana)', with: '14000'
+  fill_in 'Adicional por pessoa (finais de semana)', with: '300'
+  fill_in 'Hora extra (finais de semana)', with: '600'
+  fill_in 'Valor base do evento (dias úteis)', with: '12000'
+  fill_in 'Adicional por pessoa (dias úteis)', with: '150'
+  fill_in 'Hora extra (dias úteis)', with: '450'
   click_on 'Registrar'
 end
+
