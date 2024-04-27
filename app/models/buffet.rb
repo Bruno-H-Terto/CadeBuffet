@@ -10,15 +10,15 @@ class Buffet < ApplicationRecord
   
   
   def full_register
-    "Buffet #{brand_name} - #{corporate_name} #{register_number} - #{phone_number}"
+    "Buffet #{brand_name} | #{corporate_name} #{register_number} | #{phone_number}"
   end
 
   def full_address
-    "Rua: #{address}, Bairro: #{district}, Cidade: #{city} - #{state} (CEP: #{zip_code})"
+    "Rua: #{address} | Bairro: #{district} | Cidade: #{city} - #{state} | (CEP: #{zip_code})"
   end
 
   def full_contact
-    "Descrição #{description} - #{payment_methods}"
+    "Descrição: #{description} | Forma(s) de pagamento(s): #{payment_methods}"
   end
 
 end

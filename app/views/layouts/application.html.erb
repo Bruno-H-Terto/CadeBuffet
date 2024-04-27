@@ -10,8 +10,7 @@
   </head>
 
   <body>
-  <h1>Cadê Buffet</h1>
-  <p>Em processo de refatoração!</p>
+  <h1><%= link_to 'Cadê Buffet', root_path%></h1>
   <% if buffets_owner_signed_in? %>
     <div>
       <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
@@ -19,6 +18,7 @@
   <% else %>
     <div>
       <%= link_to 'Sou Proprietário', new_buffets_owner_session_path %>
+      
     </div>
   <% end %>
     <div>

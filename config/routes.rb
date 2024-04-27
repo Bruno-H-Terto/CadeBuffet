@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'home#index'
   get 'list', to: 'home#list', as: 'listing'
+  resources :home, only: %i[show]
 
   namespace :buffets do
     devise_for :owners, controllers: {
