@@ -8,6 +8,7 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @price = PriceEvent.new
+    @buffet = Buffet.find_by(owner: current_buffets_owner)
   end
 
 

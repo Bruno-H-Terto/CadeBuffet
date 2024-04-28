@@ -1,12 +1,3 @@
 <p><%= link_to 'Home', root_path%> > Listar Buffets</p>
 
-<section>
-  <ul>
-  <% @buffets.each do |buffet| %>
-    <li>
-    <dl>Buffet <%= link_to "#{buffet.brand_name}", home_path(buffet)%></dl>
-      <dd>Localizado em <%= buffet.city%> - <%= buffet.state%></dd>
-    </li>
-  <% end %>
-  </ul>
-</section>
+<%= render 'results' %>

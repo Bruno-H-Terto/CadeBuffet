@@ -63,7 +63,7 @@ describe 'Proprietário registra seu Buffet' do
     click_on 'Gravar'
     visit new_buffet_path 
 
-    expect(page).to have_content 'Propietário já está em uso!'
+    expect(page).to have_content 'Buffet já cadastrado'
 
   end
   

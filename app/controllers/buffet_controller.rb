@@ -12,7 +12,7 @@ class BuffetController < ApplicationController
     if Buffet.find_by(owner: current_buffets_owner).nil?
       @buffet = Buffet.new 
     else
-      flash.alert = 'Propietário já está em uso!' if request.path == new_buffet_path
+      flash.alert = 'Buffet já cadastrado' if request.path == new_buffet_path
       redirect_to buffet_path(Buffet.find_by(owner: current_buffets_owner))
     end
   end

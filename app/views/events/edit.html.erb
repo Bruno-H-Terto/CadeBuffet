@@ -1,4 +1,22 @@
-<p>Meu Buffet > <%=link_to "#{@event.name}", event_path(@event)%> > Editar informações </p>
+<p><%= link_to 'Meu Buffet', buffet_path(@buffet)%> > <%=link_to "#{@event.name}", event_path(@event)%> > Editar informações </p>
+
+<% if @event.errors.any? %>
+  <p>Reveja os campos abaixo: </p>
+  <ul>
+  <% @event.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+<% if @price.errors.any? %>
+  <p>Reveja os campos abaixo: </p>
+  <ul>
+  <% @price.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
 <main>
   <h2>Editar evento <%= @event.name%></h2>
   <%= render 'form' %>

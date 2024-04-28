@@ -1,4 +1,4 @@
-<p><%= link_to 'Meu Buffet', buffet_path(Buffet.find_by(owner: current_buffets_owner))%> > Cadastrar novo evento</p>
+<p><%= link_to 'Meu Buffet', buffet_path(@buffet)%> > Cadastrar novo evento</p>
 
 <% if @event.errors.any? %>
   <p>Reveja os campos abaixo: </p>

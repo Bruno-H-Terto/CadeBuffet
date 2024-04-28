@@ -4,12 +4,19 @@ class HomeController < ApplicationController
   end
 
   def list
-    @buffets = Buffet.all
+    @buffets = Buffet.order(brand_name: :asc).all
   end
 
   def show
     @buffet = Buffet.find(params[:id])
   end
+
+  def search
+    @q = params[:query]
+    @buffets = Buffet.order(brand_name: :asc).where('brand_name like ? OR city like ? OR description like ?', "%#{@q}%",
+                "%#{@q}%", "%#{@q}%")
+  end
+
   private
 
   def authenticate_owner

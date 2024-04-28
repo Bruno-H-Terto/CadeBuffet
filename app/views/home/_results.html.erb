@@ -1,0 +1,10 @@
+<section>
+  <ul>
+  <% @buffets.each do |buffet| %>
+    <li>
+    <dl>Buffet <%= link_to "#{buffet.brand_name}", home_path(buffet)%></dl>
+      <dd>Localizado em <%= buffet.city%> - <%= buffet.state%></dd>
+    </li>
+  <% end %>
+  </ul>
+</section>
