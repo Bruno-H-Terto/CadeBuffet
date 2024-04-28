@@ -19,12 +19,12 @@ class EventsController < ApplicationController
     @event.owner = @buffet.owner
     @event.buffet = @buffet
     
-    @price = PriceEvent.new(price_event_params)  # Uso correto do método
-    @price.event = @event  # Associa ao evento
+    @price = PriceEvent.new(price_event_params) 
+    @price.event = @event
 
     if @event.valid? && @price.valid?
       @event.save!
-      @price.save!  # Salva o PriceEvent associado ao evento
+      @price.save! 
       flash.notice = 'Evento registrado com sucesso!'
       redirect_to buffet_path(@buffet)
     else

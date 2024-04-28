@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :authenticate_owner
+  before_action :authenticate_owner, only: %i[index]
   def index
   end
 
@@ -9,6 +9,7 @@ class HomeController < ApplicationController
 
   def show
     @buffet = Buffet.find(params[:id])
+    @events = Event.where(buffet: @buffet)
   end
 
   def search
