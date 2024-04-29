@@ -21,7 +21,7 @@ RSpec.describe Client, type: :model do
     end
 
     it 'Nome é obrigatório' do
-      client2 = Client.create(name: 'Amadeu', email: 'amadeu@email.com', register_number: '62260204074', password: '456789')
+      client2 = Client.create(name: '', email: 'amadeu@email.com', register_number: '62260204074', password: '456789')
 
       result = client2.valid?
 

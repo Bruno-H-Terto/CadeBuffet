@@ -31,6 +31,7 @@ describe 'Proprietário cadastra um evento'do
     fill_in 'Valor base do evento (dias úteis)', with: '12000'
     fill_in 'Adicional por pessoa (dias úteis)', with: '150'
     fill_in 'Hora extra (dias úteis)', with: '450'
+ 
     click_on 'Registrar'
 
 
