@@ -18,13 +18,25 @@
     <%= submit_tag 'Buscar' %>
   <% end %>
 
-  <% if buffets_owner_signed_in? %>
-    <div>
-      <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
-    </div>
+  <div>
+    <h2>Veja nossos Buffets cadastrados</h2>
+    <%= link_to 'Listar Buffets', listing_path %>
+  </div>
+  
+
+  <% if buffets_owner_signed_in? || client_signed_in? %>
+    <% if buffets_owner_signed_in? %>
+      <div>
+        <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
+      </div>
+    <% else %>
+    <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
+    <%= button_to 'Sair', destroy_client_session_path, method: :delete %>
+    <% end %>
   <% else %>
     <div>
       <%= link_to 'Sou Proprietário', new_buffets_owner_session_path %>
+      <%= link_to 'Sou Cliente', new_client_session_path %>
       
     </div>
   <% end %>

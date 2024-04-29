@@ -23,5 +23,7 @@ Rails.application.routes.draw do
     resource :price_events, only: %i[new create]
   end
   resources :events, only: %i[show edit update]
+
+  devise_for :clients
   
 end

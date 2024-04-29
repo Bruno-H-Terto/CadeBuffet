@@ -1,0 +1,8 @@
+pt-BR:
+  activerecord:
+    models:
+      owner: 'Proprietário'
+    attributes:
+      owner:
+        password: Senha
+        email: Email

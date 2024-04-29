@@ -4,8 +4,8 @@ def login()
   visit root_path
   click_on 'Sou Proprietário'
   fill_in 'Email', with: 'owner@test.com'
-  fill_in 'Password', with: '123456'
-  click_on 'Log in'
+  fill_in 'Senha', with: '123456'
+  click_on 'Entrar'
 
 end
 

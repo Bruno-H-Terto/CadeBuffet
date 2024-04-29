@@ -1,0 +1,10 @@
+pt-BR:
+  activerecord:
+    models:
+      client: 'Cliente'
+    attributes:
+      client:
+        password: Senha
+        email: Email
+        register_number: CPF
+        name: Nome

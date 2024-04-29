@@ -18,5 +18,10 @@ class ApplicationController < ActionController::Base
         return redirect_to new_buffet_path
       end
     end
+
+    def configure_permitted_parameters
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :register_number])
+    end
+
   end
 end
