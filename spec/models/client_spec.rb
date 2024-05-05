@@ -39,7 +39,7 @@ RSpec.describe Client, type: :model do
 
 
     it 'CPF é um número' do
-      client2 = Client.create(name: 'Amadeu', email: 'amadeu@email.com', register_number: 'adb', password: '456789')
+      client2 = Client.create(name: 'Amadeu', email: 'amadeu@email.com', register_number: 'abcdefghijk', password: '456789')
 
       result = client2.valid?
 

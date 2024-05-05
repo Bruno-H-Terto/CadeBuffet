@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_110402) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_04_222535) do
   create_table "buffets", force: :cascade do |t|
     t.integer "owner_id", null: false
     t.string "brand_name"
     t.string "corporate_name"
-    t.integer "register_number"
+    t.string "register_number"
     t.string "phone_number"
     t.string "address"
     t.string "district"

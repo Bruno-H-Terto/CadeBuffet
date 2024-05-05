@@ -17,4 +17,8 @@ pt-BR:
         zip_code: 'CEP'
         description: 'Descrição'
         payment_methods: 'Formas de Pagamento'
+        pix: 'Pix'
+        money: 'Dinheiro'
+        debit_card: 'Cartão de débito'
+        credit_card: 'Cartão de crédito'
 

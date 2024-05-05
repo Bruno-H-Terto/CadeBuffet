@@ -22,17 +22,17 @@ describe 'Usuário não autenticado' do
 
     buffet_first = Buffet.create!(brand_name: 'Chinas Buffet', corporate_name: 'China LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner_first)
 
     buffet_second = Buffet.create!(brand_name: 'Giramundo', corporate_name: 'Giramundo LTDA', city: 'São Paulo',
                           state:'SP', address: 'Rua Nova, 75', register_number: '83448951000155', 
-                          phone_number: '(11)97895-9999', district: 'Centro', zip_code: '11000-000',
+                          phone_number: '11978959999', district: 'Centro', zip_code: '11000-000',
                           payment_methods: 'Cartão, dinheiro', description: 'Churrascaria', owner: owner_second)
 
     buffet = Buffet.create!(brand_name: 'Buffet Grande Família', corporate_name: 'Grande Família LTDA', city: 'Rio de Janeiro',
                           state:'RJ', address: 'Av 7 de Setembro, 101', register_number: '40386821000122', 
-                          phone_number: '(21)94563-9999', district: 'Centro', zip_code: '21000-000',
+                          phone_number: '21945639999', district: 'Centro', zip_code: '21000-000',
                           payment_methods: 'Pix', description: 'Churrascaria', owner: owner_third)
 
 
@@ -56,17 +56,17 @@ describe 'Usuário não autenticado' do
 
     buffet_first = Buffet.create!(brand_name: 'Chinas Buffet', corporate_name: 'China LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner_first)
 
     buffet_second = Buffet.create!(brand_name: 'Giramundo', corporate_name: 'Giramundo LTDA', city: 'São Paulo',
                           state:'SP', address: 'Rua Nova, 75', register_number: '83448951000155', 
-                          phone_number: '(11)97895-9999', district: 'Centro', zip_code: '11000-000',
+                          phone_number: '11978959999', district: 'Centro', zip_code: '11000-000',
                           payment_methods: 'Cartão, dinheiro', description: 'Churrascaria', owner: owner_second)
 
     buffet = Buffet.create!(brand_name: 'Buffet Grande Família', corporate_name: 'Grande Família LTDA', city: 'Rio de Janeiro',
                           state:'RJ', address: 'Av 7 de Setembro, 101', register_number: '40386821000122', 
-                          phone_number: '(21)94563-9999', district: 'Centro', zip_code: '21000-000',
+                          phone_number: '21945639999', district: 'Centro', zip_code: '21000-000',
                           payment_methods: 'Pix', description: 'Churrascaria', owner: owner_third)
 
 
@@ -76,7 +76,7 @@ describe 'Usuário não autenticado' do
     click_on 'Chinas Buffet'
 
     expect(page).to have_content 'Chinas Buffet' 
-    expect(page).to have_content 'Chinas Buffet | CNPJ: 75889767000112 | Telefone: (32)99999-9999' 
+    expect(page).to have_content 'Chinas Buffet | CNPJ: 75889767000112 | Telefone: 32999999999' 
     expect(page).to have_content 'Rua: Rua Principal, 42 | Bairro: Centro | Cidade: Juiz de Fora - MG | (CEP: 32000-000)' 
     expect(page).to have_content 'Descrição: Buffets e eventos | Forma(s) de pagamento(s): Pix'
 
@@ -89,17 +89,17 @@ describe 'Usuário não autenticado' do
   
     buffet_first = Buffet.create!(brand_name: 'Chinas Buffet', corporate_name: 'China LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner_first)
   
     buffet_second = Buffet.create!(brand_name: 'Giramundo', corporate_name: 'Giramundo LTDA', city: 'São Paulo',
                           state:'SP', address: 'Rua Nova, 75', register_number: '83448951000155', 
-                          phone_number: '(11)97895-9999', district: 'Centro', zip_code: '11000-000',
+                          phone_number: '11978959999', district: 'Centro', zip_code: '11000-000',
                           payment_methods: 'Cartão, dinheiro', description: 'Churrascaria', owner: owner_second)
   
     buffet = Buffet.create!(brand_name: 'Buffet Grande Família', corporate_name: 'Grande Família LTDA', city: 'Rio de Janeiro',
                           state:'RJ', address: 'Av 7 de Setembro, 101', register_number: '40386821000122', 
-                          phone_number: '(21)94563-9999', district: 'Centro', zip_code: '21000-000',
+                          phone_number: '21945639999', district: 'Centro', zip_code: '21000-000',
                           payment_methods: 'Pix', description: 'Churrascaria', owner: owner_third)
 
     visit root_path
@@ -122,17 +122,17 @@ describe 'Usuário não autenticado' do
   
     buffet_first = Buffet.create!(brand_name: 'Chinas Buffet', corporate_name: 'China LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner_first)
   
     buffet_second = Buffet.create!(brand_name: 'Giramundo', corporate_name: 'Giramundo LTDA', city: 'São Paulo',
                           state:'SP', address: 'Rua Nova, 75', register_number: '83448951000155', 
-                          phone_number: '(11)97895-9999', district: 'Centro', zip_code: '11000-000',
+                          phone_number: '11978959999', district: 'Centro', zip_code: '11000-000',
                           payment_methods: 'Cartão, dinheiro', description: 'Churrascaria', owner: owner_second)
   
     buffet = Buffet.create!(brand_name: 'Buffet Grande Família', corporate_name: 'Grande Família LTDA', city: 'Rio de Janeiro',
                           state:'RJ', address: 'Av 7 de Setembro, 101', register_number: '40386821000122', 
-                          phone_number: '(21)94563-9999', district: 'Centro', zip_code: '21000-000',
+                          phone_number: '21945639999', district: 'Centro', zip_code: '21000-000',
                           payment_methods: 'Pix', description: 'Churrascaria', owner: owner_third)
 
     visit root_path
@@ -149,12 +149,12 @@ describe 'Usuário não autenticado' do
   
     buffet_first = Buffet.create!(brand_name: 'Chinas Buffet', corporate_name: 'China LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner_first)
   
     buffet_second = Buffet.create!(brand_name: 'Giramundo', corporate_name: 'Giramundo LTDA', city: 'São Paulo',
                           state:'SP', address: 'Rua Nova, 75', register_number: '83448951000155', 
-                          phone_number: '(11)97895-9999', district: 'Centro', zip_code: '11000-000',
+                          phone_number: '11978959999', district: 'Centro', zip_code: '11000-000',
                           payment_methods: 'Cartão, dinheiro', description: 'Churrascaria', owner: owner_second)
 
     event_1 = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -217,17 +217,17 @@ describe 'Usuário não autenticado' do
 
     buffet_first = Buffet.create!(brand_name: 'Chinas Buffet', corporate_name: 'China LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner_first)
 
     buffet_second = Buffet.create!(brand_name: 'Giramundo', corporate_name: 'Giramundo LTDA', city: 'São Paulo',
                           state:'SP', address: 'Rua Nova, 75', register_number: '83448951000155', 
-                          phone_number: '(11)97895-9999', district: 'Centro', zip_code: '11000-000',
+                          phone_number: '11978959999', district: 'Centro', zip_code: '11000-000',
                           payment_methods: 'Cartão, dinheiro', description: 'Churrascaria', owner: owner_second)
 
     buffet = Buffet.create!(brand_name: 'Buffet Grande Família', corporate_name: 'Grande Família LTDA', city: 'Rio de Janeiro',
                           state:'RJ', address: 'Av 7 de Setembro, 101', register_number: '40386821000122', 
-                          phone_number: '(21)94563-9999', district: 'Centro', zip_code: '21000-000',
+                          phone_number: '21945639999', district: 'Centro', zip_code: '21000-000',
                           payment_methods: 'Pix', description: 'Churrascaria', owner: owner_third)
 
 

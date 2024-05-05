@@ -19,11 +19,9 @@ class BuffetController < ApplicationController
 
   def create
     owner = current_buffets_owner
-    buffet_params = params.require(:buffet).permit(:brand_name, :corporate_name, :city, :state, 
-                    :address, :register_number, :phone_number, :district, :zip_code, :payment_methods,
-                    :description)
 
     @buffet = Buffet.new(buffet_params)
+    @buffet.payment_methods = payment_methods_params
     @buffet.owner = owner
     
     if @buffet.save
@@ -33,6 +31,19 @@ class BuffetController < ApplicationController
       flash.alert = 'Não foi possível salvar seu Buffet.'
       render 'new'
     end
+  end
+
+  private
+
+  def buffet_params
+    params.require(:buffet).permit(:brand_name, :corporate_name, :city, :state, 
+    :address, :register_number, :phone_number, :district, :zip_code,
+    :description)
+  end
+
+  def payment_methods_params
+    methods = params.require(:buffet).permit(payment_methods: [])[:payment_methods]
+    methods.join(', ') if methods.present?
   end
 
 end

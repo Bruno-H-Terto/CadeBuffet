@@ -15,15 +15,16 @@ def register_buffet
 
   fill_in 'Nome Fantasia', with: 'Teste'
   fill_in 'Razão Social', with: 'Teste LTDA'
-  fill_in 'CNPJ', with: '75889767000112'
-  fill_in 'Telefone', with: '(32) 3200-0000'
+  fill_in 'CNPJ', with: '08782544000164'
+  fill_in 'Telefone', with: '3232000000'
   fill_in 'Endereço', with: 'Rua Teste, nº 00'
   fill_in 'Bairro', with: 'Bairro Teste'
   fill_in 'Estado', with: 'Estado Teste'
   fill_in 'Cidade', with: 'Cidade Teste'
   fill_in 'CEP', with: '123456789'
   fill_in 'Descrição', with: 'Descrição Teste'
-  fill_in 'Formas de Pagamento', with: 'Pagamentos Teste'
+  find("#buffet_payment_methods_pix").click
+  find("#buffet_payment_methods_dinheiro").click
 
   click_on 'Gravar'
 end

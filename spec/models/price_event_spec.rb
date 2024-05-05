@@ -6,7 +6,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -26,7 +26,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -46,7 +46,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -66,7 +66,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -86,7 +86,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -106,7 +106,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -126,7 +126,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
@@ -147,7 +147,7 @@ RSpec.describe PriceEvent, type: :model do
       owner = Owner.create!(email: 'owner@test.com', password: '123456')
       buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
                           state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
-                          phone_number: '(32)99999-9999', district: 'Centro', zip_code: '32000-000',
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
                           payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
 
       price_event = PriceEvent.new(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',

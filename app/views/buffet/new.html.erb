@@ -28,8 +28,8 @@
     </div>
 
     <div>
-      <%= form.label :phone_number %>
-      <%= form.text_field :phone_number %>
+      <p><%= form.label :phone_number %> Código de área mais telefone</p>
+      <p><%= form.text_field :phone_number %> Somente números</p>
     </div>
 
     <div>
@@ -64,7 +64,12 @@
 
     <div>
       <%= form.label :payment_methods %>
-      <%= form.text_field :payment_methods %>
+      <% Buffet::METHODS.each do |m| %>
+        <div>
+          <%= form.check_box :payment_methods, { multiple: true }, Buffet.human_attribute_name(m), nil %> 
+          <%= form.label m %>
+        </div>
+      <% end %>
     </div>
 
     <div>

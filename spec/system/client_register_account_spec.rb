@@ -44,7 +44,7 @@ describe 'Cliente acessa a plataforma' do
     click_on 'Entrar'
 
     expect(current_path).to eq root_path
-    expect(page).to have_content 'José - 617******36'
+    expect(page).to have_content 'José - 617.xxx.xxx-36'
   end
 
   it 'não possui autorização para criar um Buffet' do

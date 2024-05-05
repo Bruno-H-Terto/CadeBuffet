@@ -35,22 +35,26 @@ class EventsController < ApplicationController
 
 
   def edit
+    return redirect_to root_path unless is_owner?
     @event = Event.find(params[:id])
     @price = PriceEvent.find_by(event: @event)
     @buffet = Buffet.find(@event.buffet_id)
   end
   
   def update
+    return redirect_to root_path unless is_owner?
     @event = Event.find(params[:id])
+    
+    
     @price = PriceEvent.find_by(event: @event)
 
     if @event.update(event_params) && @price.update(price_event_params)
       flash.notice = 'Evento atualizado com sucesso!'
-      redirect_to buffet_path(@buffet)
-    else
+      return redirect_to buffet_path(@buffet)
+    end
       flash.notice = 'Não foi possível atualizar seu Evento.'
       render 'edit'
-    end
+    
 
   end
 
@@ -83,6 +87,11 @@ class EventsController < ApplicationController
         :_destroy
       ]
     )[:price_event] 
+  end
+
+  def is_owner?
+    @event = Event.find(params[:id])
+    @event.owner == current_buffets_owner
   end
 
 end

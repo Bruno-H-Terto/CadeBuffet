@@ -11,15 +11,14 @@ class Client < ApplicationRecord
   validate :register_is_valid
 
   def register_mask
-    masked = register_number[0..2] + '******' + register_number[9..10]
+    masked = register_number[0..2] + '.xxx.xxx-' + register_number[9..10]
   end
 
   private
   def register_is_valid
-    return errors.add :register_number, 'CPF deve conter 11 digítos' if register_number.nil? || register_number.length != 11 || register_number.to_i.to_s != register_number
-
+    return errors.add :register_number, 'CPF deve conter 11 digítos' if register_number.nil? || register_number.length != 11
     if (register_valid_to_eq(register_number))
-      errors.add(:register_number, "CPF não é válido")
+      errors.add(:register_number, "não é válido")
     end
   end
 
