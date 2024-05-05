@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_04_222535) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_05_031757) do
   create_table "buffets", force: :cascade do |t|
     t.integer "owner_id", null: false
     t.string "brand_name"
@@ -63,6 +63,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_222535) do
     t.index ["owner_id"], name: "index_events_on_owner_id"
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.integer "buffet_id", null: false
+    t.integer "event_id", null: false
+    t.date "estimated_date"
+    t.integer "estimated_people"
+    t.text "details"
+    t.string "code"
+    t.string "address"
+    t.integer "status", default: 0
+    t.integer "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["buffet_id"], name: "index_orders_on_buffet_id"
+    t.index ["client_id"], name: "index_orders_on_client_id"
+    t.index ["event_id"], name: "index_orders_on_event_id"
+  end
+
   create_table "owners", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -91,5 +108,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_04_222535) do
   add_foreign_key "buffets", "owners"
   add_foreign_key "events", "buffets"
   add_foreign_key "events", "owners"
+  add_foreign_key "orders", "buffets"
+  add_foreign_key "orders", "clients"
+  add_foreign_key "orders", "events"
   add_foreign_key "price_events", "events"
 end

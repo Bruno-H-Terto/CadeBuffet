@@ -53,3 +53,11 @@ def register_event
   click_on 'Registrar'
 end
 
+def login_client(user)
+  visit root_path
+  click_on 'Sou Cliente'
+  fill_in 'Email', with: user.email
+  fill_in 'Senha', with: user.password
+  click_on 'Entrar'
+end
+

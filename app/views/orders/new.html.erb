@@ -1,0 +1,40 @@
+<% if @order.errors.any? %>
+  <p>Reveja os campos abaixo: </p>
+  <ul>
+  <% @order.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<section>
+  <h2><%= @event.name %></h2>
+  <%= form_with model: @order, url: home_orders_path, method: :post do |order| %>
+
+    <div>
+      <%= order.label :estimated_date %>
+      <%= order.date_field :estimated_date %>
+    </div>
+
+    <div>
+      <%= order.label :estimated_people %>
+      <%= order.number_field :estimated_people %>
+    </div>
+
+    <div>
+      <%= order.label :details %>
+      <%= order.text_area :details %>
+    </div>
+
+    <% unless @event.fixed_location %>
+      <div>
+        <%= order.label :address %>
+        <%= order.text_field :address, value: @buffet.full_address %>
+      </div>
+    <% end %>
+
+    <div>
+      <%= order.submit 'Gravar' %>
+    </div>
+  <% end %>
+</section>

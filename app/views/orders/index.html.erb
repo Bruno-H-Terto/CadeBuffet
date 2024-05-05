@@ -1,0 +1,9 @@
+<% if @orders.any? %>
+  <% @orders.each do |order| %>
+    <p><%= Order.human_attribute_name(:code) %>: <%= order.code %></p>
+    <p><%= Order.human_attribute_name(:status) %>: <%= Order.human_attribute_name(order.status) %></p>
+  <% end %>
+<% else %>
+    <p>Não existem pedidos cadastrados</p>
+
+<% end %>

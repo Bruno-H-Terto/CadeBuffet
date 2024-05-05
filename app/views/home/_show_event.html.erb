@@ -1,7 +1,11 @@
 <% if @events.present? %>
+   
+
 
   <% @events.each do |event| %>
-    <h2><%= event.name %></h2>
+    <% if client_signed_in? %>
+      <h2><%= link_to "Novo pedido - #{event.name}", new_home_order_path(event.id) %> </h2>
+    <% end %>
     <div><p><%= event.full_description %></p></div>
 
     <div><p><%= event.capacity %></p></div>

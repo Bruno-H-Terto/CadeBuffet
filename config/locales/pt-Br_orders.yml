@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    models:
+      order: 
+        one: 'Pedido'
+        other: 'Pedidos'
+    attributes:
+      order:
+        event: 'Evento'
+        event_id: 'Evento'
+        estimated_date: 'Data desejada'
+        estimated_people: 'Quantidade estimada de convidados'
+        details: 'Observações'
+        address: 'Local de realização do evento'
+        code: 'Código'
+        status: 'Situação'
+        waiting_review: 'Aguardando avaliação do buffet'

@@ -32,6 +32,7 @@
     <% else %>
     <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
     <%= button_to 'Sair', destroy_client_session_path, method: :delete %>
+    <%= link_to 'Meus pedidos', orders_path %>
     <% end %>
   <% else %>
     <div>

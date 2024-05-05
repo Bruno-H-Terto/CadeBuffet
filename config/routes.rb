@@ -3,7 +3,10 @@ Rails.application.routes.draw do
   root to: 'home#index'
   get 'list', to: 'home#list', as: 'listing'
   get 'search', to: 'home#search', as: 'search'
-  resources :home, only: %i[show]
+  resources :home, only: %i[show] do 
+    resources :orders, only: %i[new create]
+  end
+  resources :orders, only: %i[index]
 
   namespace :buffets do
     devise_for :owners, controllers: {
