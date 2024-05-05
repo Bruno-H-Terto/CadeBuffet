@@ -1,0 +1,15 @@
+<h2><%= Order.model_name.human %> <%= @order.code %> <%= Order.human_attribute_name @order.status%></h2>
+<% if @order_count.any? && @order_count.count > 1%>
+  <div>
+    <p>Existem <%=@order_count.count%> pedidos agendados para está data</p>
+    <% @order_count.each do |order| %>
+      <p> Pedido <%= link_to order.code, order_view_path(order) %>, <%= Order.human_attribute_name order.status %></p>
+    <% end %>
+  </div>
+<% end %>
+
+<p><%= Order.human_attribute_name :client %> <%= @order.client.name %></p>
+<p><%= Order.human_attribute_name :estimated_date %> <%= I18n.l @order.estimated_date %></p>
+<p><%= Order.human_attribute_name :estimated_people %> <%= @order.estimated_people %></p>
+<p><%= Order.human_attribute_name :details %> <%= @order.details %></p>
+<p><%= Order.human_attribute_name :address %> <%= @order.address %></p>

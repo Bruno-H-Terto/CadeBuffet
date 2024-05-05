@@ -27,12 +27,13 @@
   <% if buffets_owner_signed_in? || client_signed_in? %>
     <% if buffets_owner_signed_in? %>
       <div>
+        <%= link_to 'Pedidos', buffet_my_orders_path(Buffet.find_by(owner_id: current_buffets_owner.id)) if Buffet.find_by(owner_id: current_buffets_owner.id).present? %>
         <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
       </div>
     <% else %>
-    <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
-    <%= button_to 'Sair', destroy_client_session_path, method: :delete %>
-    <%= link_to 'Meus pedidos', orders_path %>
+      <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
+      <%= link_to 'Meus pedidos', orders_path %>
+      <%= button_to 'Sair', destroy_client_session_path, method: :delete %>
     <% end %>
   <% else %>
     <div>

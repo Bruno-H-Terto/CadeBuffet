@@ -33,6 +33,19 @@ class BuffetController < ApplicationController
     end
   end
 
+  def orders
+    @buffet = Buffet.find(params[:buffet_id])
+    @orders = Order.where('status = ? AND buffet_id = ?', 0, @buffet.id).order(estimated_date: :asc)
+    @other_orders = Order.where('NOT status = ? AND buffet_id = ?', 0, @buffet.id).order(estimated_date: :asc)
+  end
+
+  def order_view
+    @order = Order.find(params[:id])
+    @order_count = Order.where('estimated_date = ? AND buffet_id = ? AND NOT status = ?', @order.estimated_date, @order.buffet_id,
+                                3).where('estimated_date >= ?', Date.today)
+
+  end
+
   private
 
   def buffet_params

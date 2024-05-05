@@ -1,0 +1,17 @@
+<% if @orders.any? %>
+  <h2>Pedidos aguardando avaliação</h2>
+  <% @orders.each do |order| %>
+    <%= link_to "#{order.code}", order_view_path(order) %>
+
+  <% end %>
+<% else %>
+    <p>Não existem pedidos a serem avalidos</p>
+<% end %>
+
+<% if @other_orders.any? %>
+  <h2>Demais pedidos</h2>
+  <% @other_orders.each do |order| %>
+    <%= link_to "#{order.code}", order_view_path(order) %>
+
+  <% end %>
+<% end %>

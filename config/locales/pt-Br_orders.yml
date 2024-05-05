@@ -14,4 +14,6 @@ pt-BR:
         address: 'Local de realização do evento'
         code: 'Código'
         status: 'Situação'
-        waiting_review: 'Aguardando avaliação do buffet'
+        waiting_review: 'Aguardando avaliação do Buffet'
+        client: 'Cliente'
+        client_id: 'Cliente'
