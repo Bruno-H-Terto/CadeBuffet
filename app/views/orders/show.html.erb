@@ -1,0 +1,15 @@
+<h2><%= Order.model_name.human %> <%= @order.code %> <%= Order.human_attribute_name @order.status%></h2>
+
+<%= render 'buffet/order_details' %>
+<%= render 'buffet/price_order_details' %>
+
+<div>
+  <% if @price_order.deadline >= Date.today %>
+    <%= button_to 'Confirmar evento', confirm_event_path(@order, 2), method: :post %>
+    <%= button_to 'Cancelar evento', confirm_event_path(@order, 3), method: :post %>
+  <% else %>
+    <p>Pedido fora do prazo de confirmação</p>
+  <% end %>
+</div>
+
+<p>Mais informações de contato: <%= @buffet.full_address %> | <%= @buffet.mask_phone_number %></p>

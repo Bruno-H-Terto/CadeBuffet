@@ -41,6 +41,7 @@ class BuffetController < ApplicationController
 
   def order_view
     @order = Order.find(params[:id])
+    @buffet = @order.buffet
     @event = @order.event
     @price_event = PriceEvent.find_by(event: @event)
     @order_count = Order.where('estimated_date = ? AND buffet_id = ? AND NOT status = ?', @order.estimated_date, @order.buffet_id,
@@ -52,7 +53,10 @@ class BuffetController < ApplicationController
   end
 
   def confirm_order
+    
     @order = Order.find(params[:id])
+    @buffet = @order.buffet
+    return redirect_to root_path unless is_owner?
     if params[:status] == '1'
       @order.confirmed_for_buffet!
       return redirect_to order_view_path(@order), notice: 'Pedido confirmado'
@@ -74,4 +78,9 @@ class BuffetController < ApplicationController
     methods.join(', ') if methods.present?
   end
 
+  def is_owner?
+    @order = Order.find(params[:id])
+    @buffet = @order.buffet
+    @buffet.owner == current_buffets_owner
+  end
 end

@@ -1,7 +1,21 @@
-<% if @orders.any? %>
-  <% @orders.each do |order| %>
-    <p><%= Order.human_attribute_name(:code) %>: <%= order.code %></p>
-    <p><%= Order.human_attribute_name(:status) %>: <%= Order.human_attribute_name(order.status) %></p>
+<p><%= link_to 'Home', root_path %> > Meus pedidos</p>
+<% if @orders_waiting_confirmation.any? %>
+  <div>Pedidos liberados pelo Buffet</p>
+  <% @orders_waiting_confirmation.each do |order| %>
+    <dl>
+      <dt><%= Order.human_attribute_name(:code) %>: <%=link_to order.code, order_path(order) %></dt>
+      <dd><%= Order.human_attribute_name(:status) %>: <%= Order.human_attribute_name(order.status) %></dd>
+    </dl>
+  <% end %>
+<% end %>
+
+
+<% if @other_orders.any? %>
+  <% @other_orders.each do |order| %>
+    <dl>
+      <dt><%= Order.human_attribute_name(:code) %>: <%= order.code %></dt>
+      <dd><%= Order.human_attribute_name(:status) %>: <%= Order.human_attribute_name(order.status) %></dd>
+    </dl>
   <% end %>
 <% else %>
     <p>Não existem pedidos cadastrados</p>

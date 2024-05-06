@@ -1,0 +1,10 @@
+<div><%= PriceOrder.human_attribute_name :initial_price %> <%= number_to_currency @price_order.initial_price %></div>
+
+<div><%= PriceOrder.human_attribute_name :final_price %> <%= number_to_currency @price_order.final_price %></div>
+
+<div><%= PriceOrder.human_attribute_name :deadline %> <%= I18n.l @price_order.deadline %></div>
+
+<div><%= PriceOrder.human_attribute_name :rate %> de <%= number_to_currency @price_order.rate %> | 
+<%= PriceOrder.human_attribute_name :description_rate %>: <%= @price_order.description_rate %> </div>
+
+<div><%= PriceOrder.human_attribute_name :payment_methods %>: <%= @price_order.payment_methods %> </div>

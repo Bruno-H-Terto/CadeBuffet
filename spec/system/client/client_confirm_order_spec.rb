@@ -1,9 +1,7 @@
 require 'rails_helper'
 
-describe 'Proprietário confirma pedido' do
-  include ActionView::Helpers::NumberHelper 
-
-  it 'acessa formulário para preencher valor final' do
+describe 'Cliente tem pedido aprovado pelo Buffet' do
+  it 'e recebe notificação' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 
@@ -21,41 +19,19 @@ describe 'Proprietário confirma pedido' do
     price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
                                      additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 10, estimated_people: 20, address: buffet_first.full_address, details: 'Ok', status: 1)
+    price_order = PriceOrder.create!(order: order, initial_price: 900, rate: 100, description_rate: 'Adicional de lotação', final_price: 1000, deadline: Date.today + 3, payment_methods: 'Dinheiro, Pix', owner: buffet_first.owner)
 
-
-    login_as owner_first
+    login_client client
     visit root_path
-    click_on 'Pedidos'
-    click_on order.code
-    click_on 'Cadastrar novo valor'
+    click_on 'Meus pedidos'
 
-
-
-    weekend = (0 == order.estimated_date.wday || 6 == order.estimated_date.wday)
-
-
-    add_people = order.estimated_people - event_1.min_quantity_people if order.estimated_people > event_1.min_quantity_people
-
-    price = 0
-
-    weekend ? price = price_event_1.min_price_weekend.to_i + price_event_1.additional_price_for_person_weekend*add_people :
-               price = price_event_1.min_price_working_day.to_i + price_event_1.additional_price_for_person_working_day*add_people
-
-    price = number_to_currency(price)
-
-    expect(page).to have_content "Preço base #{price}"
-    expect(page).to have_field'Taxa'
-    expect(page).to have_field'Descrição da taxa'
-    expect(page).to have_field'Data limite para confirmação'
-    expect(page).to have_content'Formas de pagamento'
-    expect(find("#price_order_payment_methods_pix").present?).to eq true
-    expect(find("#price_order_payment_methods_dinheiro").present?).to eq true
-    expect(find("#price_order_payment_methods_cartão_de_crédito").present?).to eq true
-    expect(page).to have_button 'Gravar'
+    expect(page).to have_content 'Pedidos liberados pelo Buffet'
+    expect(page).to have_content "Código: #{order.code}"
+    expect(page).to have_content "Situação: Confirmado pelo Buffet"
   end
 
-  it 'cadastrando o preço do pedido' do
+  it 'acessa página do pedido e consula valor atualizado' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 
@@ -73,44 +49,24 @@ describe 'Proprietário confirma pedido' do
     price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
                                      additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 7, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 10, estimated_people: 20, address: buffet_first.full_address, details: 'Ok', status: 1)
+    price_order = PriceOrder.create!(order: order, initial_price: 900, rate: 100, description_rate: 'Adicional de lotação', final_price: 1000, deadline: Date.today + 3, payment_methods: 'Dinheiro, Pix', owner: buffet_first.owner)
 
-
-    login_as owner_first
+    login_client client
     visit root_path
-    click_on 'Pedidos'
+    click_on 'Meus pedidos'
     click_on order.code
-    click_on 'Cadastrar novo valor'
-    fill_in 'Taxa', with: '200'
-    fill_in 'Data limite para confirmação', with: Date.today + 3
-    fill_in 'Descrição da taxa', with: 'Valor adicional devido ao pouco prazo para realização'
-    find("#price_order_payment_methods_pix").click
-    click_on 'Gravar'
 
-
-    weekend = (0 == order.estimated_date.wday || 6 == order.estimated_date.wday)
-
-
-    add_people = order.estimated_people - event_1.min_quantity_people if order.estimated_people > event_1.min_quantity_people
-
-    price = 0
-
-    weekend ? price = price_event_1.min_price_weekend.to_i + price_event_1.additional_price_for_person_weekend*add_people :
-               price = price_event_1.min_price_working_day.to_i + price_event_1.additional_price_for_person_working_day*add_people
-
-    price = number_to_currency(price + 200)
-    expect(page).to have_content 'Valor do pedido registrado com sucesso!'
-    expect(page).to have_content "Valor final #{price}"
-    format = I18n.l Date.today + 3
-    expect(page).to have_content "Data limite para confirmação #{format}"
-    expect(page).to have_content "Taxa de R$ 200,00 | Valor adicional devido ao pouco prazo para realização"
-    expect(page).to have_content "Formas de pagamento: Pix"
-    expect(page).to have_content 'Confirme o seu pedido'
-    expect(page).to have_content 'Confirmar'
+    date_format = I18n.l Date.today + 3
+    expect(page).to have_content "Data limite para confirmação #{date_format}"
+    expect(page).to have_content 'Valor final R$ 1.000,00'
+    expect(page).to have_content 'Taxa de R$ 100,00 | Descrição da taxa: Adicional de lotação'
+    expect(page).to have_content 'Formas de pagamento: Dinheiro, Pix'
+    expect(page).to have_content "Mais informações de contato: #{buffet_first.full_address} | #{buffet_first.mask_phone_number}"
 
   end
 
-  it 'e altera o status do pedido' do
+  it 'e o confirma' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 
@@ -128,23 +84,25 @@ describe 'Proprietário confirma pedido' do
     price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
                                      additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 7, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 10, estimated_people: 20, address: buffet_first.full_address, details: 'Ok', status: 1)
+    price_order = PriceOrder.create!(order: order, initial_price: 900, rate: 100, description_rate: 'Adicional de lotação', final_price: 1000, deadline: Date.today + 3, payment_methods: 'Dinheiro, Pix', owner: buffet_first.owner)
 
-
-    login_as owner_first
+    login_client client
     visit root_path
-    click_on 'Pedidos'
+    click_on 'Meus pedidos'
     click_on order.code
-    click_on 'Cadastrar novo valor'
-    fill_in 'Data limite para confirmação', with: Date.today + 3
-    fill_in 'Taxa', with: '200'
-    fill_in 'Descrição da taxa', with: 'Valor adicional devido ao pouco prazo para realização'
-    find("#price_order_payment_methods_pix").click
-    click_on 'Gravar'
+    click_on 'Confirmar evento'
 
-    click_on 'Confirmar'
 
-    expect(page).to have_content 'Pedido confirmado'
-    expect(page).to have_content 'Confirmado pelo Buffet'
+    expect(page).to have_content 'Evento confirmado com sucesso'
+    expect(page).to have_content 'Pedidos confirmados'
+    date_format = I18n.l Date.today + 10
+    click_on 'Pedidos confirmados'
+    expect(page).to have_content "Código: #{order.code} Agendado para #{date_format}"
+    expect(page).to have_content "Situação: Evento confirmado"
+    expect(page).to have_content "Valor final R$ 1.000,00"
+    expect(page).to have_content "Formas de pagamento: Dinheiro, Pix"
+    expect(page).to have_content "Local de realização do evento: #{order.address}"
+    expect(page).to have_content "Mais informações de contato: (32) 999999999"
   end
 end

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Propritériao edita um evento' do
+RSpec.describe 'Propritério edita um evento' do
   it 'e não é o dono' do
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
     owner_second= Owner.create!(email: 'ownersecond@test.com', password: '123456')

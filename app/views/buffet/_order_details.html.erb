@@ -1,0 +1,7 @@
+<section>
+  <p><%= Order.human_attribute_name :client %> <%= @order.client.name %></p>
+  <p><%= Order.human_attribute_name :estimated_date %> <%= I18n.l @order.estimated_date %></p>
+  <p><%= Order.human_attribute_name :estimated_people %> <%= @order.estimated_people %></p>
+  <p><%= Order.human_attribute_name :details %> <%= @order.details %></p>
+  <p><%= Order.human_attribute_name :address %> <%= @order.address %></p>
+</section>

@@ -8,7 +8,9 @@ Rails.application.routes.draw do
     resources :orders, only: %i[new create]
   end
 
-  resources :orders, only: %i[index]
+  resources :orders, only: %i[index show]
+  post 'confirm_event/:id/:status', to: 'orders#confirm_event', as: 'confirm_event'
+  get 'confirmed_orders', to: 'orders#index_confirmed', as: 'confirmed_orders'
 
   namespace :buffets do
     devise_for :owners, controllers: {
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   get 'order_view/:id', to: 'buffet#order_view', as: 'order_view' 
-  post 'confirm_order/:id&:status', to: 'buffet#confirm_order', as: 'confirm_order'
+  post 'confirm_order/:id/:status', to: 'buffet#confirm_order', as: 'confirm_order'
   get 'new_price_order/:id', to: 'price_orders#new', as: 'new_price_order'
   post 'price_orders/:id', to: 'price_orders#create', as: 'price_orders'
 

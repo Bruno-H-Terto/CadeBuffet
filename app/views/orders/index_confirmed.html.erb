@@ -1,0 +1,14 @@
+<p><%= link_to 'Home', root_path %> > Pedidos confirmados</p>
+<div>Eventos confirmados</p>
+<% @orders.each do |order| %>
+  <dl>
+    <dt><%= Order.human_attribute_name(:code) %>: <%= order.code%></dt>
+    <dd><%= Client.human_attribute_name(:estimated_date) %> <%= I18n.l order.estimated_date %></dd>
+    <dd><%= Order.human_attribute_name(:status) %>: <%= Order.human_attribute_name(order.status) %></dd>
+    <dd><%= PriceOrder.human_attribute_name :final_price %> <%= number_to_currency PriceOrder.find_by(order: order).final_price %></dd>
+    <dd><%= PriceOrder.human_attribute_name :payment_methods %>: <%= PriceOrder.find_by(order: order).payment_methods %> </dd>
+    <dd><%= Order.human_attribute_name :address %>: <%= order.address %> </dd>
+    <dd>Mais informações de contato: <%= order.buffet.mask_phone_number %></dd>
+
+  </dl>
+<% end %>

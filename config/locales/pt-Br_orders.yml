@@ -18,3 +18,4 @@ pt-BR:
         client: 'Cliente'
         client_id: 'Cliente'
         confirmed_for_buffet: 'Confirmado pelo Buffet'
+        confirmed: 'Evento confirmado'
