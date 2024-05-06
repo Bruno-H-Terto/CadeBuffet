@@ -81,7 +81,7 @@ describe 'Cliente realiza um pedido' do
     click_on 'Novo pedido - Festa de formatura'
     format = Date.today + 7
     fill_in 'Data desejada', with: format
-    fill_in 'Quantidade estimada de convidados', with: '50'
+    fill_in 'Quantidade estimada de convidados', with: '20'
     fill_in 'Observações', with: 'Tema a fantasia'
     click_on 'Gravar'
 

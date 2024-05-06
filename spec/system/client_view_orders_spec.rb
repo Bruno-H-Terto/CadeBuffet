@@ -19,7 +19,7 @@ describe 'Cliente consulta pedidos' do
     price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
                                      additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 50)
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, address: buffet_first.full_address, details: 'Ok')
 
     login_client client
     visit root_path
@@ -48,8 +48,8 @@ describe 'Cliente consulta pedidos' do
     price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
                                      additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 50, details: 'OK')
-    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 40, details: 'BLZ')
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 20, details: 'BLZ', address: buffet_first.full_address)
 
     login_client client
     visit root_path

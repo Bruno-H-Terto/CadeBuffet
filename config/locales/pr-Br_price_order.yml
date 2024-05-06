@@ -1,0 +1,14 @@
+pt-BR:
+  activerecord:
+    models:
+      price_order: 
+        one: 'Valor do pedido'
+        other: 'Valores dos pedidos'
+    attributes:
+      price_order:
+        initial_price: 'Preço base'
+        rate: 'Taxa'
+        description_rate: 'Descrição da taxa'
+        deadline: 'Data limite para confirmação'
+        payment_methods: 'Formas de pagamento'
+        final_price: 'Valor final'

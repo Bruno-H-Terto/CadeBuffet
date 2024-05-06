@@ -41,9 +41,24 @@ class BuffetController < ApplicationController
 
   def order_view
     @order = Order.find(params[:id])
+    @event = @order.event
+    @price_event = PriceEvent.find_by(event: @event)
     @order_count = Order.where('estimated_date = ? AND buffet_id = ? AND NOT status = ?', @order.estimated_date, @order.buffet_id,
                                 3).where('estimated_date >= ?', Date.today)
 
+    @price_order = PriceOrder.find_by(order: @order) if @order.price_orders.present?
+
+
+  end
+
+  def confirm_order
+    @order = Order.find(params[:id])
+    if params[:status] == '1'
+      @order.confirmed_for_buffet!
+      return redirect_to order_view_path(@order), notice: 'Pedido confirmado'
+    end
+    @order.canceled!
+    redirect_to order_view_path(@order), notice: 'Pedido cancelado'
   end
 
   private

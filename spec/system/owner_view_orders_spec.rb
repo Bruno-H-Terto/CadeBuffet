@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Proprietário acessa pedidos' do
-  it 'e os consulta' do
+  it 'e acessa tela de pedidos' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     client_2 = Client.create!(name: 'André', email: 'andre@email.com', register_number: '72517369003', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
@@ -20,8 +20,8 @@ describe 'Proprietário acessa pedidos' do
     price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
                                      additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 50, details: 'OK')
-    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 40, details: 'BLZ')
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 20, details: 'BLZ', address: buffet_first.full_address)
 
     login_as owner_first
     visit root_path
@@ -51,8 +51,8 @@ describe 'Proprietário acessa pedidos' do
     price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
                                      additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 50, details: 'OK')
-    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 40, details: 'BLZ', status: 1)
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 20, details: 'BLZ', status: 1, address: buffet_first.full_address)
 
     login_as owner_first
     visit root_path
@@ -86,12 +86,15 @@ describe 'Proprietário acessa pedidos' do
                           menu: 'A definir', alcoholic_drink: false, self_decoration: true, parking: true, valet: false, fixed_location: false,
                           description: 'Especialidade em formaturas', owner: owner_first, buffet: buffet_first)
   
+    price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
+                          additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
+
     event_2 = Event.create!(name: 'Samba', min_quantity_people: '20', max_quantity_people: '50', duration_in_minutes: '300',
                           menu: 'Tira gostos e peças de carne', alcoholic_drink: true, self_decoration: true, parking: true, valet: false, fixed_location: true,
                           description: 'Música ao vivo e pista de dança', owner: owner_second, buffet: buffet_second)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 50, details: 'OK', address: buffet_first.full_address)
-    order_2 = Order.create!(event: event_2, buffet: buffet_second, client: client, estimated_date: Date.today + 1, estimated_people: 40, details: 'BLZ', address: buffet_second.full_address)
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order_2 = Order.create!(event: event_2, buffet: buffet_second, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'BLZ', address: buffet_second.full_address)
 
     login_as owner_first
     visit root_path
@@ -122,12 +125,13 @@ describe 'Proprietário acessa pedidos' do
     event_1 = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '20', duration_in_minutes: '60',
                           menu: 'A definir', alcoholic_drink: false, self_decoration: true, parking: true, valet: false, fixed_location: false,
                           description: 'Especialidade em formaturas', owner: owner_first, buffet: buffet_first)
-  
-    price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
-                                     additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
 
-    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 50, details: 'OK')
-    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 40, details: 'BLZ')
+    price_event_1 = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
+                          additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event_1)
+
+
+    order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
+    order_2 = Order.create!(event: event_1, buffet: buffet_first, client: client_2, estimated_date: Date.today + 1, estimated_people: 20, details: 'BLZ', address: buffet_first.full_address)
 
     login_as owner_first
     visit root_path
@@ -135,5 +139,7 @@ describe 'Proprietário acessa pedidos' do
     click_on order.code
     
     expect(page).to have_content 'Existem 2 pedidos agendados para está data'
+    expect(page).to have_content 'Valor final ainda não confirmado'
+    expect(page).to have_content 'Cadastrar novo valor'
   end
 end 

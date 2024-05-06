@@ -17,3 +17,4 @@ pt-BR:
         waiting_review: 'Aguardando avaliação do Buffet'
         client: 'Cliente'
         client_id: 'Cliente'
+        confirmed_for_buffet: 'Confirmado pelo Buffet'

@@ -1,3 +1,4 @@
+<p><%= link_to 'Meu Buffet', buffet_path(@buffet)%> > <%= link_to 'Pedidos', buffet_my_orders_path(@event.buffet)%> > <%= "Pedido #{@order.code}" %></p>
 <h2><%= Order.model_name.human %> <%= @order.code %> <%= Order.human_attribute_name @order.status%></h2>
 <% if @order_count.any? && @order_count.count > 1%>
   <div>
@@ -8,8 +9,19 @@
   </div>
 <% end %>
 
+<p><%= link_to @order.event.name, event_path(@order.event) %></p>
 <p><%= Order.human_attribute_name :client %> <%= @order.client.name %></p>
 <p><%= Order.human_attribute_name :estimated_date %> <%= I18n.l @order.estimated_date %></p>
 <p><%= Order.human_attribute_name :estimated_people %> <%= @order.estimated_people %></p>
 <p><%= Order.human_attribute_name :details %> <%= @order.details %></p>
 <p><%= Order.human_attribute_name :address %> <%= @order.address %></p>
+
+<% if @order.price_orders.present? %>
+  
+  <%= render 'confirm_order' %>
+<% else %>
+  <p>Valor final ainda não confirmado</p>
+  <%= link_to 'Cadastrar novo valor', new_price_order_path(@order)%>
+<% end %>
+
+      

@@ -1,3 +1,4 @@
+<p><%= link_to 'Meu Buffet', buffet_path(@buffet)%> > Pedidos</p>
 <% if @orders.any? %>
   <h2>Pedidos aguardando avaliação</h2>
   <% @orders.each do |order| %>

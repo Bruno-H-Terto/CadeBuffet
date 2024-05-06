@@ -1,0 +1,37 @@
+<h3>Cadastrar novo valor</h3>
+
+<%= form_with model: @price_order, url: price_orders_path(@order), method: :post do |form| %>
+  <div>
+    <%= form.label :initial_price %>
+    <%= number_to_currency @initial_price %>
+  </div>
+
+  <div>
+    <%= form.label :rate %>
+    <%= form.number_field :rate %>
+  </div>
+
+  <div>
+    <%= form.label :description_rate %>
+    <%= form.text_area :description_rate %>
+  </div>
+
+  <div>
+    <%= form.label :deadline %>
+    <%= form.date_field :deadline %>
+  </div>
+
+  <div>
+    <%= form.label :payment_methods %>
+    <% @buffet.split(', ').each do |m| %>
+      <div>
+        <%= form.check_box :payment_methods, { multiple: true }, Buffet.human_attribute_name(m), nil %> 
+        <%= form.label m %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit 'Gravar' %>
+  </div>
+<% end %>

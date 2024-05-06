@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_05_031757) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_05_104231) do
   create_table "buffets", force: :cascade do |t|
     t.integer "owner_id", null: false
     t.string "brand_name"
@@ -105,6 +105,21 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_031757) do
     t.index ["event_id"], name: "index_price_events_on_event_id"
   end
 
+  create_table "price_orders", force: :cascade do |t|
+    t.integer "initial_price"
+    t.integer "rate"
+    t.text "description_rate"
+    t.integer "final_price"
+    t.string "payment_methods"
+    t.date "deadline"
+    t.integer "owner_id", null: false
+    t.integer "order_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_price_orders_on_order_id"
+    t.index ["owner_id"], name: "index_price_orders_on_owner_id"
+  end
+
   add_foreign_key "buffets", "owners"
   add_foreign_key "events", "buffets"
   add_foreign_key "events", "owners"
@@ -112,4 +127,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_031757) do
   add_foreign_key "orders", "clients"
   add_foreign_key "orders", "events"
   add_foreign_key "price_events", "events"
+  add_foreign_key "price_orders", "orders"
+  add_foreign_key "price_orders", "owners"
 end
