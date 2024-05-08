@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     }
   end
 
-  resources :buffet, only: %i[show new create] do
+  resources :buffet, only: %i[show new create edit update] do
     get 'orders', to: 'buffet#orders', as: 'my_orders'
   end
 

@@ -1,5 +1,4 @@
-
-
+<h2>Edite seu Buffet</h2>
 <% if @buffet.errors.any? %>
   <p>Reveja os campos abaixo: </p>
   <ul>
@@ -9,7 +8,6 @@
   </ul>
 <% end %>
 
-<main>
-  <h2>Cadastre seu Buffet</h2>
-    <%= render partial: 'form', locals: { buffet: @buffet, url: buffet_index_path, method: :post } %>
-</main>
+
+  <%= render partial: 'form', locals: { buffet: @buffet, url: buffet_path, method: :patch } %>
+

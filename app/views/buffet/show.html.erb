@@ -5,6 +5,8 @@
   <li><%= @buffet.full_contact %></li>
 </ul>
 
+<%= link_to 'Editar dados do Buffet', edit_buffet_path(@buffet)%>
+
 <section>
   <% if @events.any? %>
   <table>

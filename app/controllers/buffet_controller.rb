@@ -1,7 +1,7 @@
 class BuffetController < ApplicationController
 
   before_action :authenticate_buffets_owner!
-  before_action :redirect_owner, except: [:create]
+  before_action :redirect_owner, except: [:create, :update]
 
   def show
     @buffet = Buffet.find(params[:id])
@@ -30,6 +30,25 @@ class BuffetController < ApplicationController
     else
       flash.alert = 'Não foi possível salvar seu Buffet.'
       render 'new'
+    end
+  end
+
+  def edit
+    return redirect_to root_path unless permited_owner_edit?
+    @buffet = Buffet.find(params[:id])
+  end
+
+  def update
+    return redirect_to root_path unless permited_owner_edit?
+    @buffet = Buffet.find(params[:id])
+    @buffet.payment_methods = payment_methods_params
+    
+    if @buffet.update(buffet_params)
+      flash.notice = "Buffet atualizado com sucesso!"
+      redirect_to buffet_path(@buffet)
+    else
+      flash.alert = 'Não foi possível atualizar seu Buffet.'
+      render 'edit'
     end
   end
 
@@ -77,6 +96,11 @@ class BuffetController < ApplicationController
   def payment_methods_params
     methods = params.require(:buffet).permit(payment_methods: [])[:payment_methods]
     methods.join(', ') if methods.present?
+  end
+
+  def permited_owner_edit?
+    @buffet = Buffet.find(params[:id])
+    @buffet.owner == current_buffets_owner
   end
 
   def is_owner?

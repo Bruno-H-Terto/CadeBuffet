@@ -1,0 +1,65 @@
+<%= form_with model: buffet, url: url, method: method do |form| %>
+  <div>
+    <%= form.label :brand_name %>
+    <%= form.text_field :brand_name %>
+  </div>
+
+  <div>
+    <%= form.label :corporate_name %>
+    <%= form.text_field :corporate_name %>
+  </div>
+
+  <div>
+    <%= form.label :register_number %>
+    <%= form.text_field :register_number %>
+  </div>
+
+  <div>
+    <p><%= form.label :phone_number %> Código de área mais telefone</p>
+    <p><%= form.text_field :phone_number %> Somente números</p>
+  </div>
+
+  <div>
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div>
+    <%= form.label :district %>
+    <%= form.text_field :district %>
+  </div>
+
+  <div>
+    <%= form.label :state %>
+    <%= form.text_field :state %>
+  </div>
+
+  <div>
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+
+  <div>
+    <%= form.label :zip_code %>
+    <%= form.text_field :zip_code %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :payment_methods %>
+    <% Buffet::METHODS.each do |m| %>
+      <div>
+        <%= form.check_box :payment_methods, { multiple: true }, Buffet.human_attribute_name(m), nil %> 
+        <%= form.label m %>
+      </div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.submit 'Gravar' %>
+  </div>
+<% end %>
