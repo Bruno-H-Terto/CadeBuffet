@@ -34,6 +34,7 @@ Rails.application.routes.draw do
 
   resources :events, only: %i[new create] do
     resource :price_events, only: %i[new create]
+    get 'historic_orders', to: 'events#historic_orders', as: 'historic_orders'
   end
 
   resources :events, only: %i[show edit update]

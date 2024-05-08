@@ -35,8 +35,8 @@ class BuffetController < ApplicationController
 
   def orders
     @buffet = Buffet.find(params[:buffet_id])
-    @orders = Order.where('status = ? AND buffet_id = ?', 0, @buffet.id).order(estimated_date: :asc)
-    @other_orders = Order.where('NOT status = ? AND buffet_id = ?', 0, @buffet.id).order(estimated_date: :asc)
+    @orders = Order.waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc)
+    @other_orders = Order.not_waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc)
   end
 
   def order_view
@@ -45,10 +45,10 @@ class BuffetController < ApplicationController
     @buffet = @order.buffet
     @event = @order.event
     @price_event = PriceEvent.find_by(event: @event)
-    @order_count = Order.where('estimated_date = ? AND buffet_id = ? AND NOT status = ?', @order.estimated_date, @order.buffet_id,
-                                3).where('estimated_date >= ?', Date.today)
+    @order_count = Order.not_canceled.where('estimated_date = ? AND buffet_id = ?', @order.estimated_date, @order.buffet_id
+                                ).where('estimated_date >= ?', Date.today)
 
-    @price_order = PriceOrder.find_by(order: @order) if @order.price_orders.present?
+    @price_order = PriceOrder.find_by(order: @order) if @order.price_order.present?
 
 
   end

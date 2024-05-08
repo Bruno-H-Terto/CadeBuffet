@@ -58,6 +58,10 @@ class EventsController < ApplicationController
 
   end
 
+  def historic_orders
+    @historic = Event.find(params[:event_id]).orders
+  end
+
   private
     def event_params
       params.require(:event).permit(

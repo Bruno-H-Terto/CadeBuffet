@@ -2,15 +2,15 @@ class OrdersController < ApplicationController
   before_action :authenticate_client!
   def index
     @client = current_client
-    @orders_waiting_confirmation = Order.joins(:price_orders).where('client_id = ? AND status = ? AND deadline >= ?', @client.id, 1, Date.today)
-    @orders_expired = Order.joins(:price_orders).where('client_id = ? AND status = ? AND deadline < ?', @client.id, 1, Date.today)
+    @orders_waiting_confirmation = Order.confirmed_for_buffet.joins(:price_order).where('client_id = ? AND deadline >= ?', @client.id, Date.today)
+    @orders_expired = Order.confirmed_for_buffet.joins(:price_order).where('client_id = ? AND deadline < ?', @client.id, Date.today)
     .update_all(status: 3) 
-    @other_orders = Order.where('client_id = ? AND NOT status = ?', @client.id, 1)
+    @other_orders = Order.not_confirmed.not_confirmed_for_buffet.where('client_id = ?', @client.id)
   end
 
   def index_confirmed
     @client = current_client
-    @orders = Order.where('client_id = ? AND status = ?', @client.id, '2').order(estimated_date: :asc)
+    @orders = Order.confirmed.where('client_id = ?', @client.id).order(estimated_date: :asc)
     return redirect_to root_path, notice: 'Acesso indisponível' if @orders.nil?
   end
 
@@ -54,13 +54,13 @@ class OrdersController < ApplicationController
     @order = Order.find(result[:id])
     @price_order = PriceOrder.find_by(order: @order)
     @buffet = @order.buffet
-    date_time = @price_order.deadline >= Date.today
-    if result[:status] == 'confirmed' && date_time
+    date_time = @price_order.deadline < Date.today
+    if result[:status] == 'confirmed' && !date_time
       @order.confirmed!
       return redirect_to root_path, notice: 'Evento confirmado com sucesso'
     end
     @order.canceled!
-    redirect_to order_path(@order)
+    redirect_to orders_path
     date_time ? flash.notice = 'Prazo para confirmação esgotado' : flash.notice = 'Evento cancelado'
   end
 

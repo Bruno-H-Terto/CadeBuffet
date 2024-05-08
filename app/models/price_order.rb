@@ -1,7 +1,8 @@
 class PriceOrder < ApplicationRecord
   belongs_to :owner
   belongs_to :order
-  
+  has_many :events, through: :orders
+
   validates :initial_price, :rate, :description_rate, :final_price, :payment_methods, :deadline, presence: true
   validates :initial_price, :rate, :final_price, numericality: true
   validate :estimated_date_is_before

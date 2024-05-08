@@ -2,6 +2,8 @@ class Event < ApplicationRecord
   belongs_to :owner
   belongs_to :buffet
   has_many :price_events
+  has_many :orders
+  has_many :price_orders, through: :orders
   accepts_nested_attributes_for :price_events
 
 

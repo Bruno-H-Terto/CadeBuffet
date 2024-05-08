@@ -27,7 +27,7 @@ RSpec.describe 'Cliente confirma um pedido' do
 
     post client_session_path, params: { client: { email: client_2.email, password: client_2.password } }
 
-    post(confirm_event_path(id: order.id, status: 1))
+    post(confirm_event_path(id: order.id, status: 'confirm'))
 
     expect(response).to redirect_to root_path
   end

@@ -1,8 +1,8 @@
 <p><%= link_to 'Meu Buffet', buffet_path(@buffet)%> > Pedidos</p>
+<h2>Pedidos aguardando avaliação</h2>
 <% if @orders.any? %>
-  <h2>Pedidos aguardando avaliação</h2>
   <% @orders.each do |order| %>
-    <%= link_to "#{order.code}", order_view_path(order) %>
+    <div><%= Order.human_attribute_name :code%> <%= link_to "#{order.code}", order_view_path(order) %></div>
 
   <% end %>
 <% else %>
@@ -12,7 +12,7 @@
 <% if @other_orders.any? %>
   <h2>Demais pedidos</h2>
   <% @other_orders.each do |order| %>
-    <%= link_to "#{order.code}", order_view_path(order) %>
+    <div><%= Order.human_attribute_name :code%> <%= link_to "#{order.code}", order_view_path(order) %></div>
 
   <% end %>
 <% end %>

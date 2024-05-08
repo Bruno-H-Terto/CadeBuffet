@@ -12,3 +12,7 @@ pt-BR:
         deadline: 'Data limite para confirmação'
         payment_methods: 'Formas de pagamento'
         final_price: 'Valor final'
+        pix: 'Pix'
+        money: 'Dinheiro'
+        debit_card: 'Cartão de débito'
+        credit_card: 'Cartão de crédito'

@@ -12,7 +12,7 @@
 <p><%= link_to @order.event.name, event_path(@order.event) %></p>
 <%= render 'order_details'%>
 
-<% if @order.price_orders.present? %>
+<% if @order.price_order.present? %>
   <%= render 'price_order_details' %>
   <%= render 'confirm_order' %>
 <% else %>

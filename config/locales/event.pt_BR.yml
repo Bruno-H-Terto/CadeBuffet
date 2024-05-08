@@ -19,3 +19,7 @@ pt-BR:
         fixed_location: 'Evento fixo?'
         buffet_id: 'Buffet'
         buffet: 'Buffet'
+        waiting_review: 'Aguardando avaliação do Buffet'
+        confirmed_for_buffet: 'Confirmado pelo Buffet'
+        confirmed: 'Evento confirmado'
+        canceled: 'Evento Cancelado'

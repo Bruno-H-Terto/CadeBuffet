@@ -21,4 +21,10 @@ pt-BR:
         money: 'Dinheiro'
         debit_card: 'Cartão de débito'
         credit_card: 'Cartão de crédito'
+        waiting_review: 'Aguardando avaliação'
+        confirmed_for_buffet: 'Confirmado'
+        confirmed: 'Evento confirmado pelo cliente'
+        canceled: 'Evento Cancelado'
+        estimated_date: 'Data agendada'
+
 

@@ -2,7 +2,8 @@ class Order < ApplicationRecord
   belongs_to :buffet
   belongs_to :event
   belongs_to :client
-  has_many :price_orders
+  has_one :price_order
+  
   before_validation :generate_code
 
   enum status: { waiting_review: 0, confirmed_for_buffet: 1, confirmed: 2, canceled: 3 }

@@ -20,3 +20,7 @@ pt-BR:
         confirmed_for_buffet: 'Confirmado pelo Buffet'
         confirmed: 'Evento confirmado'
         canceled: 'Evento Cancelado'
+        pix: 'Pix'
+        money: 'Dinheiro'
+        debit_card: 'Cartão de débito'
+        credit_card: 'Cartão de crédito'

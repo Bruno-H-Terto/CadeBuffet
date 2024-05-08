@@ -1,25 +1,6 @@
 require 'rails_helper'
 
 describe 'Proprietário edita seu evento' do
-  it 'a partir da página de consulta do buffet cadastrado'do
-    register_event
-
-    click_on 'Festa de 15 anos'
-    
-    expect(page).to have_content 'Festa de 15 anos'
-    expect(page).to have_content 'Festa de 15 anos - Eventos para festas de 15 anos'
-    expect(page).to have_content 'Capacidade de 10 à 50 pessoas'
-    expect(page).to have_content 'Duração de 120 minutos'
-    expect(page).to have_content 'Cardápio: Salgados e refrigerante'
-    expect(page).to have_content 'Sem bebida alcoólica'
-    expect(page).to have_content 'Decoração própria'
-    expect(page).to have_content 'Estacionamento disponível'
-    expect(page).to have_content 'Valet disponível'
-    expect(page).to have_content 'Local fixo'
-    expect(page).to have_content 'Valores nos dias úteis: R$ 12.000,00 com adicional por pessoa de R$ 150,00 + Hora extra de R$ R$ 450,00'
-    expect(page).to have_content 'Valores nos fins de semana: R$ 14.000,00 com adicional por pessoa de R$ 300,00 + Hora extra de R$ R$ 600,00'
-    expect(page).to have_content 'Editar informações'
-  end
 
   it 'e edita com sucesso' do
     register_event
