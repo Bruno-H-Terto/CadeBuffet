@@ -3,8 +3,8 @@
 <% when 'waiting_review' %>
   <div>Confirme o seu pedido</div>
   <div>
-    <%= button_to 'Confirmar', confirm_order_path(@order, 1), method: :post %>
-    <%= button_to 'Cancelar', confirm_order_path(@order, 3), method: :post %>
+    <%= button_to 'Confirmar', confirm_order_path(@order, 'confirmed'), method: :post %>
+    <%= button_to 'Cancelar', confirm_order_path(@order, 'canceled'), method: :post %>
   </div>
 <% when 'canceled' %>
   <p>Pedido cancelado</p>

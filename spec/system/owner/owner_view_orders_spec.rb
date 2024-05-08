@@ -94,7 +94,8 @@ describe 'Proprietário acessa pedidos' do
                           description: 'Música ao vivo e pista de dança', owner: owner_second, buffet: buffet_second)
 
     order = Order.create!(event: event_1, buffet: buffet_first, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'OK', address: buffet_first.full_address)
-    order_2 = Order.create!(event: event_2, buffet: buffet_second, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'BLZ', address: buffet_second.full_address)
+    order_2 = Order.create!(event: event_2, buffet: buffet_second, client: client, estimated_date: Date.today + 1, estimated_people: 20, details: 'BLZ', address: buffet_second.full_address,
+                            status: 'canceled')
 
     login_as owner_first
     visit root_path
@@ -108,6 +109,7 @@ describe 'Proprietário acessa pedidos' do
     expect(page).to have_content "Cliente #{order.client.name}"
     expect(page).to have_content "Local de realização do evento #{order.address}"
     expect(page).not_to have_content order_2.code
+    expect(page).not_to have_content 'Situação: Evento Cancelado'
 
   end
   it 'e é informado que possui dois pedidos para o mesmo dia' do

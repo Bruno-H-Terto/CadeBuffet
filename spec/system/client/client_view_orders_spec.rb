@@ -56,6 +56,8 @@ describe 'Cliente consulta pedidos' do
     click_on 'Meus pedidos'
 
     expect(page).to have_content "Código: #{order.code}"
+    expect(page).to have_content "Situação: Aguardando avaliação do Buffet"
     expect(page).not_to have_content "Código: #{order_2.code}"
+    expect(page).not_to have_content "Situação: Evento Cancelado"
   end
 end

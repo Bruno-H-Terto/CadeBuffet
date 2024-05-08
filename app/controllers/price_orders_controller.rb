@@ -37,6 +37,7 @@ class PriceOrdersController < ApplicationController
 
   def normal_price(order, event, price_event)
     weekend = (0 == order.estimated_date.wday || 6 == order.estimated_date.wday)
+    add_people = 0
     add_people = order.estimated_people - event.min_quantity_people if order.estimated_people > event.min_quantity_people
 
     @initial_price = 0

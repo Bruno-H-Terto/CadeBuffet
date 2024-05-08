@@ -40,6 +40,7 @@ class BuffetController < ApplicationController
   end
 
   def order_view
+    return redirect_to root_path unless is_owner?
     @order = Order.find(params[:id])
     @buffet = @order.buffet
     @event = @order.event
@@ -53,11 +54,11 @@ class BuffetController < ApplicationController
   end
 
   def confirm_order
-    
-    @order = Order.find(params[:id])
+    result = params_confirm
+    @order = Order.find(result[:id])
     @buffet = @order.buffet
     return redirect_to root_path unless is_owner?
-    if params[:status] == '1'
+    if result[:status] == 'confirmed'
       @order.confirmed_for_buffet!
       return redirect_to order_view_path(@order), notice: 'Pedido confirmado'
     end
@@ -82,5 +83,9 @@ class BuffetController < ApplicationController
     @order = Order.find(params[:id])
     @buffet = @order.buffet
     @buffet.owner == current_buffets_owner
+  end
+
+  def params_confirm
+    params.permit(:id, :status)
   end
 end

@@ -2,7 +2,9 @@ class OrdersController < ApplicationController
   before_action :authenticate_client!
   def index
     @client = current_client
-    @orders_waiting_confirmation = Order.where('client_id = ? AND status = ?', @client.id, 1)
+    @orders_waiting_confirmation = Order.joins(:price_orders).where('client_id = ? AND status = ? AND deadline >= ?', @client.id, 1, Date.today)
+    @orders_expired = Order.joins(:price_orders).where('client_id = ? AND status = ? AND deadline < ?', @client.id, 1, Date.today)
+    .update_all(status: 3) 
     @other_orders = Order.where('client_id = ? AND NOT status = ?', @client.id, 1)
   end
 
@@ -13,6 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def show
+    return redirect_to root_path unless is_client?
     @order = Order.find(params[:id])
     return redirect_to root_path, notice: 'Acesso indisponível' if @order.status != 'confirmed_for_buffet' 
     @buffet = @order.buffet
@@ -47,11 +50,12 @@ class OrdersController < ApplicationController
 
   def confirm_event
     return redirect_to root_path unless is_client?
-    @order = Order.find(params[:id])
+    result= params_confirm
+    @order = Order.find(result[:id])
     @price_order = PriceOrder.find_by(order: @order)
     @buffet = @order.buffet
     date_time = @price_order.deadline >= Date.today
-    if params[:status] == '2' && date_time
+    if result[:status] == 'confirmed' && date_time
       @order.confirmed!
       return redirect_to root_path, notice: 'Evento confirmado com sucesso'
     end
@@ -73,5 +77,9 @@ class OrdersController < ApplicationController
   def is_client?
     @order = Order.find(params[:id])
     current_client == @order.client
+  end
+
+  def params_confirm
+    params.permit(:id, :status)
   end
 end

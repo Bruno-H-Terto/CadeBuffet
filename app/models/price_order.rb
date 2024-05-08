@@ -10,7 +10,7 @@ class PriceOrder < ApplicationRecord
 
   private
   def estimated_date_is_before
-    if order.estimated_date.present? && deadline.present? && deadline > order.estimated_date
+    if order.estimated_date.present? && deadline.present? && deadline > order.estimated_date && deadline >= Date.today
       return errors.add :deadline, 'deve ser anterior a data de realização do evento'
     end
   end
