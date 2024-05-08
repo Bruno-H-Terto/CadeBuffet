@@ -3,7 +3,6 @@
     <dl>
       <dt><%= Order.human_attribute_name :code%> <%= link_to "#{order.code}", order_view_path(order) %></dt>
       <dd><%= Buffet.human_attribute_name :estimated_date%>: <%= I18n.l order.estimated_date %></dd>
-      <dd><%= PriceOrder.human_attribute_name :final_price%>: <%= number_to_currency order.price_order.final_price %></dd>
       <dd><%= Order.human_attribute_name :status%>: <%= Buffet.human_attribute_name order.status %></dd>
     </dl>
   <% end %>

@@ -33,6 +33,7 @@
     <% else %>
       <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
       <%= link_to 'Meus pedidos', orders_path %>
+      <%= link_to 'Novo pedido', new_order_path %>
       <%= link_to 'Pedidos confirmados', confirmed_orders_path if Order.where('client_id = ? AND status = ?', current_client.id, '2')%>
       <%= button_to 'Sair', destroy_client_session_path, method: :delete %>
     <% end %>

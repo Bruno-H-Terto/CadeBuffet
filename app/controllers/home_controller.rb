@@ -18,6 +18,10 @@ class HomeController < ApplicationController
                 "%#{@q}%", "%#{@q}%")
   end
 
+  def new_order
+    @events = Event.all
+  end
+
   private
 
   def authenticate_owner

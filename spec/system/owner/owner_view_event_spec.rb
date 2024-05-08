@@ -54,14 +54,10 @@ describe 'Proprietário consulta seu evento' do
     expect(page).to have_content order.code
     date_format = I18n.l order.estimated_date
     expect(page).to have_content "Data agendada: #{date_format}"
-    price_format = number_to_currency price_order.final_price
-    expect(page).to have_content "Valor final: #{price_format}"
     expect(page).to have_content "Situação: Aguardando avaliação"
     expect(page).to have_content order_2.code
     date_format = I18n.l order_2.estimated_date
     expect(page).to have_content "Data agendada: #{date_format}"
-    price_format = number_to_currency price_order_2.final_price
-    expect(page).to have_content "Valor final: #{price_format}"
     expect(page).to have_content 'Situação: Evento Cancelado'
 
   end
