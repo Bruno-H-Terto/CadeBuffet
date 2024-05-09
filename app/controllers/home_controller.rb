@@ -19,7 +19,7 @@ class HomeController < ApplicationController
   end
 
   def new_order
-    @events = Event.all
+    @events = Event.order(name: :asc).all
   end
 
   private

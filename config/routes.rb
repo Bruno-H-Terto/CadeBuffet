@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     resources :orders, only: %i[new create]
   end
   
-  get 'new_order', to: 'home#new_order', as: 'new_order'
   resources :orders, only: %i[index show]
+  get 'new_order', to: 'home#new_order', as: 'new_order'
   post 'confirm_event/:id/:status', to: 'orders#confirm_event', as: 'confirm_event'
   get 'confirmed_orders', to: 'orders#index_confirmed', as: 'confirmed_orders'
 

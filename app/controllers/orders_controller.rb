@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    return redirect_to root_path unless is_client?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_client?
     @order = Order.find(params[:id])
     return redirect_to root_path, notice: 'Acesso indisponível' if @order.status != 'confirmed_for_buffet' 
     @buffet = @order.buffet
@@ -49,7 +49,7 @@ class OrdersController < ApplicationController
   end
 
   def confirm_event
-    return redirect_to root_path unless is_client?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_client?
     result= params_confirm
     @order = Order.find(result[:id])
     @price_order = PriceOrder.find_by(order: @order)

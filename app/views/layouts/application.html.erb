@@ -20,29 +20,38 @@
 
   <div>
     <h2>Veja nossos Buffets cadastrados</h2>
-    <%= link_to 'Listar Buffets', listing_path %>
+    <div><%= link_to 'Listar Buffets', listing_path %></div>
   </div>
   
 
   <% if buffets_owner_signed_in? || client_signed_in? %>
     <% if buffets_owner_signed_in? %>
-      <div>
-        <%= link_to 'Pedidos', buffet_my_orders_path(Buffet.find_by(owner_id: current_buffets_owner.id)) if Buffet.find_by(owner_id: current_buffets_owner.id).present? %>
-        <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
-      </div>
+      <nav>
+        <ul>
+          <li>
+            <%= link_to 'Pedidos', buffet_my_orders_path(Buffet.find_by(owner_id: current_buffets_owner.id)) if Buffet.find_by(owner_id: current_buffets_owner.id).present? %>
+            <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
+          </li>
+        </ul>
+      </nav>
     <% else %>
       <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
-      <%= link_to 'Meus pedidos', orders_path %>
-      <%= link_to 'Novo pedido', new_order_path %>
-      <%= link_to 'Pedidos confirmados', confirmed_orders_path if Order.where('client_id = ? AND status = ?', current_client.id, '2')%>
-      <%= button_to 'Sair', destroy_client_session_path, method: :delete %>
+      <nav>
+        <ul>
+          <li><%= link_to 'Meus pedidos', orders_path %></li>
+          <li><%= link_to 'Novo pedido', new_order_path %></li>
+          <li><%= link_to 'Pedidos confirmados', confirmed_orders_path if Order.where('client_id = ? AND status = ?', current_client.id, '2')%></li>
+          <li><%= button_to 'Sair', destroy_client_session_path, method: :delete %></li>
+        </ul>
+      </nav>
     <% end %>
   <% else %>
-    <div>
-      <%= link_to 'Sou Proprietário', new_buffets_owner_session_path %>
-      <%= link_to 'Sou Cliente', new_client_session_path %>
-      
-    </div>
+    <nav>
+      <ul>
+        <li><%= link_to 'Sou Proprietário', new_buffets_owner_session_path %></li>
+        <li><%= link_to 'Sou Cliente', new_client_session_path %></li> 
+      </ul>  
+    </nav>
   <% end %>
     <div>
       <%= notice %>

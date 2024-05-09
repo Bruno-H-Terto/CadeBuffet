@@ -4,6 +4,7 @@ class BuffetController < ApplicationController
   before_action :redirect_owner, except: [:create, :update]
 
   def show
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless permited_owner_edit?
     @buffet = Buffet.find(params[:id])
     @events = Event.where(buffet: @buffet)
   end
@@ -34,12 +35,12 @@ class BuffetController < ApplicationController
   end
 
   def edit
-    return redirect_to root_path unless permited_owner_edit?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless permited_owner_edit?
     @buffet = Buffet.find(params[:id])
   end
 
   def update
-    return redirect_to root_path unless permited_owner_edit?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless permited_owner_edit?
     @buffet = Buffet.find(params[:id])
     @buffet.payment_methods = payment_methods_params
     
@@ -54,12 +55,13 @@ class BuffetController < ApplicationController
 
   def orders
     @buffet = Buffet.find(params[:buffet_id])
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless @buffet.owner == current_buffets_owner
     @orders = Order.waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc)
     @other_orders = Order.not_waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc)
   end
 
   def order_view
-    return redirect_to root_path unless is_owner?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
     @order = Order.find(params[:id])
     @buffet = @order.buffet
     @event = @order.event
@@ -76,7 +78,7 @@ class BuffetController < ApplicationController
     result = params_confirm
     @order = Order.find(result[:id])
     @buffet = @order.buffet
-    return redirect_to root_path unless is_owner?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
     if result[:status] == 'confirmed'
       @order.confirmed_for_buffet!
       return redirect_to order_view_path(@order), notice: 'Pedido confirmado'

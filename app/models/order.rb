@@ -4,7 +4,7 @@ class Order < ApplicationRecord
   belongs_to :client
   has_one :price_order
   
-  before_validation :generate_code
+  before_validation :generate_code, on: :create
 
   enum status: { waiting_review: 0, confirmed_for_buffet: 1, confirmed: 2, canceled: 3 }
 
@@ -15,7 +15,7 @@ class Order < ApplicationRecord
   private
 
   def generate_code
-    self.code = SecureRandom.alphanumeric(8).upcase if self.code.nil?
+    self.code = SecureRandom.alphanumeric(8).upcase
   end
 
   def how_many_people_are_possible?

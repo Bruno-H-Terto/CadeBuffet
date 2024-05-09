@@ -1,5 +1,5 @@
 <p><%= link_to 'Home', root_path %> > Pedidos confirmados</p>
-<div>Eventos confirmados</p>
+<div>Eventos confirmados</div>
 <% @orders.each do |order| %>
   <dl>
     <dt><%= Order.human_attribute_name(:code) %>: <%= order.code%></dt>

@@ -11,7 +11,7 @@ class Buffet < ApplicationRecord
 
   validate :register_number_is_valid
 
-  METHODS = [:pix, :money, :credit_card, :debit_card].freeze
+  METHODS = [:pix, :money, :credit_card, :debit_card]
   
   
   def full_register

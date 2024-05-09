@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_buffets_owner!
   def show
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
     @event = Event.find(params[:id])
     @price = PriceEvent.find(@event.price_events)
   end
@@ -35,14 +36,14 @@ class EventsController < ApplicationController
 
 
   def edit
-    return redirect_to root_path unless is_owner?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
     @event = Event.find(params[:id])
     @price = PriceEvent.find_by(event: @event)
     @buffet = Buffet.find(@event.buffet_id)
   end
   
   def update
-    return redirect_to root_path unless is_owner?
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
     @event = Event.find(params[:id])
     
     
@@ -60,6 +61,7 @@ class EventsController < ApplicationController
 
   def historic_orders
     @historic = Event.find(params[:event_id]).orders
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless  Event.find(params[:event_id]).owner == current_buffets_owner
   end
 
   private
