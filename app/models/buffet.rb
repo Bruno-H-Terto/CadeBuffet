@@ -9,7 +9,7 @@ class Buffet < ApplicationRecord
   validates :register_number, numericality: {only_integer: true}
   validates :phone_number, length: { minimum: 10, maximum: 11 }
 
-  validate :register_number_is_valid
+  validate :register_number_is_valid?
 
   METHODS = [:pix, :money, :credit_card, :debit_card]
   
@@ -32,38 +32,32 @@ class Buffet < ApplicationRecord
 
   private
 
-  def register_number_is_valid
+  def register_number_is_valid?
     return errors.add :register_number, 'deve conter 14 digítos' if register_number.nil? || register_number.to_s.length != 14
-    if (register_valid_to_eq(register_number.to_s))
-      errors.add(:register_number, "não é válido")
-    end
+    errors.add(:register_number, "não é válido") unless register_valid_to_eq?(register_number.to_s)
 
   end
 
-  def register_valid_to_eq(register)
-    first12 = register[0..11]
-    first_dig = digit(calculator(first12)).to_s
-    second_dig = digit(calculator(first12 + first_dig)).to_s
-    register != first12 + first_dig + second_dig
+  def register_valid_to_eq?(register)
+    first_12_numbers = register[0..11]
+    first_digit = digit(digit_calculator(first_12_numbers)).to_s
+    second_digit = digit(digit_calculator(first_12_numbers + first_digit)).to_s
+    register == first_12_numbers + first_digit + second_digit
   end
 
-  def calculator(number)
-    i = number.length - 7
+  def digit_calculator(number)
+    iterator = number.length - 7
     result = 0
     number.each_char do |num|
-      result += num.to_i * i
-      if i == 2
-        i = 10
-      end
-      i -= 1
+      result += num.to_i * iterator
+      iterator = 10 if iterator == 2
+      iterator -= 1
     end
     result%11
   end
 
   def digit(number)
-    if number < 2
-      return 0
-    end
+    return 0 if number < 2
     11 - number
   end
 end

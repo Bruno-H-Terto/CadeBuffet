@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Proprietário cadastra um evento'do
-  it 'localiza o link logo após concluir o cadastro de seu Buffet' do
+  it 'e localiza o link logo após concluir o cadastro de seu Buffet' do
 
     register_buffet
 

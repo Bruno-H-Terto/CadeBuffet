@@ -1,7 +1,7 @@
 <h2>Registre-se</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "buffets/owners/shared/error_messages", resource: resource %>
+  <%= render "my_company/owners/shared/error_messages", resource: resource %>
 
   <div class="field">
     <%= f.label :email %><br />
@@ -27,4 +27,4 @@
   </div>
 <% end %>
 
-<%= render "buffets/owners/shared/links" %>
+<%= render "my_company/owners/shared/links" %>

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
-module Buffets
+module MyCompany
   class Owners::SessionsController < Devise::SessionsController
-    before_action :redirect_owner, except: [:destroy]
+    before_action :redirect_owner_to_home, except: [:destroy]
+    before_action :configure_permitted_parameters
   # before_action :configure_sign_in_params, only: [:create]
 
     def after_sign_in_path_for(resource)
@@ -29,4 +30,10 @@ module Buffets
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   end
+
+  private
+  def configure_permitted_parameters
+    # medida para correção de bug identificado quando se atualiza a página de log in
+  end
+
 end

@@ -1,7 +1,7 @@
 class BuffetController < ApplicationController
 
-  before_action :authenticate_buffets_owner!
-  before_action :redirect_owner, except: [:create, :update]
+  before_action :authenticate_my_company_owner!
+  before_action :redirect_owner_to_home, except: [:create, :update]
 
   def show
     return redirect_to root_path, alert: 'Acesso não autorizado' unless permited_owner_edit?
@@ -10,16 +10,16 @@ class BuffetController < ApplicationController
   end
 
   def new
-    if Buffet.find_by(owner: current_buffets_owner).nil?
+    if Buffet.find_by(owner: current_my_company_owner).nil?
       @buffet = Buffet.new 
     else
       flash.alert = 'Buffet já cadastrado' if request.path == new_buffet_path
-      redirect_to buffet_path(Buffet.find_by(owner: current_buffets_owner))
+      redirect_to buffet_path(Buffet.find_by(owner: current_my_company_owner))
     end
   end
 
   def create
-    owner = current_buffets_owner
+    owner = current_my_company_owner
 
     @buffet = Buffet.new(buffet_params)
     @buffet.payment_methods = payment_methods_params
@@ -44,20 +44,20 @@ class BuffetController < ApplicationController
     @buffet = Buffet.find(params[:id])
     @buffet.payment_methods = payment_methods_params
     
-    if @buffet.update(buffet_params)
-      flash.notice = "Buffet atualizado com sucesso!"
-      redirect_to buffet_path(@buffet)
-    else
-      flash.alert = 'Não foi possível atualizar seu Buffet.'
-      render 'edit'
-    end
+    
+  
+    return redirect_to buffet_path(@buffet), notice: "Buffet atualizado com sucesso!" if @buffet.update(buffet_params)
+
+    flash.alert = 'Não foi possível atualizar seu Buffet.'
+    render 'edit'
+
   end
 
   def orders
     @buffet = Buffet.find(params[:buffet_id])
-    return redirect_to root_path, alert: 'Acesso não autorizado' unless @buffet.owner == current_buffets_owner
-    @orders = Order.waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc)
-    @other_orders = Order.not_waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc)
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless @buffet.owner == current_my_company_owner
+    @orders_waiting_review = Order.waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc).group_by { |date| date.estimated_date }
+    @other_orders = Order.not_waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc).group_by { |date| date.estimated_date }
   end
 
   def order_view
@@ -79,12 +79,18 @@ class BuffetController < ApplicationController
     @order = Order.find(result[:id])
     @buffet = @order.buffet
     return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
-    if result[:status] == 'confirmed'
+
+    case result[:status]
+    when 'confirmed' 
       @order.confirmed_for_buffet!
-      return redirect_to order_view_path(@order), notice: 'Pedido confirmado'
+      redirect_to order_view_path(@order), notice: 'Pedido confirmado'
+    when 'canceled'
+      @order.canceled!
+      redirect_to order_view_path(@order), notice: 'Pedido cancelado'
+    else
+      redirect_to orders_view_path, notice: 'Requisição inválida'
     end
-    @order.canceled!
-    redirect_to order_view_path(@order), notice: 'Pedido cancelado'
+
   end
 
   private
@@ -102,13 +108,13 @@ class BuffetController < ApplicationController
 
   def permited_owner_edit?
     @buffet = Buffet.find(params[:id])
-    @buffet.owner == current_buffets_owner
+    @buffet.owner == current_my_company_owner
   end
 
   def is_owner?
     @order = Order.find(params[:id])
     @buffet = @order.buffet
-    @buffet.owner == current_buffets_owner
+    @buffet.owner == current_my_company_owner
   end
 
   def params_confirm

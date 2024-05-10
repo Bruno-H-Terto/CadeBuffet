@@ -1,6 +1,6 @@
 <p><%= link_to 'Home', root_path %> > Pedidos confirmados</p>
 <div>Eventos confirmados</div>
-<% @orders.each do |order| %>
+<% @orders_confirmed.each do |order| %>
   <dl>
     <dt><%= Order.human_attribute_name(:code) %>: <%= order.code%></dt>
     <dd><%= Client.human_attribute_name(:estimated_date) %> <%= I18n.l order.estimated_date %></dd>

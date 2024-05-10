@@ -13,14 +13,14 @@ Rails.application.routes.draw do
   post 'confirm_event/:id/:status', to: 'orders#confirm_event', as: 'confirm_event'
   get 'confirmed_orders', to: 'orders#index_confirmed', as: 'confirmed_orders'
 
-  namespace :buffets do
+  namespace :my_company do
     devise_for :owners, controllers: {
-      sessions: 'buffets/owners/sessions',
-      confirmations: 'buffets/owners/confirmations',
-      omniauth: 'buffets/owners/omniauth',
-      passwords: 'buffets/owners/passwords',
-      registrations: 'buffets/owners/registrations',
-      unlocks: 'buffets/owners/unlocks'
+      sessions: 'my_company/owners/sessions',
+      confirmations: 'my_company/owners/confirmations',
+      omniauth: 'my_company/owners/omniauth',
+      passwords: 'my_company/owners/passwords',
+      registrations: 'my_company/owners/registrations',
+      unlocks: 'my_company/owners/unlocks'
     }
   end
 
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
   post 'price_orders/:id', to: 'price_orders#create', as: 'price_orders'
 
   resources :events, only: %i[new create] do
-    resource :price_events, only: %i[new create]
+    resources :price_events, only: %i[new create]
     get 'historic_orders', to: 'events#historic_orders', as: 'historic_orders'
   end
 
@@ -42,4 +42,12 @@ Rails.application.routes.draw do
 
   devise_for :clients
   
+
+
+
+  namespace :api do
+    namespace :v1 do
+      resources :buffets, only: %i[index]
+    end
+  end
 end

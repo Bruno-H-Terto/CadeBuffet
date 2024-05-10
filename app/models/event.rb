@@ -17,9 +17,7 @@ class Event < ApplicationRecord
   end
 
   def capacity
-    if max_quantity_people > min_quantity_people
-      return "Capacidade de #{min_quantity_people} à #{max_quantity_people} pessoas"
-    end
+    return "Capacidade de #{min_quantity_people} à #{max_quantity_people} pessoas" if max_quantity_people > min_quantity_people
     "Capacidade máxima de #{min_quantity_people} pessoa(s)"
   end
 
@@ -32,37 +30,27 @@ class Event < ApplicationRecord
   end
 
   def alcoholic?
-    if alcoholic_drink
-      return "Bebidas alcoólicas disponíveis"
-    end
+    return "Bebidas alcoólicas disponíveis" if alcoholic_drink
     "Sem bebida alcoólica"
   end
 
   def decoration?
-    if self_decoration
-      return "Decoração própria"
-    end
+    return "Decoração própria" if self_decoration
     "Decoração a parte"
   end
 
   def parking_space?
-    if parking
-      return "Estacionamento disponível"
-    end
+    return "Estacionamento disponível" if parking
     "Sem estacionamento"
   end
 
   def valet_service?
-    if valet
-      return "Valet disponível"
-    end
+    return "Valet disponível" if valet
     "Sem valet"
   end
 
   def location?
-    if fixed_location
-      return "Local fixo"
-    end
+    return "Local fixo" if fixed_location
     "Local flexível"
 
   end

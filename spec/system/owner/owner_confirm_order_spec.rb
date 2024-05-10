@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe 'Proprietário confirma pedido' do
-  include ActionView::Helpers::NumberHelper 
+describe 'Proprietário consulta pedido' do
 
-  it 'acessa formulário para preencher valor final' do
+
+  it 'e acessa formulário para preencher valor final' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 
@@ -55,7 +55,7 @@ describe 'Proprietário confirma pedido' do
     expect(page).to have_button 'Gravar'
   end
 
-  it 'cadastrando o preço do pedido' do
+  it 'cadastrando seu preço' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 
@@ -110,7 +110,7 @@ describe 'Proprietário confirma pedido' do
 
   end
 
-  it 'e confirma' do
+  it 'e o confirma com sucesso' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 
@@ -148,7 +148,7 @@ describe 'Proprietário confirma pedido' do
     expect(page).to have_content 'Confirmado pelo Buffet'
   end
 
-  it 'e cancela' do
+  it 'porém o cancela' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 

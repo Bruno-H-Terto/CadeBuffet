@@ -24,13 +24,13 @@
   </div>
   
 
-  <% if buffets_owner_signed_in? || client_signed_in? %>
-    <% if buffets_owner_signed_in? %>
+  <% if my_company_owner_signed_in? || client_signed_in? %>
+    <% if my_company_owner_signed_in? %>
       <nav>
         <ul>
           <li>
-            <%= link_to 'Pedidos', buffet_my_orders_path(Buffet.find_by(owner_id: current_buffets_owner.id)) if Buffet.find_by(owner_id: current_buffets_owner.id).present? %>
-            <%= button_to 'Sair', destroy_buffets_owner_session_path, method: :delete %>
+            <%= link_to 'Pedidos', buffet_my_orders_path(Buffet.find_by(owner_id: current_my_company_owner.id)) if Buffet.find_by(owner_id: current_my_company_owner.id).present? %>
+            <%= button_to 'Sair', destroy_my_company_owner_session_path, method: :delete %>
           </li>
         </ul>
       </nav>
@@ -48,7 +48,7 @@
   <% else %>
     <nav>
       <ul>
-        <li><%= link_to 'Sou Proprietário', new_buffets_owner_session_path %></li>
+        <li><%= link_to 'Sou Proprietário', new_my_company_owner_session_path %></li>
         <li><%= link_to 'Sou Cliente', new_client_session_path %></li> 
       </ul>  
     </nav>

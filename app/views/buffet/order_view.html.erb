@@ -4,7 +4,7 @@
   <div>
     <p>Existem <%=@order_count.count%> pedidos agendados para está data</p>
     <% @order_count.each do |order| %>
-      <p> Pedido <%= link_to order.code, order_view_path(order) %>, <%= Order.human_attribute_name order.status %></p>
+      <p> Order.human_attribute_name :order <%= link_to order.code, order_view_path(order) %>, <%= Order.human_attribute_name order.status %></p>
     <% end %>
   </div>
 <% end %>

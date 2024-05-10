@@ -12,6 +12,7 @@ class Order < ApplicationRecord
   validates :estimated_people, numericality: {only_integer: true}
   validate :how_many_people_are_possible?
 
+
   private
 
   def generate_code
@@ -19,9 +20,10 @@ class Order < ApplicationRecord
   end
 
   def how_many_people_are_possible?
-    if estimated_people.present? && estimated_people > event.max_quantity_people
-      return errors.add :estimated_people, 'acima da capacidade do evento'
-    end
+    
+    return errors.add :estimated_people, 'acima da capacidade do evento' if estimated_people.present? && estimated_people > event.max_quantity_people
   end
+
+
 
 end

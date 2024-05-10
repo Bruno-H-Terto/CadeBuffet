@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-module Buffets
+module MyCompany
   class Owners::ConfirmationsController < Devise::ConfirmationsController
     # GET /resource/confirmation/new
     # def new

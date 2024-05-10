@@ -1,18 +1,29 @@
 <p><%= link_to 'Meu Buffet', buffet_path(@buffet)%> > Pedidos</p>
 <h2>Pedidos aguardando avaliação</h2>
-<% if @orders.any? %>
-  <% @orders.each do |order| %>
-    <div><%= Order.human_attribute_name :code%> <%= link_to "#{order.code}", order_view_path(order) %></div>
 
+<% if @orders_waiting_review.any? %>
+  <dl>
+  <% @orders_waiting_review.each_pair do |date, orders| %>
+    <dt><%= I18n.l date %></dt>
+      <% orders.each do |order| %>
+        <dd><%=Order.human_attribute_name :code%> <%= link_to "#{order.code}", order_view_path(order) %></dd>
+      <% end %>
+      <br>
   <% end %>
+  </dl>
 <% else %>
     <p>Não existem pedidos a serem avalidos</p>
 <% end %>
 
 <% if @other_orders.any? %>
   <h2>Demais pedidos</h2>
-  <% @other_orders.each do |order| %>
-    <div><%= Order.human_attribute_name :code%> <%= link_to "#{order.code}", order_view_path(order) %></div>
-
-  <% end %>
+  <dl>
+    <% @other_orders.each_pair do |date, orders| %>
+      <dt><%= I18n.l date %></dt>
+        <% orders.each do |order| %>
+          <dd><%=Order.human_attribute_name :code%> <%= link_to "#{order.code}", order_view_path(order) %></dd>
+        <% end %>
+        <br>
+    <% end %>
+  </dl>
 <% end %>

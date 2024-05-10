@@ -41,11 +41,11 @@ describe 'Usuário não autenticado' do
     click_on 'Listar Buffets'
 
     expect(page).to have_content 'Buffet Chinas Buffet'
-    expect(page).to have_content 'Localizado em Juiz de Fora - MG'
+    expect(page).to have_content 'Endereço: Juiz de Fora - MG'
     expect(page).to have_content 'Buffet Giramundo'
-    expect(page).to have_content 'Localizado em São Paulo - SP'
+    expect(page).to have_content 'Endereço: São Paulo - SP'
     expect(page).to have_content 'Buffet Buffet Grande Família'
-    expect(page).to have_content 'Localizado em Rio de Janeiro - RJ'
+    expect(page).to have_content 'Endereço: Rio de Janeiro - RJ'
 
   end
 
@@ -110,9 +110,9 @@ describe 'Usuário não autenticado' do
     expect(page).not_to have_content 'Buffet Chinas Buffet'
     expect(page).not_to have_content 'Localizado em Juiz de Fora - MG'
     expect(page).to have_content 'Buffet Giramundo'
-    expect(page).to have_content 'Localizado em São Paulo - SP'
+    expect(page).to have_content 'Endereço: São Paulo - SP'
     expect(page).to have_content 'Buffet Buffet Grande Família'
-    expect(page).to have_content 'Localizado em Rio de Janeiro - RJ'
+    expect(page).to have_content 'Endereço: Rio de Janeiro - RJ'
   end
 
   it 'realiza uma busca sem correspondência' do
@@ -142,7 +142,7 @@ describe 'Usuário não autenticado' do
     expect(page).to have_content 'Não foram localizados Buffets'
   end
 
-  it 'vê eventos relacionados a um buffet juntamento com seu preço' do
+  it 'vê eventos relacionados a um Buffet juntamento com seu preço' do
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
     owner_second= Owner.create!(email: 'ownersecond@test.com', password: '123456')
 

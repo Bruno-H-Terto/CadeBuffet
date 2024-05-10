@@ -1,5 +1,5 @@
   # frozen_string_literal: true
-module Buffets
+module MyCompany
   class Owners::UnlocksController < Devise::UnlocksController
     # GET /resource/unlock/new
     # def new

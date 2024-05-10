@@ -1,14 +1,14 @@
 require 'rails_helper'
 
 describe 'Proprietário edita seu Buffet' do
-  it 'acessa o formulário' do
+  it 'e acessa o formulário' do
     register_buffet
     click_on 'Editar dados do Buffet'
 
     expect(page).to have_content 'Edite seu Buffet'
   end
 
-  it 'edita com sucesso' do
+  it 'com sucesso' do
     register_buffet
     click_on 'Editar dados do Buffet'
     fill_in 'Nome Fantasia', with: 'Americano'

@@ -10,8 +10,8 @@ class OrdersController < ApplicationController
 
   def index_confirmed
     @client = current_client
-    @orders = Order.confirmed.where('client_id = ?', @client.id).order(estimated_date: :asc)
-    return redirect_to root_path, notice: 'Acesso indisponível' if @orders.nil?
+    @orders_confirmed = Order.confirmed.where('client_id = ?', @client.id).order(estimated_date: :asc)
+    return redirect_to root_path, notice: 'Acesso indisponível' if @orders_confirmed.nil?
   end
 
   def show
@@ -23,12 +23,14 @@ class OrdersController < ApplicationController
   end
 
   def new
+    how_many_orders_are_permited?
     @event = Event.find(params[:home_id])
     @buffet = Buffet.find(@event.buffet_id)
     @order = Order.new
   end
 
   def create
+    how_many_orders_are_permited?
     @event = Event.find(params[:home_id])
     @buffet = Buffet.find(@event.buffet_id)
     @client = current_client
@@ -54,14 +56,26 @@ class OrdersController < ApplicationController
     @order = Order.find(result[:id])
     @price_order = PriceOrder.find_by(order: @order)
     @buffet = @order.buffet
-    date_time = @price_order.deadline < Date.today
-    if result[:status] == 'confirmed' && !date_time
-      @order.confirmed!
-      return redirect_to root_path, notice: 'Evento confirmado com sucesso'
+    expired_date = (@price_order.deadline >= Date.today)
+
+    case result[:status]
+    when 'confirmed' 
+      if expired_date
+        @order.confirmed!
+        return redirect_to root_path, notice: 'Evento confirmado com sucesso'
+      end
+    when 'canceled'
+      @order.canceled!
+      return redirect_to orders_path, notice: 'Evento cancelado'
+    else
+      return redirect_to orders_path, notice: 'Requisição inválida'
     end
-    @order.canceled!
-    redirect_to orders_path
-    date_time ? flash.notice = 'Prazo para confirmação esgotado' : flash.notice = 'Evento cancelado'
+
+
+    unless expired_date 
+      @order.canceled!
+      redirect_to orders_path, notice: 'Prazo para confirmação esgotado'
+    end
   end
 
   private
@@ -81,5 +95,15 @@ class OrdersController < ApplicationController
 
   def params_confirm
     params.permit(:id, :status)
+  end
+
+  def how_many_orders_are_permited?
+    @event = Event.find(params[:home_id])
+    @buffet = Buffet.find(@event.buffet_id)
+    client = current_client
+    if Order.waiting_review.where('client_id = ? AND buffet_id = ?', client.id, @buffet.id).present?
+      return redirect_to root_path, notice: 'Não é permitido o registro simultãneo de dois ou mais pedidos para o mesmo Buffet'
+    end
+    
   end
 end

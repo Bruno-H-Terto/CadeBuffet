@@ -1,5 +1,5 @@
   # frozen_string_literal: true
-module Buffets
+module MyCompany
   class Owners::PasswordsController < Devise::PasswordsController
     # GET /resource/password/new
     # def new

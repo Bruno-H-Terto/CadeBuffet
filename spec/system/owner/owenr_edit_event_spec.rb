@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Proprietário edita seu evento' do
 
-  it 'e edita com sucesso' do
+  it 'com sucesso' do
     register_event
 
     click_on 'Festa de 15 anos'
@@ -29,7 +29,7 @@ describe 'Proprietário edita seu evento' do
     expect(page).to have_content 'Evento atualizado com sucesso!'
   end
 
-  it 'Falha ao deixar campos do evento em branco' do
+  it 'e falha ao deixar campos do evento em branco' do
     register_event
 
     click_on 'Festa de 15 anos'
@@ -59,7 +59,7 @@ describe 'Proprietário edita seu evento' do
     expect(page).to have_content 'Quantidade mínima de pessoas não pode ficar em branco'
   end
 
-  it 'Falha ao deixar campos do preço em branco' do
+  it 'e falha ao deixar campos do preço em branco' do
     register_event
 
     click_on 'Festa de 15 anos'
@@ -88,7 +88,7 @@ describe 'Proprietário edita seu evento' do
     expect(page).to have_content 'Adicional por pessoa (finais de semana) não pode ficar em branco'
     expect(page).to have_content 'Adicional por pessoa (dias úteis) não pode ficar em branco'
   end
-  it 'falha e vizualiza formulário parcialmente preenchido ' do
+  it 'e falha, em seguida vizualiza formulário parcialmente preenchido ' do
     register_event
 
     click_on 'Festa de 15 anos'

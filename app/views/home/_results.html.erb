@@ -1,11 +1,13 @@
-<% if @buffets.present? %>
+<% if @ordened_buffets.present? %>
 
   <section>
     <ul>
-      <% @buffets.each do |buffet| %>
-        <li>
-        <dl>Buffet <%= link_to "#{buffet.brand_name}", home_path(buffet)%></dl>
-          <dd>Localizado em <%= buffet.city%> - <%= buffet.state%></dd>
+      <% @ordened_buffets.each_pair do |alphabetical_order, buffets| %>
+        <li><%= alphabetical_order %>
+          <% buffets.each do |buffet|%>
+            <dl><%= Buffet.model_name%> <%= link_to "#{buffet.brand_name}", home_path(buffet)%></dl>
+              <dd><%= Buffet.human_attribute_name :address%>: <%= buffet.city%> - <%= buffet.state%></dd>
+          <% end %>
         </li>
       <% end %>
     </ul>

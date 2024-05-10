@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :authenticate_buffets_owner!
+  before_action :authenticate_my_company_owner!
   def show
     return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
     @event = Event.find(params[:id])
@@ -9,13 +9,13 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @price = PriceEvent.new
-    @buffet = Buffet.find_by(owner: current_buffets_owner)
+    @buffet = Buffet.find_by(owner: current_my_company_owner)
   end
 
 
 
   def create
-    @buffet = Buffet.find_by(owner: current_buffets_owner)
+    @buffet = Buffet.find_by(owner: current_my_company_owner)
     @event = Event.new(event_params)
     @event.owner = @buffet.owner
     @event.buffet = @buffet
@@ -26,12 +26,11 @@ class EventsController < ApplicationController
     if @event.valid? && @price.valid?
       @event.save!
       @price.save! 
-      flash.notice = 'Evento registrado com sucesso!'
-      redirect_to buffet_path(@buffet)
-    else
+      return redirect_to buffet_path(@buffet), notice: 'Evento registrado com sucesso!'
+    end
       flash.notice = 'Não foi possível cadastrar seu Evento.'
       render 'new'
-    end
+    
   end
 
 
@@ -60,8 +59,9 @@ class EventsController < ApplicationController
   end
 
   def historic_orders
+    @event = Event.find(params[:event_id])
     @historic = Event.find(params[:event_id]).orders
-    return redirect_to root_path, alert: 'Acesso não autorizado' unless  Event.find(params[:event_id]).owner == current_buffets_owner
+    return redirect_to root_path, alert: 'Acesso não autorizado' unless  Event.find(params[:event_id]).owner == current_my_company_owner
   end
 
   private
@@ -97,7 +97,7 @@ class EventsController < ApplicationController
 
   def is_owner?
     @event = Event.find(params[:id])
-    @event.owner == current_buffets_owner
+    @event.owner == current_my_company_owner
   end
 
 end

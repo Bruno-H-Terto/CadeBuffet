@@ -1,5 +1,5 @@
 class PriceEventsController < ApplicationController
-  before_action :authenticate_buffets_owner!
+  before_action :authenticate_my_company_owner!
   def new
     @price_event = PriceEvent.new
     @event = Event.find(params[:format])
@@ -11,10 +11,10 @@ class PriceEventsController < ApplicationController
     @buffet = Buffet.find(@event.buffet_id)
     @price_event = PriceEvent.new(price_event_params)
     @price_event.event_id = @event.id
-    if @price_event.save
-      redirect_to buffets_buffet_path(@buffet)
-      return flash.notice = 'Valores salvos com sucesso!'
-    end
+
+    redirect_to my_company_buffet_path(@buffet), flash.notice = 'Valores salvos com sucesso!' if @price_event.save
+
+    flash.alert = 'Não foi possível registrar os valores para este evento'
   end
 
   private

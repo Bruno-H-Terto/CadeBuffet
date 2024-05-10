@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-describe 'Proprietário acessa pedidos' do
-  it 'e acessa tela de pedidos' do
+describe 'Proprietário acessa a plataforma de pedidos' do
+  it 'e acessa área reservada' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     client_2 = Client.create!(name: 'André', email: 'andre@email.com', register_number: '72517369003', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')

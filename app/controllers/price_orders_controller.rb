@@ -1,5 +1,5 @@
 class PriceOrdersController < ApplicationController
-  before_action :authenticate_buffets_owner!
+  before_action :authenticate_my_company_owner!
 
   def new
     @price_order = PriceOrder.new
@@ -8,7 +8,7 @@ class PriceOrdersController < ApplicationController
     @buffet = @event.buffet.payment_methods
     @price_event = PriceEvent.find_by(event: @event)
 
-    normal_price(@order, @event, @price_event)
+    base_price(@order, @event, @price_event)
   end
 
   def create
@@ -18,7 +18,7 @@ class PriceOrdersController < ApplicationController
     @buffet = @event.buffet.payment_methods
     @price_event = PriceEvent.find_by(event: @event)
 
-    @price_order.initial_price = normal_price(@order, @event, @price_event)
+    @price_order.initial_price = base_price(@order, @event, @price_event)
     @price_order.payment_methods = payment_methods_price_order
     @price_order.owner = @event.owner
     @price_order.order = @order
@@ -35,13 +35,13 @@ class PriceOrdersController < ApplicationController
 
   private
 
-  def normal_price(order, event, price_event)
-    weekend = (0 == order.estimated_date.wday || 6 == order.estimated_date.wday)
+  def base_price(order, event, price_event)
+    is_weekend = (0 == order.estimated_date.wday || 6 == order.estimated_date.wday)
     add_people = 0
     add_people = order.estimated_people - event.min_quantity_people if order.estimated_people > event.min_quantity_people
 
     @initial_price = 0
-    if weekend 
+    if is_weekend 
       @initial_price = price_event.min_price_weekend.to_i + price_event.additional_price_for_person_weekend*add_people
     else
       @initial_price = price_event.min_price_working_day.to_i + price_event.additional_price_for_person_working_day*add_people

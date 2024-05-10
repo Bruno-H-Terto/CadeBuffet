@@ -1,5 +1,5 @@
   # frozen_string_literal: true
-module Buffets
+module MyCompany
   class Owners::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # You should configure your model like this:
     # devise :omniauthable, omniauth_providers: [:twitter]

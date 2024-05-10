@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'Proprietário acessa a página'do
-  it 'e acessa a página para autenticação'do
+  it 'e é enviado para autenticação'do
     visit root_path
     click_on 'Sou Proprietário'
 

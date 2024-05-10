@@ -1,3 +1,5 @@
+include ActionView::Helpers::NumberHelper 
+
 def login()
   owner = Owner.create!(email: 'owner@test.com', password: '123456')
 

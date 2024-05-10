@@ -31,7 +31,7 @@ describe 'Cliente tem pedido aprovado pelo Buffet' do
     expect(page).to have_content "Situação: Confirmado pelo Buffet"
   end
 
-  it 'acessa página do pedido e consula valor atualizado' do
+  it 'e acessa página do pedido' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
 

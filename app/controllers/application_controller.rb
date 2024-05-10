@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :redirect_owner_to_home
   before_action :redirect_owner
   before_action :redirect_client
   before_action :configure_permitted_parameters, if: :devise_controller?
@@ -6,14 +7,13 @@ class ApplicationController < ActionController::Base
 
 
   protected
-  def redirect_owner
+    def redirect_owner_to_home
 
     current_path = request.path
     
 
-    if buffets_owner_signed_in?
-
-      @buffet = Buffet.find_by(owner: current_buffets_owner)
+    if my_company_owner_signed_in?
+      @buffet = Buffet.find_by(owner: current_my_company_owner)
     
 
       if @buffet.nil? && current_path != new_buffet_path
@@ -32,8 +32,18 @@ class ApplicationController < ActionController::Base
     current_path = request.path
     
     
-    if client_signed_in? && (current_path == new_buffets_owner_session_path || current_path == buffets_owner_session_path || current_path == new_buffets_owner_registration_path)
+    if client_signed_in? && (current_path == new_my_company_owner_session_path || current_path == my_company_owner_session_path || current_path == new_my_company_owner_registration_path)
       flash.notice = 'Usuário não autorizado. Clique em sair e acesse a página com o login Proprietário.'
+      redirect_to root_path
+    end
+  end
+
+  def redirect_owner
+    current_path = request.path
+    
+    
+    if my_company_owner_signed_in? && (current_path == new_client_session_path || current_path == client_session_path || current_path == new_client_registration_path)
+      flash.notice = 'Usuário não autorizado. Clique em sair e acesse a página com acesso de Cliente.'
       redirect_to root_path
     end
   end

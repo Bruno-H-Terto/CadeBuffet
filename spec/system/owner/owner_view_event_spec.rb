@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Proprietário consulta seu evento' do
   include ActionView::Helpers::NumberHelper 
-  it 'a partir da página de consulta do buffet cadastrado'do
+  it 'a partir da página de consulta do Buffet cadastrado'do
     register_event
 
     click_on 'Festa de 15 anos'

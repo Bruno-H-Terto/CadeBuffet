@@ -47,7 +47,7 @@ describe 'Cliente acessa a plataforma' do
     expect(page).to have_content 'José - 617.xxx.xxx-36'
   end
 
-  it 'não possui autorização para criar um Buffet' do
+  it 'e não possui autorização para criar um Buffet' do
     client = Client.create!(name: 'José', email: 'jose1@email.com', register_number: '61795864036', password: '123456')
 
     visit root_path
