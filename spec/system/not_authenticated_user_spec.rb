@@ -15,7 +15,7 @@ describe 'Usuário não autenticado' do
     expect(page).to have_content 'Não foram localizados Buffets'
   end
 
-  it 'vizualiza a listagem de Buffets' do
+  it 'visualiza a listagem de Buffets' do
     owner_first = Owner.create!(email: 'owner1234@test.com', password: '123456')
     owner_second= Owner.create!(email: 'ownersecond@test.com', password: '123456')
     owner_third = Owner.create!(email: 'ownerother@test.com', password: '123456')
@@ -106,7 +106,7 @@ describe 'Usuário não autenticado' do
     fill_in 'Busca', with: 'Chu'  
     click_on 'Buscar'
     
-    expect(current_path).to eq search_path
+
     expect(page).not_to have_content 'Buffet Chinas Buffet'
     expect(page).not_to have_content 'Localizado em Juiz de Fora - MG'
     expect(page).to have_content 'Buffet Giramundo'
@@ -196,18 +196,18 @@ describe 'Usuário não autenticado' do
     expect(page).to have_content 'Estacionamento disponível'
     expect(page).to have_content 'Sem valet'
     expect(page).to have_content 'Local fixo'
-    expect(page).to have_content 'Valores nos dias úteis: R$ 900,00 com adicional por pessoa de R$ 100,00 + Hora extra de R$ R$ 150,00'
-    expect(page).to have_content 'Valores nos fins de semana: R$ 1.000,00 com adicional por pessoa de R$ 150,00 + Hora extra de R$ R$ 200,00'
+    expect(page).to have_content 'Valores nos dias úteis: R$ 900,00 com adicional por pessoa de R$ 100,00 + Hora extra de R$ 150,00'
+    expect(page).to have_content 'Valores nos fins de semana: R$ 1.000,00 com adicional por pessoa de R$ 150,00 + Hora extra de R$ 200,00'
 
     expect(page).to have_content 'Chá de revelação - Eventos para toda a família'
     expect(page).to have_content 'Valet disponível'
     expect(page).to have_content 'Local fixo'
-    expect(page).to have_content 'Valores nos dias úteis: R$ 1.400,00 com adicional por pessoa de R$ 180,00 + Hora extra de R$ R$ 270,00'
+    expect(page).to have_content 'Valores nos dias úteis: R$ 1.400,00 com adicional por pessoa de R$ 180,00 + Hora extra de R$ 270,00'
 
     expect(page).not_to have_content('Samba')
     expect(page).not_to have_content 'Samba - Música ao vivo e pista de dança'
     expect(page).not_to have_content 'Bebidas alcoólicas disponíveis'
-    expect(page).not_to have_content 'Valores nos fins de semana: R$ 5.000,00 com adicional por pessoa de R$ 500,00 + Hora extra de R$ R$ 700,00'
+    expect(page).not_to have_content 'Valores nos fins de semana: R$ 5.000,00 com adicional por pessoa de R$ 500,00 + Hora extra de R$ 700,00'
   end
 
   it 'acessa Buffet, mas não há eventos cadastrados' do

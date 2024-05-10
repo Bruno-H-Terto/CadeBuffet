@@ -5,8 +5,8 @@
 
 <div>
   <% if @price_order.deadline >= Date.today %>
-    <div><%= button_to 'Confirmar evento', confirm_event_path(@order, 'confirmed'), method: :post %></div>
-    <div><%= button_to 'Cancelar evento', confirm_event_path(@order, 'canceled'), method: :post %></div>
+    <div><%= button_to 'Confirmar evento', order_confirm_event_path(@order,'confirmed'), method: :post %></div>
+    <div><%= button_to 'Cancelar evento', order_confirm_event_path(@order,'canceled'), method: :post %></div>
   <% else %>
     <p>Pedido fora do prazo de confirmação</p>
   <% end %>

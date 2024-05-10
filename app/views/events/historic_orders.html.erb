@@ -1,3 +1,4 @@
+<p><%= link_to 'Meu Buffet', buffet_path(@buffet)%> > <%= link_to @event.name, event_path(@event) %> > <%= Event.human_attribute_name :historic %>: <%= @event.name %></p>
 <h2><%= Event.human_attribute_name :historic %>: <%= @event.name %></h2>
 <% if @historic.present? %>
   <% @historic.each do |order| %>

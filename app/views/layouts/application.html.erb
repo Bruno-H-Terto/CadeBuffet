@@ -12,7 +12,7 @@
   <body>
   <h1><%= link_to 'Cadê Buffet', root_path%></h1>
 
-  <%= form_with url: search_path, method: :get do %>
+  <%= form_with url: search_home_index_path, method: :get do %>
     <%= label_tag :query, 'Busca:' %>
     <%= text_field_tag :query %>
     <%= submit_tag 'Buscar' %>
@@ -20,7 +20,7 @@
 
   <div>
     <h2>Veja nossos Buffets cadastrados</h2>
-    <div><%= link_to 'Listar Buffets', listing_path %></div>
+    <div><%= link_to 'Listar Buffets', list_home_index_path %></div>
   </div>
   
 
@@ -39,7 +39,7 @@
       <nav>
         <ul>
           <li><%= link_to 'Meus pedidos', orders_path %></li>
-          <li><%= link_to 'Novo pedido', new_order_path %></li>
+          <li><%= link_to 'Novo pedido', new_order_home_index_path %></li>
           <li><%= link_to 'Pedidos confirmados', confirmed_orders_path if Order.where('client_id = ? AND status = ?', current_client.id, '2')%></li>
           <li><%= button_to 'Sair', destroy_client_session_path, method: :delete %></li>
         </ul>

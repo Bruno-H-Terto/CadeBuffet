@@ -8,11 +8,11 @@ class PriceEvent < ApplicationRecord
 
   def price_working_days(min_price, add_people, extra_hour)
     "Valores nos dias úteis: #{min_price} com adicional por pessoa de #{add_people} 
-     + Hora extra de R$ #{extra_hour}"
+     + Hora extra de #{extra_hour}"
   end
 
   def price_weekend(min_price, add_people, extra_hour)
     "Valores nos fins de semana: #{min_price} com adicional por pessoa de #{add_people} 
-     + Hora extra de R$ #{extra_hour}"
+     + Hora extra de #{extra_hour}"
   end
 end

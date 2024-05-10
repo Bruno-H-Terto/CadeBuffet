@@ -4,7 +4,7 @@
 
   <% @events.each do |event| %>
     <% if client_signed_in? %>
-      <h2><%= link_to "Novo pedido - #{event.name}", new_home_order_path(event.id) %> </h2>
+      <h3><%= link_to "Novo pedido - #{event.name}", new_home_order_path(event.id) %> </h3>
     <% end %>
     <div><p><%= event.full_description %></p></div>
 

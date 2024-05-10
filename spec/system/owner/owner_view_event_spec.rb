@@ -17,8 +17,8 @@ describe 'Proprietário consulta seu evento' do
     expect(page).to have_content 'Estacionamento disponível'
     expect(page).to have_content 'Valet disponível'
     expect(page).to have_content 'Local fixo'
-    expect(page).to have_content 'Valores nos dias úteis: R$ 12.000,00 com adicional por pessoa de R$ 150,00 + Hora extra de R$ R$ 450,00'
-    expect(page).to have_content 'Valores nos fins de semana: R$ 14.000,00 com adicional por pessoa de R$ 300,00 + Hora extra de R$ R$ 600,00'
+    expect(page).to have_content 'Valores nos dias úteis: R$ 12.000,00 com adicional por pessoa de R$ 150,00 + Hora extra de R$ 450,00'
+    expect(page).to have_content 'Valores nos fins de semana: R$ 14.000,00 com adicional por pessoa de R$ 300,00 + Hora extra de R$ 600,00'
     expect(page).to have_content 'Editar informações'
   end
 

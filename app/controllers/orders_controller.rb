@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
     @other_orders = Order.not_confirmed.not_confirmed_for_buffet.where('client_id = ?', @client.id)
   end
 
-  def index_confirmed
+  def confirmed
     @client = current_client
     @orders_confirmed = Order.confirmed.where('client_id = ?', @client.id).order(estimated_date: :asc)
     return redirect_to root_path, notice: 'Acesso indisponível' if @orders_confirmed.nil?
@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
   def confirm_event
     return redirect_to root_path, alert: 'Acesso não autorizado' unless is_client?
     result= params_confirm
-    @order = Order.find(result[:id])
+    @order = Order.find(result[:order_id])
     @price_order = PriceOrder.find_by(order: @order)
     @buffet = @order.buffet
     expired_date = (@price_order.deadline >= Date.today)
@@ -89,12 +89,16 @@ class OrdersController < ApplicationController
   end
 
   def is_client?
-    @order = Order.find(params[:id])
+    begin
+      @order = Order.find(params[:id])
+    rescue
+      @order = Order.find(params[:order_id])
+    end
     current_client == @order.client
   end
 
   def params_confirm
-    params.permit(:id, :status)
+    params.permit(:order_id, :status)
   end
 
   def how_many_orders_are_permited?

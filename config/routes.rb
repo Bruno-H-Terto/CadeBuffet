@@ -1,17 +1,20 @@
 Rails.application.routes.draw do
   
   root to: 'home#index'
-  get 'list', to: 'home#list', as: 'listing'
-  get 'search', to: 'home#search', as: 'search'
+ 
 
   resources :home, only: %i[show] do 
     resources :orders, only: %i[new create]
+    get 'list', on: :collection
+    get 'search', on: :collection
+    get 'new_order', on: :collection
   end
   
-  resources :orders, only: %i[index show]
-  get 'new_order', to: 'home#new_order', as: 'new_order'
-  post 'confirm_event/:id/:status', to: 'orders#confirm_event', as: 'confirm_event'
-  get 'confirmed_orders', to: 'orders#index_confirmed', as: 'confirmed_orders'
+  resources :orders, only: %i[index show] do
+    get 'confirmed', on: :collection
+    post 'confirm_event/:status', to: 'orders#confirm_event', as: 'confirm_event'
+  end
+
 
   namespace :my_company do
     devise_for :owners, controllers: {
@@ -27,18 +30,16 @@ Rails.application.routes.draw do
   resources :buffet, only: %i[show new create edit update] do
     get 'orders', to: 'buffet#orders', as: 'my_orders'
   end
-
   get 'order_view/:id', to: 'buffet#order_view', as: 'order_view' 
+
   post 'confirm_order/:id/:status', to: 'buffet#confirm_order', as: 'confirm_order'
   get 'new_price_order/:id', to: 'price_orders#new', as: 'new_price_order'
   post 'price_orders/:id', to: 'price_orders#create', as: 'price_orders'
 
-  resources :events, only: %i[new create] do
+  resources :events, only: %i[new create show edit update] do
     resources :price_events, only: %i[new create]
     get 'historic_orders', to: 'events#historic_orders', as: 'historic_orders'
   end
-
-  resources :events, only: %i[show edit update]
 
   devise_for :clients
   
