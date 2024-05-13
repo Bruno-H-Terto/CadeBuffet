@@ -21,4 +21,5 @@ class PriceOrder < ApplicationRecord
       return errors.add :rate, 'não pode ultrapassar o máximo de desconto'
     end
   end
+
 end

@@ -51,6 +51,9 @@ Rails.application.routes.draw do
       resources :buffets, only: %i[index show] do
         resources :events, only: %i[index]
       end
+      resources :events, only: %i[show] do
+        get 'avaliable_event', on: :member
+      end
     end
   end
 end

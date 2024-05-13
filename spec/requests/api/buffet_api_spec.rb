@@ -149,7 +149,7 @@ describe 'Buffet API' do
 
       expect(response.status).to eq 404
       json_response = JSON.parse(response.body)
-      expect(json_response['message']).to eq 'Sem resultados disponíveis'
+      expect(json_response['message']).to eq 'Não foi encontrado um Buffet com id=> parâmetros: buffet.id=42'
     end
   end
 end

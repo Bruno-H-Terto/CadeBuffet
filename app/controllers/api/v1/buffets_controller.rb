@@ -25,8 +25,8 @@ class Api::V1::BuffetsController < Api::V1::ApiController
     begin
       buffet = Buffet.find(params[:id])
       render status: 200, json: buffet.as_json(except: [:created_at, :updated_at, :corporate_name, :register_number])
-    rescue
-      no_content = {'message' => "Sem resultados disponíveis"}.to_json
+    rescue=> error
+      no_content = {'message' => "#{message_format(error.to_s)} parâmetros: buffet.id=#{params[:id]}"}.to_json
       JSON.parse no_content
       render status: 404, json: no_content
     end
