@@ -35,8 +35,20 @@ class Api::V1::EventsController < Api::V1::ApiController
       event = Event.find(params[:id])
       estimated_date = params_event_show[:estimated_date]
       quantity_people = params_event_show[:estimated_quantity_people]
-      result = availability_event_show(event, estimated_date, quantity_people)
-      render status: 200, json: result
+
+      if estimated_date.present? && quantity_people.present?
+        result = availability_event_show(event, estimated_date, quantity_people)
+        render status: 200, json: result
+      else
+        error_message = [{'message' => "Requisição inválida para o evento #{event.name}"},
+        {"estimated_date.present?" => "#{estimated_date.present?}"},
+        {"estimated_quantity_people.present?" => "#{quantity_people.present?}"}].to_json
+
+        JSON.parse error_message
+      
+        render status: 404, json: error_message
+      end
+      
     rescue=> error
       no_content = {'message' => "#{message_format(error.to_s)} parâmetros: event.id=#{params[:id]}"}.to_json
       JSON.parse no_content
@@ -79,7 +91,6 @@ class Api::V1::EventsController < Api::V1::ApiController
         {"Estimated date (#{date_format}) available?" => "#{available_date}"}].to_json
 
       JSON.parse error_message
-      error_message
     end
   end
 

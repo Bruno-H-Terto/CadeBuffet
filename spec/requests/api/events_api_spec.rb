@@ -301,5 +301,53 @@ describe 'Buffet API - Events' do
       expect(json_response['message']).to eq 'Não foi encontrado um evento com id=> parâmetros: event.id=999'
 
     end
+
+    it 'Passa parâmetros inexistentes' do
+      owner = Owner.create!(email: 'owner1234@test.com', password: '123456')
+  
+      buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
+                          payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
+  
+      event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '90', duration_in_minutes: '60',
+                        menu: 'A definir', alcoholic_drink: false, self_decoration: true, parking: true, valet: false, fixed_location: true,
+                        description: 'Especialidade em formaturas', owner: owner, buffet: buffet)
+  
+      price_event = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
+                                   additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event)
+
+      format_date = I18n.l Date.today + 7
+      get "/api/v1/events/#{event.id}/avaliable_event", params: {estimated_date: "#{format_date}" , estimated_quantity_people: 30, extra: "Esse é um parâmetro extra"}
+
+      expect(response.status).to eq 200
+      json_response = JSON.parse response.body
+      expect(json_response['base_price_event']).to eq 'R$ 2.900,00'
+    end
+
+    it 'Falta com um ou mais parâmetros' do
+      owner = Owner.create!(email: 'owner1234@test.com', password: '123456')
+  
+      buffet = Buffet.create!(brand_name: 'Buffet teste', corporate_name: 'Buffet teste LTDA', city: 'Juiz de Fora',
+                          state:'MG', address: 'Rua Principal, 42', register_number: '75889767000112', 
+                          phone_number: '32999999999', district: 'Centro', zip_code: '32000-000',
+                          payment_methods: 'Pix', description: 'Buffets e eventos', owner: owner)
+  
+      event = Event.create!(name: 'Festa de formatura', min_quantity_people: '10', max_quantity_people: '90', duration_in_minutes: '60',
+                        menu: 'A definir', alcoholic_drink: false, self_decoration: true, parking: true, valet: false, fixed_location: true,
+                        description: 'Especialidade em formaturas', owner: owner, buffet: buffet)
+  
+      price_event = PriceEvent.create!(min_price_weekend: '1000', min_price_working_day: '900', extra_hour_weekend: '200', extra_hour_working_day: '150',
+                                   additional_price_for_person_weekend: '150', additional_price_for_person_working_day: '100', event: event)
+
+      format_date = I18n.l Date.today + 7
+      get "/api/v1/events/#{event.id}/avaliable_event", params: {estimated_date: "#{format_date}" }
+
+      expect(response.status).to eq 404
+      json_response = JSON.parse response.body
+      expect(json_response[0]['message']).to eq 'Requisição inválida para o evento Festa de formatura'
+      expect(json_response[1]['estimated_date.present?']).to eq 'true'
+      expect(json_response[2]['estimated_quantity_people.present?']).to eq 'false'
+    end
   end
 end

@@ -3,9 +3,9 @@ class Api::V1::BuffetsController < Api::V1::ApiController
     
     buffets = Buffet.all.order(brand_name: :asc)
     
-    if params[:brand_name].present?
-      buffets = buffets.where('brand_name LIKE ?', "#{params[:brand_name]}%").order(brand_name: :asc)
-      no_content = {'message' => "Sem resultados disponíveis para: #{params[:brand_name]}"}.to_json
+    if buffet_params[:brand_name].present?
+      buffets = buffets.where('brand_name LIKE ?', "#{buffet_params[:brand_name]}%").order(brand_name: :asc)
+      no_content = {'message' => "Sem resultados disponíveis para: #{buffet_params[:brand_name]}"}.to_json
       JSON.parse no_content
 
       
@@ -30,5 +30,11 @@ class Api::V1::BuffetsController < Api::V1::ApiController
       JSON.parse no_content
       render status: 404, json: no_content
     end
+  end
+
+  private
+
+  def buffet_params
+    params.permit(:brand_name)
   end
 end
