@@ -31,8 +31,8 @@ Rails.application.routes.draw do
     get 'orders', to: 'buffet#orders', as: 'my_orders'
   end
   get 'order_view/:id', to: 'buffet#order_view', as: 'order_view' 
-
   post 'confirm_order/:id/:status', to: 'buffet#confirm_order', as: 'confirm_order'
+
   get 'new_price_order/:id', to: 'price_orders#new', as: 'new_price_order'
   post 'price_orders/:id', to: 'price_orders#create', as: 'price_orders'
 
@@ -48,7 +48,9 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :buffets, only: %i[index]
+      resources :buffets, only: %i[index show] do
+        resources :events, only: %i[index]
+      end
     end
   end
 end
