@@ -96,8 +96,12 @@ class EventsController < ApplicationController
   end
 
   def is_owner?
-    @event = Event.find(params[:id])
-    @event.owner == current_my_company_owner
+    begin
+      @event = Event.find(params[:id])
+      @event.owner == current_my_company_owner
+    rescue
+      false
+    end
   end
 
 end

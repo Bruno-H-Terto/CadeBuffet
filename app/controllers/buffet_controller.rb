@@ -107,8 +107,12 @@ class BuffetController < ApplicationController
   end
 
   def permited_owner_edit?
-    @buffet = Buffet.find(params[:id])
-    @buffet.owner == current_my_company_owner
+    begin
+      @buffet = Buffet.find(params[:id])
+      @buffet.owner == current_my_company_owner
+    rescue
+      false
+    end
   end
 
   def is_owner?

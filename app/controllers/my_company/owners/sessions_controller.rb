@@ -2,7 +2,7 @@
 module MyCompany
   class Owners::SessionsController < Devise::SessionsController
     before_action :redirect_owner_to_home, except: [:destroy]
-    before_action :configure_permitted_parameters
+    before_action :configure_permitted_parameters, except: [:destroy]
   # before_action :configure_sign_in_params, only: [:create]
 
     def after_sign_in_path_for(resource)
@@ -33,7 +33,9 @@ module MyCompany
 
   private
   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password])
     # medida para correção de bug identificado quando se atualiza a página de log in
+    # ou método destroy
   end
 
 end
