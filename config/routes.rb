@@ -30,18 +30,28 @@ Rails.application.routes.draw do
   resources :buffet, only: %i[show new create edit update] do
     get 'orders', to: 'buffet#orders', as: 'my_orders'
   end
-  get 'order_view/:id', to: 'buffet#order_view', as: 'order_view' 
-  post 'confirm_order/:id/:status', to: 'buffet#confirm_order', as: 'confirm_order'
+  
+  scope :orders_for_owner do
+    get 'order_view/:id', to: 'buffet#order_view', as: 'order_view' 
+    post 'confirm_order/:id/:status', to: 'buffet#confirm_order', as: 'confirm_order'
 
-  get 'new_price_order/:id', to: 'price_orders#new', as: 'new_price_order'
-  post 'price_orders/:id', to: 'price_orders#create', as: 'price_orders'
+    get 'new_price_order/:id', to: 'price_orders#new', as: 'new_price_order'
+    post 'price_orders/:id', to: 'price_orders#create', as: 'price_orders'
+  end
 
   resources :events, only: %i[new create show edit update] do
     resources :price_events, only: %i[new create]
     get 'historic_orders', to: 'events#historic_orders', as: 'historic_orders'
   end
 
-  devise_for :clients
+  devise_for :clients, controllers: {
+    sessions: 'clients/sessions',
+    confirmations: 'clients/confirmations',
+    omniauth: 'clients/omniauth',
+    passwords: 'clients/passwords',
+    registrations: 'clients/registrations',
+    unlocks: 'clients/unlocks'
+  }
   
 
 

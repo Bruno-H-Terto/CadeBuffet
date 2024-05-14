@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   before_action :redirect_owner_to_home
   before_action :redirect_owner
   before_action :redirect_client
-  before_action :configure_permitted_parameters, if: :devise_controller?
   
 
 
@@ -22,9 +21,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :register_number])
-    end
 
   end
 
