@@ -38,6 +38,10 @@ Para seu correto funcionamento, torna-se necessário as seguintes tecnologias:
     rails db:migrate
     ```
 
+A aplicação já conta com usuários, buffets e eventos cadastrados. Recomendamos o uso para fins de teste dos usuários:
+  1. Proprietário: email = 'ownertest@email.com 'e senha = '123456';
+  1. Cliente: email = 'clienttest@email.com' e senha = '123456'.
+
 ### 3 - Execução de Testes
 
 Para executar os testes, utilize o seguinte comando:
