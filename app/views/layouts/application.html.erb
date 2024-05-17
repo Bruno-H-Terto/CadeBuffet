@@ -7,6 +7,36 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application" %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      * {
+        margin-bottom: 0;
+        border-radius: 1;
+        margin-left: 1rem;
+      }
+
+      .navbar ul li {
+        display: flex;
+      }
+      
+      button{
+        background: #0066A2;
+        color: white;
+        border-style: outset;
+        border-color: #0066A2;
+        height: 30px;
+        width: 60px;
+        font: bold15px arial,sans-serif;
+        text-shadow: none;
+      }
+
+      ul li, p, h2, h3, table {
+        margin: 1rem;
+      }
+
+    </style>
   </head>
 
   <body>
@@ -27,7 +57,7 @@
   <% if my_company_owner_signed_in? || client_signed_in? %>
 
     <% if my_company_owner_signed_in? %>
-      <nav>
+      <nav class=" navbar">
         <ul>
           <li>
             <%= link_to 'Pedidos', buffet_my_orders_path(Buffet.find_by(owner_id: current_my_company_owner.id)) if Buffet.find_by(owner_id: current_my_company_owner.id).present? %>
@@ -38,21 +68,21 @@
 
     <% else %>
       <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
-      <nav>
+      <nav class="navbar">
         <ul>
-          <li><%= link_to 'Meus pedidos', orders_path %></li>
-          <li><%= link_to 'Novo pedido', new_order_home_index_path %></li>
-          <li><%= link_to 'Pedidos confirmados', confirmed_orders_path if Order.where('client_id = ? AND status = ?', current_client.id, '2')%></li>
-          <li><%= button_to 'Sair', destroy_client_session_path, method: :delete %></li>
+          <li><%= link_to 'Meus pedidos', orders_path %>
+          <%= link_to 'Novo pedido', new_order_home_index_path %>
+          <%= link_to 'Pedidos confirmados', confirmed_orders_path if Order.where('client_id = ? AND status = ?', current_client.id, '2')%>
+          <%= button_to 'Sair', destroy_client_session_path, method: :delete %></li>
         </ul>
       </nav>
     <% end %>
     
   <% else %>
-    <nav>
+    <nav class="navbar">
       <ul>
-        <li><%= link_to 'Sou Proprietário', new_my_company_owner_session_path %></li>
-        <li><%= link_to 'Sou Cliente', new_client_session_path %></li> 
+        <li><%= link_to 'Sou Proprietário', new_my_company_owner_session_path %>
+        <%= link_to 'Sou Cliente', new_client_session_path %></li> 
       </ul>  
     </nav>
   <% end %>
