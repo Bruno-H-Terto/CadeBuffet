@@ -2,38 +2,42 @@
    
 
   <h3>Eventos</h3>
-  <% @events.each do |event| %>
-    <% if client_signed_in? %>
-      <h3><%= link_to "Novo pedido - #{event.name}", new_home_order_path(event.id) %> </h3>
+  <ul>
+    <% @events.each do |event| %>
+      <li>
+        <% if client_signed_in? %>
+          <h3><%= link_to "Novo pedido - #{event.name}", new_home_order_path(event.id) %> </h3>
+        <% end %>
+        <div><p><%= event.full_description %></p></div>
+
+        <div><p><%= event.capacity %></p></div>
+
+        <div><p><%= event.duration %></p></div>
+
+        <div><p><%= event.menu_description %></p></div>
+
+        <div><p><%= event.alcoholic? %></p></div>
+
+        <div><p><%= event.decoration? %></p></div>
+
+        <div><p><%= event.parking_space? %></p></div>
+
+        <div><p><%= event.valet_service? %></p></div>
+
+        <div><p><%= event.location? %></p></div>
+
+        <% ev_p = PriceEvent.find(event.price_events) %>
+        <div><p><%= ev_p.price_working_days(number_to_currency(ev_p.min_price_working_day), 
+        number_to_currency(ev_p.additional_price_for_person_working_day),
+        number_to_currency(ev_p.extra_hour_working_day)) %></p></div>
+
+        <div><p><%= ev_p.price_weekend(number_to_currency(ev_p.min_price_weekend), 
+        number_to_currency(ev_p.additional_price_for_person_weekend),
+        number_to_currency(ev_p.extra_hour_weekend)) %></p></div>
+    </li>
+    <hr>
     <% end %>
-    <div><p><%= event.full_description %></p></div>
-
-    <div><p><%= event.capacity %></p></div>
-
-    <div><p><%= event.duration %></p></div>
-
-    <div><p><%= event.menu_description %></p></div>
-
-    <div><p><%= event.alcoholic? %></p></div>
-
-    <div><p><%= event.decoration? %></p></div>
-
-    <div><p><%= event.parking_space? %></p></div>
-
-    <div><p><%= event.valet_service? %></p></div>
-
-    <div><p><%= event.location? %></p></div>
-
-    <% ev_p = PriceEvent.find(event.price_events) %>
-    <div><p><%= ev_p.price_working_days(number_to_currency(ev_p.min_price_working_day), 
-    number_to_currency(ev_p.additional_price_for_person_working_day),
-    number_to_currency(ev_p.extra_hour_working_day)) %></p></div>
-
-    <div><p><%= ev_p.price_weekend(number_to_currency(ev_p.min_price_weekend), 
-    number_to_currency(ev_p.additional_price_for_person_weekend),
-    number_to_currency(ev_p.extra_hour_weekend)) %></p></div>
-  <% end %>
-
+  </ul>
 <% else %>
     <p>Não existem eventos disponíveis no momento</p>
 

@@ -39,6 +39,9 @@ Para seu correto funcionamento, torna-se necessário as seguintes tecnologias:
     ```
 
 A aplicação já conta com usuários, buffets e eventos cadastrados. Recomendamos o uso para fins de teste dos usuários:
+  ```sh
+    rails db:seed
+  ```
   1. Proprietário: email = 'ownertest@email.com 'e senha = '123456';
   1. Cliente: email = 'clienttest@email.com' e senha = '123456'.
 

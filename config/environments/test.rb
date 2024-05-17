@@ -35,6 +35,7 @@ Rails.application.configure do
   config.action_controller.allow_forgery_protection = false
 
   # Print deprecation notices to the stderr.
+  config.active_support.report_deprecations = false
   config.active_support.deprecation = :stderr
 
   # Raise exceptions for disallowed deprecations.
