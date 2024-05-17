@@ -7,12 +7,14 @@ class Buffet < ApplicationRecord
   validates :brand_name, :corporate_name, :register_number, :phone_number, :address, :district,
             :state, :city, :zip_code, :description, :payment_methods, presence: true  
   validates :register_number, numericality: {only_integer: true}
-  validates :phone_number, length: { minimum: 10, maximum: 11 }
+  validates :phone_number, length: { minimum: 10, maximum: 16 }
 
   validate :register_number_is_valid?
 
   METHODS = [:pix, :money, :credit_card, :debit_card]
-  
+
+
+
   
   def full_register
     "Buffet #{brand_name} | #{corporate_name} CNPJ: #{register_number} | #{mask_phone_number}"
@@ -60,4 +62,7 @@ class Buffet < ApplicationRecord
     return 0 if number < 2
     11 - number
   end
+
+
+
 end

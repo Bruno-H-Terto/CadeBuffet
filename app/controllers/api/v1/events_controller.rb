@@ -21,7 +21,7 @@ class Api::V1::EventsController < Api::V1::ApiController
   def show
     begin
       event = Event.find(params[:id])
-      
+      # event = translatedata(event)
       return render status: 200, json: event.as_json(except: [:created_at, :updated_at])
     rescue => error
       no_content = {'message' => "#{message_format(error.to_s)} parâmetros: event.id=#{params[:id]}"}.to_json
@@ -32,7 +32,7 @@ class Api::V1::EventsController < Api::V1::ApiController
 
   def avaliable_event
     begin
-      event = Event.find(params[:id])
+      event = Event.find(params_event_show[:id])
       estimated_date = params_event_show[:estimated_date]
       quantity_people = params_event_show[:estimated_quantity_people]
 
@@ -40,9 +40,9 @@ class Api::V1::EventsController < Api::V1::ApiController
         result = availability_event_show(event, estimated_date, quantity_people)
         render status: 200, json: result
       else
-        error_message = [{'message' => "Requisição inválida para o evento #{event.name}"},
-        {"estimated_date.present?" => "#{estimated_date.present?}"},
-        {"estimated_quantity_people.present?" => "#{quantity_people.present?}"}].to_json
+        error_message = [{'message' => "#{I18n.t :invalid_event} #{event.name}"},
+        {"estimated_date_present" => "#{I18n.t :date_event} #{I18n.t estimated_date.present?}"},
+        {"estimated_quantity_people_present" => "Número de convidados #{I18n.t quantity_people.present?}"}].to_json
 
         JSON.parse error_message
       
@@ -75,7 +75,7 @@ class Api::V1::EventsController < Api::V1::ApiController
     if availability
       date = estimated_date
       json_response = number_to_currency base_price(event, date, quantity_people)
-      result = {'base_price_event' => "#{json_response}"}.to_json
+      result = {'base_price_event' => "#{I18n.t :estimated_price} #{json_response}"}.to_json
       JSON.parse result
       return result
     else
@@ -85,17 +85,17 @@ class Api::V1::EventsController < Api::V1::ApiController
       date_format = I18n.l estimated_date
 
 
-      error_message = [{'message' => "Erro no agendamento para o evento #{event.name}"},
-        {"Min. quantity people?" => "#{min_people_params}, quantidade min.: #{event.min_quantity_people}"},
-        {"Max. quantity people?" => "#{max_people_params}, quantidade máx.: #{event.max_quantity_people}"},
-        {"Estimated date (#{date_format}) available?" => "#{available_date}"}].to_json
+      error_message = [{'message' => "#{I18n.t :false_avaliable_event} #{event.name}"},
+        {"min_quantity_people" => "#{I18n.t :estimated_people_min} #{I18n.t min_people_params}, quantidade min.: #{event.min_quantity_people}"},
+        {"max_quantity_people" => "#{I18n.t :estimated_people_max} #{I18n.t max_people_params}, quantidade máx.: #{event.max_quantity_people}"},
+        {"estimated_date" => "#{I18n.t :date_event} #{I18n.t available_date}"}].to_json
 
       JSON.parse error_message
     end
   end
 
   def params_event_show
-    params.permit(:estimated_date, :estimated_quantity_people)
+    params.permit(:estimated_date, :estimated_quantity_people, :id)
   end
 
   def base_price(event, estimated_date, quantity_people)
@@ -111,4 +111,5 @@ class Api::V1::EventsController < Api::V1::ApiController
       @initial_price = price_event.min_price_working_day.to_i + price_event.additional_price_for_person_working_day*add_people
     end
   end
+  
 end

@@ -14,7 +14,7 @@ describe 'Buffet API' do
       buffet_second = Buffet.create!(brand_name: 'Giramundo', corporate_name: 'Giramundo LTDA', city: 'São Paulo',
                           state:'SP', address: 'Rua Nova, 75', register_number: '83448951000155', 
                           phone_number: '11978959999', district: 'Centro', zip_code: '11000-000',
-                          payment_methods: 'Cartão, dinheiro', description: 'Churrascaria', owner: owner_second)
+                          payment_methods: 'Cartão de crédito, dinheiro', description: 'Churrascaria', owner: owner_second)
 
       get "/api/v1/buffets"
 
@@ -176,7 +176,7 @@ describe 'Buffet API' do
 
       expect(response.status).to eq 404
       json_response = JSON.parse(response.body)
-      expect(json_response['message']).to eq 'Não foi encontrado um Buffet com id=> parâmetros: buffet.id=42'
+      expect(json_response['message']).to eq 'Não foi encontrado um Buffet com os parâmetros fornecidos: parâmetros: buffet.id=42'
     end
   end
 end

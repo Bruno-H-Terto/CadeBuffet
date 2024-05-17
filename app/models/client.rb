@@ -10,7 +10,7 @@ class Client < ApplicationRecord
   validates :register_number, uniqueness: true
   validates :register_number, numericality: {only_integer: true}
 
-  validate :register_is_valid?
+  validate :register_is_valid?, on: :create
 
   def register_mask
     masked = register_number[0..2] + '.xxx.xxx-' + register_number[9..10]

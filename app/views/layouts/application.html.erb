@@ -25,6 +25,7 @@
   
 
   <% if my_company_owner_signed_in? || client_signed_in? %>
+
     <% if my_company_owner_signed_in? %>
       <nav>
         <ul>
@@ -34,6 +35,7 @@
           </li>
         </ul>
       </nav>
+
     <% else %>
       <p><%= current_client.name%> - <%= Client.find(current_client.id).register_mask %></p>
       <nav>
@@ -45,6 +47,7 @@
         </ul>
       </nav>
     <% end %>
+    
   <% else %>
     <nav>
       <ul>
@@ -53,12 +56,15 @@
       </ul>  
     </nav>
   <% end %>
+
     <div>
       <%= notice %>
     </div>
+
     <div>
       <%= alert %>
     </div>
+
     <%= yield %>
   </body>
 </html>

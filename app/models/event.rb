@@ -7,6 +7,8 @@ class Event < ApplicationRecord
   accepts_nested_attributes_for :price_events
 
 
+
+
   validates :name, :description, :min_quantity_people, :max_quantity_people, :duration_in_minutes, :menu,
              presence: true
 

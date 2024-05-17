@@ -1,4 +1,5 @@
 <p><%= link_to 'Home', root_path %> > Meus pedidos</p>
+
 <% if @orders_waiting_confirmation.any? %>
   <div>Pedidos liberados pelo Buffet</p>
   <% @orders_waiting_confirmation.each do |order| %>

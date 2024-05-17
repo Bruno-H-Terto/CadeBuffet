@@ -117,7 +117,7 @@ describe 'Buffet API - Events' do
 
       expect(response.status).to eq 404
       json_response = JSON.parse response.body
-      expect(json_response['message']).to eq 'Não foi encontrado um Buffet com id=> parâmetros: buffet.id=199'
+      expect(json_response['message']).to eq 'Não foi encontrado um Buffet com os parâmetros fornecidos: parâmetros: buffet.id=199'
     end
   end
 
@@ -167,7 +167,7 @@ describe 'Buffet API - Events' do
 
       expect(response.status).to eq 404
       json_response = JSON.parse response.body
-      expect(json_response['message']).to eq "Não foi encontrado um evento com id=> parâmetros: event.id=1999"
+      expect(json_response['message']).to eq "Não foi encontrado um evento com os parâmetros fornecidos: parâmetros: event.id=1999"
     end
   end
 
@@ -193,7 +193,7 @@ describe 'Buffet API - Events' do
       expect(response.status).to eq 200
       expect(response.content_type).to include 'application/json'
       json_response = JSON.parse response.body
-      expect(json_response['base_price_event']).to eq 'R$ 2.900,00'
+      expect(json_response['base_price_event']).to eq 'Valor previsto R$ 2.900,00'
     end
 
     it 'É informado sobre impossibilidade de registro do pedido devido a data' do
@@ -220,10 +220,10 @@ describe 'Buffet API - Events' do
       get "/api/v1/events/#{event.id}/avaliable_event", params: {estimated_date: "#{format_date}" , estimated_quantity_people: 30}
 
       json_response = JSON.parse response.body
-      expect(json_response[0]['message']).to eq 'Erro no agendamento para o evento Festa de formatura'
-      expect(json_response[1]['Min. quantity people?']).to eq 'true, quantidade min.: 10'
-      expect(json_response[2]['Max. quantity people?']).to eq 'true, quantidade máx.: 90'
-      expect(json_response[3]["Estimated date (#{format_date}) available?"]).to eq 'false'
+      expect(json_response[0]['message']).to eq 'Indisponilidade para o evento  Festa de formatura'
+      expect(json_response[1]['min_quantity_people']).to eq 'Número mínimo de convidados Disponível/Valido, quantidade min.: 10'
+      expect(json_response[2]['max_quantity_people']).to eq 'Número máximo de convidados Disponível/Valido, quantidade máx.: 90'
+      expect(json_response[3]["estimated_date"]).to eq 'Data Indisponível/Inválido'
     end
 
     it 'É informado sobre impossibilidade de registro do pedido devido a quantidade mínima de pessoas' do
@@ -245,10 +245,10 @@ describe 'Buffet API - Events' do
       get "/api/v1/events/#{event.id}/avaliable_event", params: {estimated_date: "#{format_date}" , estimated_quantity_people: 9}
 
       json_response = JSON.parse response.body
-      expect(json_response[0]['message']).to eq 'Erro no agendamento para o evento Festa de formatura'
-      expect(json_response[1]['Min. quantity people?']).to eq 'false, quantidade min.: 10'
-      expect(json_response[2]['Max. quantity people?']).to eq 'true, quantidade máx.: 90'
-      expect(json_response[3]["Estimated date (#{format_date}) available?"]).to eq 'true'
+      expect(json_response[0]['message']).to eq 'Indisponilidade para o evento  Festa de formatura'
+      expect(json_response[1]['min_quantity_people']).to eq 'Número mínimo de convidados Indisponível/Inválido, quantidade min.: 10'
+      expect(json_response[2]['max_quantity_people']).to eq 'Número máximo de convidados Disponível/Valido, quantidade máx.: 90'
+      expect(json_response[3]["estimated_date"]).to eq 'Data Disponível/Valido'
     end
 
     it 'É informado sobre impossibilidade de registro do pedido devido a quantidade máxima de pessoas' do
@@ -271,10 +271,10 @@ describe 'Buffet API - Events' do
       get "/api/v1/events/#{event.id}/avaliable_event", params: {estimated_date: "#{format_date}" , estimated_quantity_people: 91}
 
       json_response = JSON.parse response.body
-      expect(json_response[0]['message']).to eq 'Erro no agendamento para o evento Festa de formatura'
-      expect(json_response[1]['Min. quantity people?']).to eq 'true, quantidade min.: 10'
-      expect(json_response[2]['Max. quantity people?']).to eq 'false, quantidade máx.: 90'
-      expect(json_response[3]["Estimated date (#{format_date}) available?"]).to eq 'true'
+      expect(json_response[0]['message']).to eq 'Indisponilidade para o evento  Festa de formatura'
+      expect(json_response[1]['min_quantity_people']).to eq 'Número mínimo de convidados Disponível/Valido, quantidade min.: 10'
+      expect(json_response[2]['max_quantity_people']).to eq 'Número máximo de convidados Indisponível/Inválido, quantidade máx.: 90'
+      expect(json_response[3]["estimated_date"]).to eq 'Data Disponível/Valido'
     end
 
     it 'Passa um evento inexistente' do
@@ -298,7 +298,7 @@ describe 'Buffet API - Events' do
 
       expect(response.status).to eq 404
       json_response = JSON.parse response.body
-      expect(json_response['message']).to eq 'Não foi encontrado um evento com id=> parâmetros: event.id=999'
+      expect(json_response['message']).to eq 'Não foi encontrado um evento com os parâmetros fornecidos: parâmetros: event.id=999'
 
     end
 
@@ -322,7 +322,7 @@ describe 'Buffet API - Events' do
 
       expect(response.status).to eq 200
       json_response = JSON.parse response.body
-      expect(json_response['base_price_event']).to eq 'R$ 2.900,00'
+      expect(json_response['base_price_event']).to eq 'Valor previsto R$ 2.900,00'
     end
 
     it 'Falta com um ou mais parâmetros' do
@@ -346,8 +346,8 @@ describe 'Buffet API - Events' do
       expect(response.status).to eq 404
       json_response = JSON.parse response.body
       expect(json_response[0]['message']).to eq 'Requisição inválida para o evento Festa de formatura'
-      expect(json_response[1]['estimated_date.present?']).to eq 'true'
-      expect(json_response[2]['estimated_quantity_people.present?']).to eq 'false'
+      expect(json_response[1]['estimated_date_present']).to eq 'Data Disponível/Valido'
+      expect(json_response[2]['estimated_quantity_people_present']).to eq 'Número de convidados Indisponível/Inválido'
     end
   end
 end

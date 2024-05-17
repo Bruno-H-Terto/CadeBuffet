@@ -54,22 +54,30 @@ class BuffetController < ApplicationController
   end
 
   def orders
-    @buffet = Buffet.find(params[:buffet_id])
-    return redirect_to root_path, alert: 'Acesso não autorizado' unless @buffet.owner == current_my_company_owner
-    @orders_waiting_review = Order.waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc).group_by { |date| date.estimated_date }
-    @other_orders = Order.not_waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc).group_by { |date| date.estimated_date }
+    begin
+      @buffet = Buffet.find(params[:buffet_id])
+      return redirect_to root_path, alert: 'Acesso não autorizado' unless @buffet.owner == current_my_company_owner
+      @orders_waiting_review = Order.waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc).group_by { |date| date.estimated_date }
+      @other_orders = Order.not_waiting_review.where('buffet_id = ?', @buffet.id).order(estimated_date: :asc).group_by { |date| date.estimated_date }
+    rescue
+      redirect_to root_path, notice: 'Requisição inválida'
+    end
   end
 
   def order_view
-    return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
-    @order = Order.find(params[:id])
-    @buffet = @order.buffet
-    @event = @order.event
-    @price_event = PriceEvent.find_by(event: @event)
-    @order_count = Order.not_canceled.where('estimated_date = ? AND buffet_id = ?', @order.estimated_date, @order.buffet_id
-                                ).where('estimated_date >= ?', Date.today)
+    begin
+      return redirect_to root_path, alert: 'Acesso não autorizado' unless is_owner?
+      @order = Order.find(params[:id])
+      @buffet = @order.buffet
+      @event = @order.event
+      @price_event = PriceEvent.find_by(event: @event)
+      @order_count = Order.not_canceled.where('estimated_date = ? AND buffet_id = ?', @order.estimated_date, @order.buffet_id
+                                  ).where('estimated_date >= ?', Date.today)
 
-    @price_order = PriceOrder.find_by(order: @order) if @order.price_order.present?
+      @price_order = PriceOrder.find_by(order: @order) if @order.price_order.present?
+    rescue
+      redirect_to root_path, notice: 'Requisição inválida'
+    end
 
 
   end
@@ -103,7 +111,9 @@ class BuffetController < ApplicationController
 
   def payment_methods_params
     methods = params.require(:buffet).permit(payment_methods: [])[:payment_methods]
-    methods.join(', ') if methods.present?
+    if methods.present?
+      methods.join(', ') 
+    end
   end
 
   def permited_owner_edit?

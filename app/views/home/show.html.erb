@@ -1,4 +1,6 @@
 <p><%= link_to 'Home', root_path %> > <%= link_to 'Listar Buffets', list_home_index_path%> > <%= "#{@buffet.brand_name}"%></p>
+
+<h2><%= Buffet.model_name %></h2>
 <ul>
   <li><%= @buffet.brand_name %> | CNPJ: <%= @buffet.register_number%> | Telefone: <%=@buffet.phone_number%></li>
   <li><%= @buffet.full_address %></li>

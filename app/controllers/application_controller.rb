@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :redirect_owner_to_home
   before_action :redirect_owner
   before_action :redirect_client
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   
 
 
@@ -42,5 +43,9 @@ class ApplicationController < ActionController::Base
       flash.notice = 'Usuário não autorizado. Clique em sair e acesse a página com acesso de Cliente.'
       redirect_to root_path
     end
+  end
+
+  def record_not_found
+    redirect_to root_path, notice: 'Requisição inválida'
   end
 end

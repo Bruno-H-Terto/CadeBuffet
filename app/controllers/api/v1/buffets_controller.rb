@@ -16,6 +16,8 @@ class Api::V1::BuffetsController < Api::V1::ApiController
     if buffets.present?
       return render json: buffets.as_json(except: [:created_at, :updated_at]), status: 200
     else
+      no_content = {'message' => "Sem resultados disponíveis"}.to_json
+      JSON.parse no_content
       render json: no_content, status: 204
     end
 
@@ -23,10 +25,10 @@ class Api::V1::BuffetsController < Api::V1::ApiController
 
   def show
     begin
-      buffet = Buffet.find(params[:id])
+      buffet = Buffet.find(buffet_show_params[:id])
       render status: 200, json: buffet.as_json(except: [:created_at, :updated_at, :corporate_name, :register_number])
     rescue=> error
-      no_content = {'message' => "#{message_format(error.to_s)} parâmetros: buffet.id=#{params[:id]}"}.to_json
+      no_content = {'message' => "#{message_format(error.to_s)} parâmetros: buffet.id=#{buffet_show_params[:id]}"}.to_json
       JSON.parse no_content
       render status: 404, json: no_content
     end
@@ -36,5 +38,9 @@ class Api::V1::BuffetsController < Api::V1::ApiController
 
   def buffet_params
     params.permit(:brand_name)
+  end
+
+  def buffet_show_params
+    params.permit(:id)
   end
 end
